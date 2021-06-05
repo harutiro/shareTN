@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/mainTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="テストコメント"
+        android:textColor="@color/textBlock"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/subTextView"
+        app:layout_constraintEnd_toStartOf="@+id/moreButton"
+        app:layout_constraintStart_toEndOf="@+id/iconImageView"
+        app:layout_constraintTop_toTopOf="@+id/iconImageView"
+        app:layout_constraintVertical_bias="0.51" />
+
+    <TextView
+        android:id="@+id/subTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="bottom"
+        android:text="URL"
+        android:textColor="@color/textLightGray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+        app:layout_constraintEnd_toStartOf="@+id/moreButton"
+        app:layout_constraintStart_toEndOf="@+id/iconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/mainTextView" />
+
+    <ListView
+        android:id="@+id/tagListView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/moreButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:tint="@color/textBlock"
+        app:layout_constraintBottom_toBottomOf="@+id/subTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mainTextView"
+        app:layout_constraintTop_toTopOf="@+id/mainTextView"
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tagListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconImageView"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagListView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
