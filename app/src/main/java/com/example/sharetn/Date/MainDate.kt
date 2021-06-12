@@ -5,5 +5,5 @@ class MainDate (
     val mainText: String,
     val subText: String,
     val image: String,
-    val tagList: Int
+//    val tagList: RealmList<>
         )
