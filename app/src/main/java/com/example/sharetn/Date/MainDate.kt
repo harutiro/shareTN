@@ -10,6 +10,6 @@ class MainDate(
     val icon: Int = 0,
     val mainText: String = "",
     val subText: String = "",
-    val image: String = "",
+    val image: Int = 0,
     val tagList: RealmList<TagDateClass>? = null
         ): RealmObject()
