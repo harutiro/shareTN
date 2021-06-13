@@ -3,6 +3,7 @@ package com.example.sharetn.Adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
@@ -24,7 +25,7 @@ class MainRecyclerViewAdapter(private val context: Context):
         val mainTextView: TextView = view.findViewById(R.id.mainTextView)
         val subTextView:TextView = view.findViewById(R.id.subTextView)
         val tagListView: ListView = view.findViewById(R.id.tagListView)
-        val moreButton: Button =  view.findViewById(R.id.moreButton)
+        val moreButton: ImageView =  view.findViewById(R.id.moreButton)
         val imageView:ImageView = view.findViewById(R.id.imageView)
 
 
@@ -46,8 +47,10 @@ class MainRecyclerViewAdapter(private val context: Context):
 //        holder.tagListView
 //        holder.moreButton
 
-        if(item.image != 0){
-            holder.imageView.setImageResource(item.image)
+        if(item.image != ""){
+//            holder.imageView.setImageResource(item.image)
+        }else{
+            holder.imageView.visibility = GONE
         }
     }
 
