@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
         )
 
 
+
+
         val RView = findViewById<RecyclerView>(R.id.RView)
 
         val adapter = MainRecyclerViewAdapter(this)
