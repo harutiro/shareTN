@@ -5,9 +5,9 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 import java.util.*
 
-class TagDateClass (
+open class TagDateClass (
     @PrimaryKey open var Id: String? = UUID.randomUUID().toString(),
-    val Icon:Int = 0,
-    val name:String = ""
+    open var Icon:Int = 0,
+    open var name:String = ""
 
     ): RealmObject()
