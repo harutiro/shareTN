@@ -9,9 +9,12 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
+import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.R
+import java.util.*
 
 class MainRecyclerViewAdapter(private val context: Context):
     RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
@@ -24,7 +27,7 @@ class MainRecyclerViewAdapter(private val context: Context):
         val iconImageView: ImageView = view.findViewById(R.id.iconImageView)
         val mainTextView: TextView = view.findViewById(R.id.mainTextView)
         val subTextView:TextView = view.findViewById(R.id.subTextView)
-        val tagListView: ListView = view.findViewById(R.id.tagListView)
+        val tagRView: RecyclerView = view.findViewById(R.id.tagRView)
         val moreButton: ImageView =  view.findViewById(R.id.moreButton)
         val imageView:ImageView = view.findViewById(R.id.imageView)
 
@@ -52,6 +55,20 @@ class MainRecyclerViewAdapter(private val context: Context):
         }else{
             holder.imageView.visibility = GONE
         }
+
+        val courseDate: List <TagDateClass> = listOf(
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者")
+
+        )
+
+        val adapter = TagRecyclerViewAdapter(context)
+        holder.tagRView.layoutManager = LinearLayoutManager(context)
+        holder.tagRView.adapter = adapter
+
+        //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
+        adapter.addAll(courseDate)
+
+
     }
 
     //引数にとったリストをadapterに追加するメソッド
