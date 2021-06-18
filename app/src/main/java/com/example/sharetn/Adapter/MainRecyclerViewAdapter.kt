@@ -64,7 +64,7 @@ class MainRecyclerViewAdapter(private val context: Context):
         )
 
         val adapter = TagRecyclerViewAdapter(context)
-        holder.tagRView.layoutManager = LinearLayoutManager(context)
+        holder.tagRView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
         holder.tagRView.adapter = adapter
 
         //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している

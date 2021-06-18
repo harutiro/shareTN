@@ -9,10 +9,11 @@
         android:id="@+id/tagButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:radius="90dp"
         android:text="tag"
         android:textAllCaps="false"
-        android:radius="90dp"
-        app:cornerRadius = "90dp"
+        app:cornerRadius="90dp"
         app:icon="?attr/actionModeCopyDrawable"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
