@@ -37,6 +37,7 @@ class TagRecyclerViewAdapter(private val context: Context):
 
 
 
+
     }
 
     //引数にとったリストをadapterに追加するメソッド

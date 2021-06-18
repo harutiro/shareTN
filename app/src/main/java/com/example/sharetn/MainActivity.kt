@@ -14,6 +14,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val courseDate: List <MainDate> = listOf(
+            MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null),
+            MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null),
+            MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null),
             MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null)
 
         )

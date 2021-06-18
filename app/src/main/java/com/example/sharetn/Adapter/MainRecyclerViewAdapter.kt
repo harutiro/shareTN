@@ -57,7 +57,9 @@ class MainRecyclerViewAdapter(private val context: Context):
         }
 
         val courseDate: List <TagDateClass> = listOf(
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者")
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+
 
         )
 
