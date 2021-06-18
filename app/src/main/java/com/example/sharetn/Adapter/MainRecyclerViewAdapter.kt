@@ -54,6 +54,7 @@ class MainRecyclerViewAdapter(private val context: Context):
 //            holder.imageView.setImageResource(item.image)
         }else{
             holder.imageView.visibility = GONE
+//            holder.imageView.setImageResource(R.drawable.ramen)
         }
 
         val courseDate: List <TagDateClass> = listOf(
