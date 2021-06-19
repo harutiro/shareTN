@@ -44,12 +44,15 @@ class MainRecyclerViewAdapter(private val context: Context):
     //itemsのposition番目の要素をviewに表示するコード
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
+
+//        itemとレイアウトの直接の結びつけ
         holder.iconImageView.setImageResource(item.icon)
         holder.mainTextView.text = item.mainText
         holder.subTextView.text = item.subText
 //        holder.tagListView
 //        holder.moreButton
 
+//        画像の結びつけ
         if(item.image != ""){
 //            holder.imageView.setImageResource(item.image)
         }else{
@@ -69,10 +72,8 @@ class MainRecyclerViewAdapter(private val context: Context):
 //
 //
 //        )
-        item.tagList
 
-
-
+//        タグのリサイクラービューの部分の結びつけ
         val adapter = TagRecyclerViewAdapter(context)
         holder.tagRView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
         holder.tagRView.adapter = adapter
