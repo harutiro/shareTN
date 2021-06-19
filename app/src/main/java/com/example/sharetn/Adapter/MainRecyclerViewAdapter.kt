@@ -9,15 +9,22 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.R
+import io.realm.Realm
+import java.lang.invoke.ConstantCallSite
 import java.util.*
 
-class MainRecyclerViewAdapter(private val context: Context):
+class MainRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):
     RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
+
+    private val realm by lazy {
+        Realm.getDefaultInstance()
+    }
 
     //リサイクラービューに表示するリストを宣言する
     val items: MutableList<MainDate> = mutableListOf()
@@ -30,6 +37,7 @@ class MainRecyclerViewAdapter(private val context: Context):
         val tagRView: RecyclerView = view.findViewById(R.id.tagRView)
         val moreButton: ImageView =  view.findViewById(R.id.moreButton)
         val imageView:ImageView = view.findViewById(R.id.imageView)
+        val container: ConstraintLayout = view.findViewById(R.id.constraint)
 
 
 
@@ -44,6 +52,9 @@ class MainRecyclerViewAdapter(private val context: Context):
     //itemsのposition番目の要素をviewに表示するコード
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
+
+        // MainActivity側でタップしたときの動作を記述するため，n番目の要素を渡す
+        holder.container.setOnClickListener { listener.onItemClick(item) }
 
 //        itemとレイアウトの直接の結びつけ
         holder.iconImageView.setImageResource(item.icon)
@@ -94,5 +105,14 @@ class MainRecyclerViewAdapter(private val context: Context):
     override fun getItemCount(): Int {
 
         return items.size
+    }
+
+    // RecyclerViewの要素をタップするためのもの
+    interface OnItemClickListner{
+        fun onItemClick(item: MainDate)
+    }
+
+    fun reView(){
+        notifyDataSetChanged()
     }
 }
