@@ -71,18 +71,18 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
 //            holder.imageView.setImageResource(R.drawable.ramen)
         }
 
-//        val courseDate: List <TagDateClass> = listOf(
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作dddddddddddddddddddddddddd者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//
-//
-//        )
+        val courseDate: List <TagDateClass> = listOf(
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作dddddddddddddddddddddddddd者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+
+
+        )
 
 //        タグのリサイクラービューの部分の結びつけ
         val adapter = TagRecyclerViewAdapter(context)
@@ -90,8 +90,8 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         holder.tagRView.adapter = adapter
 
         //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
-        item.tagList?.let { adapter.addAll(it) }
-
+//        item.tagList?.let { adapter.addAll(it) }
+        adapter.addAll(courseDate)
 
     }
 

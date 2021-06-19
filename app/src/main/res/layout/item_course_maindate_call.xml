@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,9 +12,7 @@
     android:paddingEnd="8dp"
     card_view:cardCornerRadius="20dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -24,9 +23,9 @@
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
             android:id="@+id/mainTextView"
@@ -37,11 +36,11 @@
             android:text="テストコメント"
             android:textColor="@color/textBlock"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/subTextView"
-            app:layout_constraintEnd_toStartOf="@+id/moreButton"
-            app:layout_constraintStart_toEndOf="@+id/iconImageView"
-            app:layout_constraintTop_toTopOf="@+id/iconImageView"
-            app:layout_constraintVertical_bias="0.51" />
+            card_view:layout_constraintBottom_toTopOf="@+id/subTextView"
+            card_view:layout_constraintEnd_toStartOf="@+id/moreButton"
+            card_view:layout_constraintStart_toEndOf="@+id/iconImageView"
+            card_view:layout_constraintTop_toTopOf="@+id/iconImageView"
+            card_view:layout_constraintVertical_bias="0.51" />
 
         <TextView
             android:id="@+id/subTextView"
@@ -53,10 +52,10 @@
             android:text="URL"
             android:textColor="@color/textLightGray"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/iconImageView"
-            app:layout_constraintEnd_toStartOf="@+id/moreButton"
-            app:layout_constraintStart_toEndOf="@+id/iconImageView"
-            app:layout_constraintTop_toBottomOf="@+id/mainTextView" />
+            card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+            card_view:layout_constraintEnd_toStartOf="@+id/moreButton"
+            card_view:layout_constraintStart_toEndOf="@+id/iconImageView"
+            card_view:layout_constraintTop_toBottomOf="@+id/mainTextView" />
 
         <ImageView
             android:id="@+id/moreButton"
@@ -65,12 +64,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/subTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/mainTextView"
-            app:layout_constraintTop_toTopOf="@+id/mainTextView"
-            app:srcCompat="@drawable/ic_baseline_more_vert_24"
-            app:tint="@color/textBlock" />
+            card_view:layout_constraintBottom_toBottomOf="@+id/subTextView"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/mainTextView"
+            card_view:layout_constraintTop_toTopOf="@+id/mainTextView"
+            card_view:srcCompat="@drawable/ic_baseline_more_vert_24"
+            card_view:tint="@color/textBlock" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -78,9 +77,9 @@
             android:layout_height="240dp"
             android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iconImageView"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/iconImageView"
             tools:srcCompat="@tools:sample/avatars" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -88,20 +87,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            card_view:layout_constraintBottom_toTopOf="@+id/divider"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="409dp"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tagRView" />
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/tagRView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
