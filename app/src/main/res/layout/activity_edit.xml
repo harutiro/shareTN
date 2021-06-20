@@ -8,7 +8,7 @@
     tools:context=".EditActivity">
 
     <ImageView
-        android:id="@+id/iconImage"
+        android:id="@+id/mainIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
@@ -29,13 +29,14 @@
         android:backgroundTint="@color/border"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="タイトル"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:singleLine="true"
         android:textColor="@color/textBlock"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iconImage"
+        app:layout_constraintStart_toEndOf="@+id/mainIcon"
         app:layout_constraintTop_toBottomOf="@+id/dayText" />
 
     <EditText
@@ -68,14 +69,14 @@
         android:id="@+id/memoEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:backgroundTint="@color/border"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="メモ"
         android:inputType="textMultiLine"
         android:textColor="@color/textBlock"
-        app:layout_constraintEnd_toEndOf="@+id/subEdit"
-        app:layout_constraintStart_toStartOf="@+id/subEdit"
+        app:layout_constraintEnd_toEndOf="@+id/mainEdit"
+        app:layout_constraintStart_toStartOf="@+id/mainEdit"
         app:layout_constraintTop_toBottomOf="@+id/subEdit" />
 
     <ImageView
@@ -106,7 +107,7 @@
         app:srcCompat="@drawable/ramen" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/subIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"

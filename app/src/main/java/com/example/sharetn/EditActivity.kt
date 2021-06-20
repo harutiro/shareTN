@@ -6,12 +6,13 @@ import android.graphics.PixelFormat
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetn.dousa.UrlDomein
 import com.squareup.picasso.Picasso
@@ -27,6 +28,9 @@ class EditActivity : AppCompatActivity() {
         var domein = ""
         var title = ""
 
+        findViewById<EditText>(R.id.subEdit).visibility = GONE
+        findViewById<ImageView>(R.id.subIcon).visibility = GONE
+
 
 
 
@@ -34,6 +38,9 @@ class EditActivity : AppCompatActivity() {
         if (TextUtils.equals(intent.action, Intent.ACTION_SEND)) {
             val extras = intent.extras
             val extraText = extras!!.getCharSequence(Intent.EXTRA_TEXT).toString()
+
+            findViewById<EditText>(R.id.subEdit).visibility = VISIBLE
+            findViewById<ImageView>(R.id.subIcon).visibility = VISIBLE
 
 //           URLや文字の受け取り
             comeText = extraText
@@ -52,7 +59,7 @@ class EditActivity : AppCompatActivity() {
                     .load("https://www.google.com/s2/favicons?domain=$domein")
                     .resize(300, 300) //表示サイズ指定
                     .centerCrop() //resizeで指定した範囲になるよう中央から切り出し
-                    .into(findViewById<ImageView>(R.id.iconImage)) //imageViewに流し込み
+                    .into(findViewById<ImageView>(R.id.mainIcon)) //imageViewに流し込み
 
 
 //================================WebViewでのタイトルの取得の仕方。
