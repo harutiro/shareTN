@@ -3,6 +3,7 @@ package com.example.sharetn
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
@@ -70,7 +71,24 @@ class EditActivity : AppCompatActivity() {
         subEdit.movementMethod = ScrollingMovementMethod()
         memoEdit.movementMethod = ScrollingMovementMethod()
 
+        // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
+        val id = intent.getStringExtra("id")
+        val item = realm.where(MainDate::class.java).equalTo("Id", id).findFirst()
+        mainEdit.setText(item?.mainText)
+        subEdit.setText(item?.subText)
+        val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
+        mainIcon.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
+        if (item != null) {
+            if(UrlDomein().check(item.subText)){
+                subEdit.visibility = VISIBLE
+                subIcon.visibility = VISIBLE
+            }
+        }
 
+
+
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
         findViewById<TextView>(R.id.saveButton).setOnClickListener {
             realm.executeTransaction{
                 val new: MainDate = it.createObject(MainDate::class.java,UUID.randomUUID().toString())
