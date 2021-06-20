@@ -20,38 +20,38 @@ class MainActivity : AppCompatActivity() {
         //realmのインスタンス
         val realm: Realm = Realm.getDefaultInstance()
 
-        realm.executeTransaction {
-
-            val mainObject = it.createObject(MainDate::class.java, UUID.randomUUID().toString()).apply {
-                this.icon = R.drawable.ic_baseline_more_vert_24
-                this.mainText = "main"
-                this.subText = "sub"
-                this.image = ""
-
-                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-                    this.Icon = R.drawable.ic_baseline_more_vert_24
-                    this.name = "タグ"
-                    this.color = ""
-                    this.mojiColor = ""
-                }
-                val tagObject1 = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-                    this.Icon = R.drawable.ic_baseline_more_vert_24
-                    this.name = "タグ"
-                    this.color = ""
-                    this.mojiColor = ""
-                }
-                val tagObject2 = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-                    this.Icon = R.drawable.ic_baseline_more_vert_24
-                    this.name = "タグ"
-                    this.color = ""
-                    this.mojiColor = ""
-                }
-
-                this.tagList?.add(tagObject)
-                this.tagList?.add(tagObject1)
-                this.tagList?.add(tagObject2)
-            }
-        }
+//        realm.executeTransaction {
+//
+//            val mainObject = it.createObject(MainDate::class.java, UUID.randomUUID().toString()).apply {
+//                this.icon = R.drawable.ic_baseline_more_vert_24
+//                this.mainText = "main"
+//                this.subText = "sub"
+//                this.image = ""
+//
+//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+//                    this.Icon = R.drawable.ic_baseline_more_vert_24
+//                    this.name = "タグ"
+//                    this.color = ""
+//                    this.mojiColor = ""
+//                }
+//                val tagObject1 = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+//                    this.Icon = R.drawable.ic_baseline_more_vert_24
+//                    this.name = "タグ"
+//                    this.color = ""
+//                    this.mojiColor = ""
+//                }
+//                val tagObject2 = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+//                    this.Icon = R.drawable.ic_baseline_more_vert_24
+//                    this.name = "タグ"
+//                    this.color = ""
+//                    this.mojiColor = ""
+//                }
+//
+//                this.tagList?.add(tagObject)
+//                this.tagList?.add(tagObject1)
+//                this.tagList?.add(tagObject2)
+//            }
+//        }
 
 
 
