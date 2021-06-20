@@ -86,6 +86,7 @@ class EditActivity : AppCompatActivity() {
             subEdit.setText(item?.subText)
             val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
             mainIcon.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
+            memoEdit.setText(item?.memoText)
             if (item != null) {
                 if(UrlDomein().check(item.subText)){
                     subEdit.visibility = VISIBLE

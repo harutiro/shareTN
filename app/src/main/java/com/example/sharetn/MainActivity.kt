@@ -92,6 +92,25 @@ class MainActivity : AppCompatActivity() {
         adapter.addAll(mainPersons)
     }
 
+    override fun onResume(){
+        super.onResume()
+
+        val adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
+            override fun onItemClick(item: MainDate) {
+                // SecondActivityに遷移するためのIntent
+                val intent = Intent(applicationContext, EditActivity::class.java)
+                // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
+                // また，要素のidをSecondActivityに渡す
+                intent.putExtra("id", item.Id)
+                startActivity(intent)
+            }
+        })
+
+        //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
+        adapter.reView()
+
+    }
+
     override fun onDestroy() {
         realm.close()
         super.onDestroy()
