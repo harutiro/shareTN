@@ -2,10 +2,14 @@ package com.example.sharetn
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.PixelFormat
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
+import android.util.Base64.encodeToString
+import android.util.Base64
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -20,11 +24,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.TagRecyclerViewAdapter
+import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
 import com.squareup.picasso.Picasso
 import io.realm.Realm
 import io.realm.RealmResults
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 
@@ -63,6 +69,36 @@ class EditActivity : AppCompatActivity() {
         mainEdit.movementMethod = ScrollingMovementMethod()
         subEdit.movementMethod = ScrollingMovementMethod()
         memoEdit.movementMethod = ScrollingMovementMethod()
+
+
+        findViewById<TextView>(R.id.saveButton).setOnClickListener {
+            realm.executeTransaction{
+                val new: MainDate = it.createObject(MainDate::class.java)
+
+                //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+                //データ受け取り
+                val bmp = (mainIcon.getDrawable() as BitmapDrawable).bitmap
+                //エンコード
+                val baos = ByteArrayOutputStream()
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, baos)
+                val b: ByteArray = baos.toByteArray()
+                val output = Base64.encodeToString(b, Base64.NO_WRAP)
+
+                new.icon = output
+                new.mainText = mainEdit.text.toString()
+                new.subText = subEdit.text.toString()
+                new.image = ""
+
+//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+//                    this.Icon = R.drawable.ic_baseline_more_vert_24
+//                    this.name = "タグ"
+//                    this.color = ""
+//                    this.mojiColor = ""
+//                }
+
+//                new.tagList?.add(tagObject)
+            }
+        }
 
 
 
