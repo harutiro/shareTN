@@ -3,19 +3,19 @@ package com.example.sharetn
 import android.content.Context
 import android.content.Intent
 import android.graphics.PixelFormat
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetn.dousa.UrlDomein
 import com.squareup.picasso.Picasso
+
 
 class EditActivity : AppCompatActivity() {
     @Suppress("DEPRECATION")
@@ -84,6 +84,15 @@ class EditActivity : AppCompatActivity() {
                         findViewById<EditText>(R.id.mainEdit).setText(title)
 
 
+                    }
+
+                    override fun onReceivedError(
+                        view: WebView?,
+                        errorCode: Int,
+                        description: String?,
+                        url: String?
+                    ){
+                        findViewById<EditText>(R.id.mainEdit).setText("ネットワークエラー")
                     }
 
                 }
