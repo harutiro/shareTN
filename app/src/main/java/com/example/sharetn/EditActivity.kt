@@ -73,7 +73,7 @@ class EditActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.saveButton).setOnClickListener {
             realm.executeTransaction{
-                val new: MainDate = it.createObject(MainDate::class.java)
+                val new: MainDate = it.createObject(MainDate::class.java,UUID.randomUUID().toString())
 
                 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
                 //データ受け取り
