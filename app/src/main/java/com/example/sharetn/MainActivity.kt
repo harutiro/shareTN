@@ -31,50 +31,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-//        realm.executeTransaction {
-//
-//            val mainObject = it.createObject(MainDate::class.java, UUID.randomUUID().toString()).apply {
-//                this.icon = R.drawable.ic_baseline_more_vert_24
-//                this.mainText = "main"
-//                this.subText = "sub"
-//                this.image = ""
-//
-//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-//                    this.Icon = R.drawable.ic_baseline_more_vert_24
-//                    this.name = "タグ"
-//                    this.color = ""
-//                    this.mojiColor = ""
-//                }
-//                val tagObject1 = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-//                    this.Icon = R.drawable.ic_baseline_more_vert_24
-//                    this.name = "タグ"
-//                    this.color = ""
-//                    this.mojiColor = ""
-//                }
-//                val tagObject2 = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-//                    this.Icon = R.drawable.ic_baseline_more_vert_24
-//                    this.name = "タグ"
-//                    this.color = ""
-//                    this.mojiColor = ""
-//                }
-//
-//                this.tagList?.add(tagObject)
-//                this.tagList?.add(tagObject1)
-//                this.tagList?.add(tagObject2)
-//            }
-//        }
-
-
-
-//        val courseDate: List <MainDate> = listOf(
-//            MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null),
-//            MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null),
-//            MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null),
-//            MainDate(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者","aaaaa","", null)
-//
-//        )
-
         val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
         val RView = findViewById<RecyclerView>(R.id.RView)
         val adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
@@ -114,10 +70,6 @@ class MainActivity : AppCompatActivity() {
 
         //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
         adapter.addAll(mainPersons)
-
-        findViewById<Button>(R.id.button).setOnClickListener{
-            adapter.notifyDataSetChanged()
-        }
 
     }
 
