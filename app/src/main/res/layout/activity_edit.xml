@@ -45,7 +45,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/mainEdit"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/mainEdit"
-                app:srcCompat="@drawable/travel_explore_black_24dp" />
+                android:src="@drawable/outline_travel_explore_black_24dp" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image"

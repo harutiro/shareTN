@@ -1,7 +1,9 @@
 package com.example.sharetn
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PixelFormat
@@ -42,6 +44,7 @@ class EditActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,21 +101,27 @@ class EditActivity : AppCompatActivity() {
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
         findViewById<TextView>(R.id.saveButton).setOnClickListener {
             realm.executeTransaction{
-                val new: MainDate = it.createObject(MainDate::class.java,UUID.randomUUID().toString())
+
+                val new = if(id == null){
+                    it.createObject(MainDate::class.java,UUID.randomUUID().toString())
+                }else{
+                    it.where(MainDate::class.java).equalTo("Id",id).findFirst()
+                }
 
                 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
                 //データ受け取り
-                val bmp = (mainIcon.getDrawable() as BitmapDrawable).bitmap
+                val bmp = (mainIcon.drawable as BitmapDrawable).bitmap
                 //エンコード
                 val baos = ByteArrayOutputStream()
                 bmp.compress(Bitmap.CompressFormat.PNG, 100, baos)
                 val b: ByteArray = baos.toByteArray()
                 val output = Base64.encodeToString(b, Base64.NO_WRAP)
 
-                new.icon = output
-                new.mainText = mainEdit.text.toString()
-                new.subText = subEdit.text.toString()
-                new.image = ""
+                new?.icon = output
+                new?.mainText = mainEdit.text.toString()
+                new?.subText = subEdit.text.toString()
+                new?.memoText = memoEdit.text.toString()
+                new?.image = ""
 
 //                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
 //                    this.Icon = R.drawable.ic_baseline_more_vert_24
@@ -121,7 +130,7 @@ class EditActivity : AppCompatActivity() {
 //                    this.mojiColor = ""
 //                }
 
-//                new.tagList?.add(tagObject)
+//                new?.tagList?.add(tagObject)
 
                 finish()
             }
