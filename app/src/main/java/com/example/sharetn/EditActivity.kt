@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -13,6 +14,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetn.dousa.UrlDomein
 import com.squareup.picasso.Picasso
@@ -30,6 +32,11 @@ class EditActivity : AppCompatActivity() {
 
         findViewById<EditText>(R.id.subEdit).visibility = GONE
         findViewById<ImageView>(R.id.subIcon).visibility = GONE
+
+        findViewById<TextView>(R.id.mainEdit).movementMethod = ScrollingMovementMethod()
+        findViewById<TextView>(R.id.subEdit).movementMethod = ScrollingMovementMethod()
+        findViewById<TextView>(R.id.memoEdit).movementMethod = ScrollingMovementMethod()
+
 
 
 
