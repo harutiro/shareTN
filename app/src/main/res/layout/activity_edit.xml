@@ -7,66 +7,101 @@
     tools:context=".EditActivity">
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/iconImage"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24"
-        tools:layout_editor_absoluteX="46dp"
-        tools:layout_editor_absoluteY="57dp" />
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mainEdit"
+        app:layout_constraintEnd_toStartOf="@+id/mainEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mainEdit"
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="wrap_content"
+        android:id="@+id/mainEdit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconImage"
+        app:layout_constraintTop_toBottomOf="@+id/dayText" />
+
+    <EditText
+        android:id="@+id/subEdit"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="39dp" />
-
-    <EditText
-        android:id="@+id/editTextTextMultiLine3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="84dp" />
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:singleLine="true"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/mainEdit"
+        app:layout_constraintStart_toStartOf="@+id/mainEdit"
+        app:layout_constraintTop_toBottomOf="@+id/mainEdit" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/dayText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="5dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine4"
-        android:layout_width="wrap_content"
+        android:id="@+id/memoEdit"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="91dp"
-        tools:layout_editor_absoluteY="142dp" />
+        app:layout_constraintEnd_toEndOf="@+id/subEdit"
+        app:layout_constraintStart_toStartOf="@+id/subEdit"
+        app:layout_constraintTop_toBottomOf="@+id/subEdit" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24"
-        tools:layout_editor_absoluteX="53dp"
-        tools:layout_editor_absoluteY="154dp" />
+        android:id="@+id/noteIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/memoEdit"
+        app:layout_constraintEnd_toStartOf="@+id/memoEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/memoEdit"
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="240dp"
+        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/memoEdit"
         app:srcCompat="@drawable/ramen"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="197dp" />
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/subEdit"
+        app:layout_constraintEnd_toStartOf="@+id/subEdit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainEdit"
+        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

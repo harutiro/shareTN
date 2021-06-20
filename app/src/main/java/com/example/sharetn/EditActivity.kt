@@ -11,6 +11,7 @@ import android.view.View
 import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.sharetn.dousa.UrlDomein
@@ -38,6 +39,9 @@ class EditActivity : AppCompatActivity() {
             comeText = extraText
             domein = UrlDomein().hen(comeText)
 
+            findViewById<EditText>(R.id.subEdit).setText(comeText)
+            findViewById<EditText>(R.id.mainEdit).setText("NowLoading...")
+
 
 //===========================URLで動く部分
             if(UrlDomein().check(comeText)) {
@@ -48,7 +52,7 @@ class EditActivity : AppCompatActivity() {
                     .load("https://www.google.com/s2/favicons?domain=$domein")
                     .resize(300, 300) //表示サイズ指定
                     .centerCrop() //resizeで指定した範囲になるよう中央から切り出し
-                    .into(findViewById<ImageView>(R.id.imageView)) //imageViewに流し込み
+                    .into(findViewById<ImageView>(R.id.iconImage)) //imageViewに流し込み
 
 
 //================================WebViewでのタイトルの取得の仕方。
@@ -77,9 +81,7 @@ class EditActivity : AppCompatActivity() {
                     override fun onPageFinished(view: WebView, url: String) {
 
                         title = webview.title.toString()
-
-
-
+                        findViewById<EditText>(R.id.mainEdit).setText(title)
 
 
                     }
