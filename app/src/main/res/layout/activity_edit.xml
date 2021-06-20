@@ -34,7 +34,7 @@
                 android:scrollbars="vertical"
                 android:textColor="@color/textBlock"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/noteIcon"
+                app:layout_constraintStart_toEndOf="@+id/memoIcon"
                 app:layout_constraintTop_toBottomOf="@+id/subEdit" />
 
             <ImageView
@@ -127,7 +127,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/mainEdit" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/dayIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:radius="10dp"
@@ -149,7 +149,7 @@
                 app:tint="@color/textBlock" />
 
             <ImageView
-                android:id="@+id/noteIcon"
+                android:id="@+id/memoIcon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"

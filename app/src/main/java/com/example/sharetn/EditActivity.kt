@@ -19,9 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Adapter.MainRecyclerViewAdapter
 import com.example.sharetn.Adapter.TagRecyclerViewAdapter
-import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
 import com.squareup.picasso.Picasso
@@ -47,14 +45,27 @@ class EditActivity : AppCompatActivity() {
         var domein = ""
         var title = ""
 
+        val subEdit = findViewById<EditText>(R.id.subEdit)
+        val subIcon = findViewById<ImageView>(R.id.subIcon)
+        val mainEdit = findViewById<EditText>(R.id.mainEdit)
+        val mainIcon = findViewById<ImageView>(R.id.mainIcon)
+        val dayText = findViewById<TextView>(R.id.dayText)
+        val dayIcon = findViewById<ImageView>(R.id.dayIcon)
+        val memoIcon = findViewById<ImageView>(R.id.memoIcon)
+        val memoEdit = findViewById<EditText>(R.id.memoEdit)
+        val image = findViewById<ImageView>(R.id.image)
+
         //URLのViewの非表示
-        findViewById<EditText>(R.id.subEdit).visibility = GONE
-        findViewById<ImageView>(R.id.subIcon).visibility = GONE
+        subEdit.visibility = GONE
+        subIcon.visibility = GONE
 
         //スクロールできるように設定
-        findViewById<TextView>(R.id.mainEdit).movementMethod = ScrollingMovementMethod()
-        findViewById<TextView>(R.id.subEdit).movementMethod = ScrollingMovementMethod()
-        findViewById<TextView>(R.id.memoEdit).movementMethod = ScrollingMovementMethod()
+        mainEdit.movementMethod = ScrollingMovementMethod()
+        subEdit.movementMethod = ScrollingMovementMethod()
+        memoEdit.movementMethod = ScrollingMovementMethod()
+
+
+
 
 
 
@@ -88,8 +99,8 @@ class EditActivity : AppCompatActivity() {
             val extras = intent.extras
             val extraText = extras!!.getCharSequence(Intent.EXTRA_TEXT).toString()
 
-            findViewById<EditText>(R.id.subEdit).visibility = VISIBLE
-            findViewById<ImageView>(R.id.subIcon).visibility = VISIBLE
+            subEdit.visibility = VISIBLE
+            subIcon.visibility = VISIBLE
 
             //URLや文字の受け取り
             comeText = extraText
@@ -137,7 +148,7 @@ class EditActivity : AppCompatActivity() {
                     override fun onPageFinished(view: WebView, url: String) {
 
                         title = webview.title.toString()
-                        findViewById<EditText>(R.id.mainEdit).setText(title)
+                        mainEdit.setText(title)
 
 
                     }
@@ -148,7 +159,7 @@ class EditActivity : AppCompatActivity() {
                         description: String?,
                         url: String?
                     ){
-                        findViewById<EditText>(R.id.mainEdit).setText("ネットワークエラー")
+                        mainEdit.setText("ネットワークエラー")
                     }
 
                 }
