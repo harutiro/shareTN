@@ -51,6 +51,7 @@ class EditActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.subEdit).movementMethod = ScrollingMovementMethod()
         findViewById<TextView>(R.id.memoEdit).movementMethod = ScrollingMovementMethod()
 
+        //タグ関係
         val courseDate: List <TagDateClass> = listOf(
             TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
             TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
@@ -83,7 +84,7 @@ class EditActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.subEdit).visibility = VISIBLE
             findViewById<ImageView>(R.id.subIcon).visibility = VISIBLE
 
-//           URLや文字の受け取り
+            //URLや文字の受け取り
             comeText = extraText
             domein = UrlDomein().hen(comeText)
 
@@ -91,25 +92,25 @@ class EditActivity : AppCompatActivity() {
             findViewById<EditText>(R.id.mainEdit).setText("NowLoading...")
 
 
-//===========================URLで動く部分
+            //URLで動く部分
             if(UrlDomein().check(comeText)) {
 
-//==============================faviconの取得
+                //faviconの取得
                 Picasso.get()
-                    //いらすとやの画像URL
+                    //画像URL
                     .load("https://www.google.com/s2/favicons?domain=$domein")
                     .resize(300, 300) //表示サイズ指定
                     .centerCrop() //resizeで指定した範囲になるよう中央から切り出し
                     .into(findViewById<ImageView>(R.id.mainIcon)) //imageViewに流し込み
 
 
-//================================WebViewでのタイトルの取得の仕方。
+                //WebViewでのタイトルの取得の仕方。
                 val webview = WebView(this)
 
-//              URL
+                //URL
                 webview.loadUrl(comeText)
 
-//              画面を取得するときにここがないと取得できない
+                //画面を取得するときにここがないと取得できない
                 val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
                 val params = WindowManager.LayoutParams(
                     300,
@@ -124,7 +125,7 @@ class EditActivity : AppCompatActivity() {
                 //非表示
                 webview.visibility = View.GONE
 
-//                 画像取得部分
+                //画像取得部分
                 webview.webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView, url: String) {
 
