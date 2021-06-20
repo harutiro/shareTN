@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
 //        realm.executeTransaction {
 //
 //            val mainObject = it.createObject(MainDate::class.java, UUID.randomUUID().toString()).apply {
@@ -95,6 +97,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume(){
         super.onResume()
 
+        val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
+        val RView = findViewById<RecyclerView>(R.id.RView)
         val adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: MainDate) {
                 // SecondActivityに遷移するためのIntent
@@ -105,9 +109,15 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         })
+        RView.layoutManager = LinearLayoutManager(this)
+        RView.adapter = adapter
 
         //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
-        adapter.reView()
+        adapter.addAll(mainPersons)
+
+        findViewById<Button>(R.id.button).setOnClickListener{
+            adapter.notifyDataSetChanged()
+        }
 
     }
 
