@@ -97,6 +97,8 @@ class EditActivity : AppCompatActivity() {
 //                }
 
 //                new.tagList?.add(tagObject)
+
+                finish()
             }
         }
 
