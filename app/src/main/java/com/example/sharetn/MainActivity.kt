@@ -13,12 +13,15 @@ import io.realm.RealmResults
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val realm by lazy {
+        Realm.getDefaultInstance()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //realmのインスタンス
-        val realm: Realm = Realm.getDefaultInstance()
 
 //        realm.executeTransaction {
 //
@@ -80,5 +83,11 @@ class MainActivity : AppCompatActivity() {
 
         //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
         adapter.addAll(mainPersons)
+    }
+
+    override fun onDestroy() {
+        realm.close()
+        super.onDestroy()
+
     }
 }

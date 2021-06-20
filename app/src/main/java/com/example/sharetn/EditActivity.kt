@@ -15,6 +15,7 @@ import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,13 +31,17 @@ import java.util.*
 
 
 class EditActivity : AppCompatActivity() {
+
+    private val realm by lazy {
+        Realm.getDefaultInstance()
+    }
+
+
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
-        //realmのインスタンス
-        val realm: Realm = Realm.getDefaultInstance()
 
         var comeText = ""
         var domein = ""
@@ -50,6 +55,8 @@ class EditActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.mainEdit).movementMethod = ScrollingMovementMethod()
         findViewById<TextView>(R.id.subEdit).movementMethod = ScrollingMovementMethod()
         findViewById<TextView>(R.id.memoEdit).movementMethod = ScrollingMovementMethod()
+
+
 
         //タグ関係
         val courseDate: List <TagDateClass> = listOf(
@@ -152,6 +159,33 @@ class EditActivity : AppCompatActivity() {
 
 
 
+
+    }
+
+    //戻るボタンの処理
+    override fun onBackPressed() {
+        // 行いたい処理
+        AlertDialog.Builder(this) // FragmentではActivityを取得して生成
+            .setTitle("注意")
+            .setMessage("入力したデータを保存しないでホームに戻りますか？")
+            .setPositiveButton("OK") { dialog, which ->
+                //Yesが押された時の挙動
+                finish()
+            }
+            .setNegativeButton("Cancel") { dialog, which ->
+                // Noが押された時の挙動
+            }
+            .setNeutralButton("保存") { dialog, which ->
+                //その他が押された時の挙動
+//                datekanri()
+                finish()
+            }
+            .show()
+    }
+
+    override fun onDestroy() {
+        realm.close()
+        super.onDestroy()
 
     }
 }
