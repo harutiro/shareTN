@@ -16,8 +16,17 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.sharetn.Adapter.MainRecyclerViewAdapter
+import com.example.sharetn.Adapter.TagRecyclerViewAdapter
+import com.example.sharetn.Date.MainDate
+import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
 import com.squareup.picasso.Picasso
+import io.realm.Realm
+import io.realm.RealmResults
+import java.util.*
 
 
 class EditActivity : AppCompatActivity() {
@@ -26,17 +35,42 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
 
+        //realmのインスタンス
+        val realm: Realm = Realm.getDefaultInstance()
+
         var comeText = ""
         var domein = ""
         var title = ""
 
+        //URLのViewの非表示
         findViewById<EditText>(R.id.subEdit).visibility = GONE
         findViewById<ImageView>(R.id.subIcon).visibility = GONE
 
+        //スクロールできるように設定
         findViewById<TextView>(R.id.mainEdit).movementMethod = ScrollingMovementMethod()
         findViewById<TextView>(R.id.subEdit).movementMethod = ScrollingMovementMethod()
         findViewById<TextView>(R.id.memoEdit).movementMethod = ScrollingMovementMethod()
 
+        val courseDate: List <TagDateClass> = listOf(
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作dddddddddddddddddddddddddd者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+
+
+            )
+
+        val tagPersons: RealmResults<TagDateClass> = realm.where(TagDateClass::class.java).findAll()
+        val RView = findViewById<RecyclerView>(R.id.EditRView)
+        val adapter = TagRecyclerViewAdapter(this )
+        RView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
+        RView.adapter = adapter
+
+        adapter.addAll(courseDate)
 
 
 
