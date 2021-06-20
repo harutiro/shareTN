@@ -176,6 +176,7 @@ class EditActivity : AppCompatActivity() {
                     PixelFormat.TRANSLUCENT
                 )
 
+//                TODO:終わらせるときにクローズさせるようにする。
                 wm.addView(webview, params)
 
                 //非表示
