@@ -7,7 +7,7 @@ import java.util.*
 
 open class MainDate(
     @PrimaryKey open var Id: String? = UUID.randomUUID().toString(),
-    open var icon: Int = 0,
+    open var icon: String = "",
     open var mainText: String = "",
     open var subText: String = "",
     open var image: String = "",

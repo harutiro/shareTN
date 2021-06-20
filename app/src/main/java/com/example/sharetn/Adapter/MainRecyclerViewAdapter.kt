@@ -1,6 +1,7 @@
 package com.example.sharetn.Adapter
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ListView
+import android.util.Base64
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,7 +59,8 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         holder.container.setOnClickListener { listener.onItemClick(item) }
 
 //        itemとレイアウトの直接の結びつけ
-        holder.iconImageView.setImageResource(item.icon)
+        val decodedByte: ByteArray = Base64.decode(item.icon, 0)
+        holder.iconImageView.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
         holder.mainTextView.text = item.mainText
         holder.subTextView.text = item.subText
 //        holder.tagListView
