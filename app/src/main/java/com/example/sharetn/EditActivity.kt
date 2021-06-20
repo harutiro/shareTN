@@ -73,17 +73,24 @@ class EditActivity : AppCompatActivity() {
 
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         val id = intent.getStringExtra("id")
-        val item = realm.where(MainDate::class.java).equalTo("Id", id).findFirst()
-        mainEdit.setText(item?.mainText)
-        subEdit.setText(item?.subText)
-        val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
-        mainIcon.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
-        if (item != null) {
-            if(UrlDomein().check(item.subText)){
-                subEdit.visibility = VISIBLE
-                subIcon.visibility = VISIBLE
+
+        //データのはめ込み
+        if (id == null){
+
+        }else{
+            val item = realm.where(MainDate::class.java).equalTo("Id", id).findFirst()
+            mainEdit.setText(item?.mainText)
+            subEdit.setText(item?.subText)
+            val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
+            mainIcon.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
+            if (item != null) {
+                if(UrlDomein().check(item.subText)){
+                    subEdit.visibility = VISIBLE
+                    subIcon.visibility = VISIBLE
+                }
             }
         }
+
 
 
 

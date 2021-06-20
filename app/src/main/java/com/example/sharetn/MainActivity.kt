@@ -3,6 +3,8 @@ package com.example.sharetn
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.MainRecyclerViewAdapter
@@ -22,6 +24,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+        findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.puraFAB).setOnClickListener{
+            val intent = Intent(this, EditActivity::class.java)
+            startActivity(intent)
+        }
 
 //        realm.executeTransaction {
 //
