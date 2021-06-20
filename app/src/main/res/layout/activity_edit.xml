@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".EditActivity">
 
     <ImageView
         android:id="@+id/iconImage"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginStart="16dp"
+        app:tint="@color/textBlock"
         app:layout_constraintBottom_toBottomOf="@+id/mainEdit"
         app:layout_constraintEnd_toStartOf="@+id/mainEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/mainEdit"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        app:srcCompat="@drawable/travel_explore_black_24dp" />
 
     <EditText
         android:id="@+id/mainEdit"
@@ -24,11 +26,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/border"
         android:ems="10"
         android:gravity="start|top"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:singleLine="true"
+        android:textColor="@color/textBlock"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iconImage"
@@ -38,11 +42,13 @@
         android:id="@+id/subEdit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/border"
         android:ems="10"
         android:gravity="start|top"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:singleLine="true"
+        android:textColor="@color/textLightGray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/mainEdit"
         app:layout_constraintStart_toStartOf="@+id/mainEdit"
@@ -63,9 +69,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:backgroundTint="@color/border"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:textColor="@color/textBlock"
         app:layout_constraintEnd_toEndOf="@+id/subEdit"
         app:layout_constraintStart_toStartOf="@+id/subEdit"
         app:layout_constraintTop_toBottomOf="@+id/subEdit" />
@@ -76,21 +84,26 @@
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:tint="@color/textBlock"
         app:layout_constraintBottom_toBottomOf="@+id/memoEdit"
         app:layout_constraintEnd_toStartOf="@+id/memoEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/memoEdit"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        app:srcCompat="@drawable/description_black_24dp" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="240dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/memoEdit"
-        app:srcCompat="@drawable/ramen"
-        tools:layout_editor_absoluteX="0dp" />
+        app:shapeAppearanceOverlay="@style/roundimageview"
+        app:srcCompat="@drawable/ramen" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -98,10 +111,33 @@
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:tint="@color/textBlock"
         app:layout_constraintBottom_toBottomOf="@+id/subEdit"
         app:layout_constraintEnd_toStartOf="@+id/subEdit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainEdit"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+        app:srcCompat="@drawable/link_black_24dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:radius="10dp"
+        app:tint="@color/textBlock"
+        app:layout_constraintBottom_toBottomOf="@+id/dayText"
+        app:layout_constraintEnd_toStartOf="@+id/dayText"
+        app:layout_constraintTop_toTopOf="@+id/dayText"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/today_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
