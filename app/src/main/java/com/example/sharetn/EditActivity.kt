@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
@@ -22,6 +23,7 @@ import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +36,8 @@ import com.squareup.picasso.Picasso
 import io.realm.Realm
 import io.realm.RealmResults
 import java.io.ByteArrayOutputStream
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -44,6 +48,7 @@ class EditActivity : AppCompatActivity() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("UseCompatLoadingForDrawables")
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,13 +85,25 @@ class EditActivity : AppCompatActivity() {
         //データのはめ込み
         if (id == null){
 
+            val dateAndtime: LocalDate = LocalDate.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy年 MM月 dd日")
+            val formatted = dateAndtime.format(formatter)
+            dayText.text = formatted
+
         }else{
             val item = realm.where(MainDate::class.java).equalTo("Id", id).findFirst()
+
+
             mainEdit.setText(item?.mainText)
             subEdit.setText(item?.subText)
+
             val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
             mainIcon.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
+
+            dayText.text = item?.dayText
+
             memoEdit.setText(item?.memoText)
+
             if (item != null) {
                 if(UrlDomein().check(item.subText)){
                     subEdit.visibility = VISIBLE
@@ -123,6 +140,11 @@ class EditActivity : AppCompatActivity() {
                 new?.subText = subEdit.text.toString()
                 new?.memoText = memoEdit.text.toString()
                 new?.image = ""
+
+                val dateAndtime: LocalDate = LocalDate.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy年 MM月 dd日")
+                val formatted = dateAndtime.format(formatter)
+                new?.dayText = formatted
 
 //                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
 //                    this.Icon = R.drawable.ic_baseline_more_vert_24
