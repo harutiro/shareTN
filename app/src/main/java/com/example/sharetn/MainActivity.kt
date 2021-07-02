@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.searchButton).setOnClickListener{
             RVGo(findViewById<EditText>(R.id.searchEditText).text.toString())
         }
+        findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
+            findViewById<EditText>(R.id.searchEditText).setText("")
+        }
 
 
         RVGo()
