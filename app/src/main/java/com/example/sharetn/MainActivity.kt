@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.MainRecyclerViewAdapter
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.TagDateClass
+import com.example.sharetn.dousa.BottomSheetFragment
 import io.realm.Realm
 import io.realm.RealmResults
 import java.util.*
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        findViewById<Button>(R.id.button).setOnClickListener{
+            val myBottomSheet = BottomSheetFragment()
+            myBottomSheet.show(supportFragmentManager,"navigation_bottom_sheet")
+        }
 
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.puraFAB).setOnClickListener{
             val intent = Intent(this, EditActivity::class.java)
