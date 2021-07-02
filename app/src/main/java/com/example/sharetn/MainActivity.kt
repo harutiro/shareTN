@@ -2,6 +2,8 @@ package com.example.sharetn
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +28,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        findViewById<ImageButton>(R.id.searchButton).setOnClickListener{
+            RVGo(findViewById<EditText>(R.id.searchEditText).text.toString())
+        }
+
 
         RVGo()
     }
@@ -43,8 +49,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun RVGo(){
-        val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
+    fun RVGo(word:String = ""){
+
+
+        val mainPersons: RealmResults<MainDate> = if(word == ""){
+            realm.where(MainDate::class.java).findAll()
+        } else{
+            realm.where(MainDate::class.java)
+                .contains("mainText",word)
+                .or()
+                .contains("subText",word)
+                .or()
+                .contains("memoText",word)
+                .findAll()
+        }
         val RView = findViewById<RecyclerView>(R.id.RView)
         val adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: MainDate) {

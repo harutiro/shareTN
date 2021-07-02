@@ -71,7 +71,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine"
+            android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
@@ -90,9 +90,9 @@
             android:layout_marginEnd="16dp"
             android:background="@null"
             android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTextMultiLine"
+            app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextTextMultiLine"
+            app:layout_constraintTop_toTopOf="@+id/searchEditText"
             app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
         <ImageButton
@@ -102,9 +102,9 @@
             android:layout_marginEnd="8dp"
             android:background="@null"
             android:padding="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTextMultiLine"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextMultiLine"
-            app:layout_constraintTop_toTopOf="@+id/editTextTextMultiLine"
+            app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
+            app:layout_constraintEnd_toEndOf="@+id/searchEditText"
+            app:layout_constraintTop_toTopOf="@+id/searchEditText"
             app:srcCompat="@drawable/close_black_24dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
