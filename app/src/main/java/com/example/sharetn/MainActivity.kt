@@ -2,6 +2,7 @@ package com.example.sharetn
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         Realm.getDefaultInstance()
     }
 
+    var adapter: MainRecyclerViewAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,15 +31,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.searchButton).setOnClickListener{
-            RVGo(findViewById<EditText>(R.id.searchEditText).text.toString())
+            RVGo()
         }
         findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
             findViewById<EditText>(R.id.searchEditText).setText("")
         }
 
 
+        val rView = findViewById<RecyclerView>(R.id.RView)
+        adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
+            override fun onItemClick(item: MainDate) {
+                // SecondActivityに遷移するためのIntent
+                val intent = Intent(applicationContext, EditActivity::class.java)
+                // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
+                // また，要素のidをSecondActivityに渡す
+                intent.putExtra("id", item.Id)
+                startActivity(intent)
+            }
+        })
+        rView.layoutManager = LinearLayoutManager(this)
+        rView.adapter = adapter
 
-        RVGo()
+        val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
+        adapter?.setList(mainPersons)
     }
 
     override fun onResume(){
@@ -53,36 +69,33 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun RVGo(word:String = ""){
+    fun RVGo(){
 
+        val word = findViewById<EditText>(R.id.searchEditText).text.toString()
+        val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
 
-        val mainPersons: RealmResults<MainDate> = if(word == ""){
-            realm.where(MainDate::class.java).findAll()
-        } else{
-            realm.where(MainDate::class.java)
-                .contains("mainText",word)
-                .or()
-                .contains("subText",word)
-                .or()
-                .contains("memoText",word)
-                .findAll()
-        }
-        val RView = findViewById<RecyclerView>(R.id.RView)
-        val adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
-            override fun onItemClick(item: MainDate) {
-                // SecondActivityに遷移するためのIntent
-                val intent = Intent(applicationContext, EditActivity::class.java)
-                // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
-                // また，要素のidをSecondActivityに渡す
-                intent.putExtra("id", item.Id)
-                startActivity(intent)
+        val mainPerson: MutableList<MainDate> = mutableListOf()
+
+        if(word != ""){
+            val all = word.split(" ","　")
+
+            for(p in all){
+                val filterMain = mainPersons.filter{Regex(p).containsMatchIn(it.mainText)}
+                val filterMemo = mainPersons.filter{Regex(p).containsMatchIn(it.memoText)}
+
+                val match = filterMain + filterMemo
+
+                mainPerson += match
+
             }
-        })
-        RView.layoutManager = LinearLayoutManager(this)
-        RView.adapter = adapter
 
-        //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
-        adapter.addAll(mainPersons)
+            //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
+            adapter?.setList(mainPerson)
+        }else{
+            adapter?.setList(mainPersons)
+
+        }
+
 
     }
 }

@@ -118,4 +118,10 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
     fun reView(){
         notifyDataSetChanged()
     }
+
+    fun setList(list: List<MainDate>){
+        items.clear()
+        items.addAll(list)
+        notifyDataSetChanged()
+    }
 }
