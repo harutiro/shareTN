@@ -89,6 +89,8 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+            //TODO: or検索になっているものをAND検索にする。
+            //TODO: 二重に重なっているものをなくす
             //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
             adapter?.setList(mainPerson)
         }else{
