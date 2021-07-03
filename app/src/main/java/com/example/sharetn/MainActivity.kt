@@ -74,18 +74,17 @@ class MainActivity : AppCompatActivity() {
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
         val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
 
-        val mainPerson: MutableList<MainDate> = mutableListOf()
+        var mainPerson: MutableList<MainDate> = mainPersons
 
         if(word != ""){
             val all = word.split(" ","　")
 
             for(p in all){
-                val filterMain = mainPersons.filter{Regex(p).containsMatchIn(it.mainText)}
-                val filterMemo = mainPersons.filter{Regex(p).containsMatchIn(it.memoText)}
+                val filterMain = mainPerson.filter{Regex(p).containsMatchIn(it.mainText)}
+                val filterMemo = mainPerson.filter{Regex(p).containsMatchIn(it.memoText)}
 
-                val match = filterMain + filterMemo
+                mainPerson = (filterMain + filterMemo) as MutableList<MainDate>
 
-                mainPerson += match
 
             }
 
