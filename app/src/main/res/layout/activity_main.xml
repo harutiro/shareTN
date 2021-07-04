@@ -33,7 +33,7 @@
             android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
@@ -55,17 +55,29 @@
         android:layout_height="300dp"
         android:background="@drawable/shape_rounded_corners_10dp"
         android:backgroundTint="@color/white"
-        android:paddingTop="32dp"
+        android:paddingTop="16dp"
         android:paddingBottom="24dp"
         app:behavior_peekHeight="96dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:context=".BottomSheetFragment">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="32dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/textLightGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:gravity="start|top"
             android:imeOptions="actionDone"
@@ -75,7 +87,7 @@
             android:textColor="@color/textBlock"
             app:layout_constraintEnd_toStartOf="@+id/searchButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
 
         <ImageButton
             android:id="@+id/searchButton"
