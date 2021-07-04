@@ -1,9 +1,12 @@
 package com.example.sharetn
 
 import android.content.Intent
+import android.icu.text.Transliterator
+import android.os.Build
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +15,7 @@ import com.example.sharetn.Date.MainDate
 import io.realm.Realm
 import io.realm.RealmResults
 
+
 class MainActivity : AppCompatActivity() {
 
     private val realm by lazy {
@@ -19,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     var adapter: MainRecyclerViewAdapter? = null
+
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -56,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         adapter?.setList(mainPersons)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onResume(){
         super.onResume()
 
@@ -69,6 +76,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
+    @Suppress("DEPRECATION")
     fun RVGo(){
 
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
@@ -81,8 +90,15 @@ class MainActivity : AppCompatActivity() {
 
             for(p in all){
 
-                val filterMain = mainPerson.filter{Regex(p.toLowerCase()).containsMatchIn(it.mainText.toLowerCase())}
-                val filterMemo = mainPerson.filter{Regex(p.toLowerCase()).containsMatchIn(it.memoText.toLowerCase())}
+                val transliterator = Transliterator.getInstance("Katakana-Hiragana")
+
+                //カタカナは全部ひらがなに変換する
+                //大文字の英語は小文字の英語に変換する
+                val filterMain = mainPerson.filter{Regex(transliterator.transliterate(p.toLowerCase()))
+                                        .containsMatchIn(transliterator.transliterate(it.mainText.toLowerCase()))}
+
+                val filterMemo = mainPerson.filter{Regex(transliterator.transliterate(p.toLowerCase()))
+                                        .containsMatchIn(transliterator.transliterate(it.memoText.toLowerCase()))}
 
                 mainPerson = (filterMain + filterMemo) as MutableList<MainDate>
 
