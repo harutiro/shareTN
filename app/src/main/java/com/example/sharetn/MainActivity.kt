@@ -2,7 +2,6 @@ package com.example.sharetn
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
             findViewById<EditText>(R.id.searchEditText).setText("")
+            RVGo()
         }
 
 
