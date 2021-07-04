@@ -80,16 +80,14 @@ class MainActivity : AppCompatActivity() {
             val all = word.split(" ","　")
 
             for(p in all){
-                val filterMain = mainPerson.filter{Regex(p).containsMatchIn(it.mainText)}
-                val filterMemo = mainPerson.filter{Regex(p).containsMatchIn(it.memoText)}
+
+                val filterMain = mainPerson.filter{Regex(p.toLowerCase()).containsMatchIn(it.mainText.toLowerCase())}
+                val filterMemo = mainPerson.filter{Regex(p.toLowerCase()).containsMatchIn(it.memoText.toLowerCase())}
 
                 mainPerson = (filterMain + filterMemo) as MutableList<MainDate>
 
 
             }
-
-            //TODO: or検索になっているものをAND検索にする。
-            //TODO: 二重に重なっているものをなくす
             //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
             adapter?.setList(mainPerson)
         }else{
