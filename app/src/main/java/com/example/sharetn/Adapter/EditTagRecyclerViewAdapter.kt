@@ -2,14 +2,11 @@ package com.example.sharetn.Adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.ListView
-import android.util.Base64
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +15,6 @@ import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.R
 import io.realm.Realm
-import java.lang.invoke.ConstantCallSite
 import java.util.*
 
 class EditTagRecyclerViewAdapter(private val context: Context, private val listener: OnItemClickListner):
@@ -71,7 +67,7 @@ class EditTagRecyclerViewAdapter(private val context: Context, private val liste
 //            holder.imageView.setImageResource(item.image)
         }else{
 //            holder.imageView.visibility = GONE
-            holder.imageView.setImageResource(R.drawable.ramen)
+            holder.imageView.setImageResource(R.drawable.ramen2)
         }
 
         val courseDate: List <TagDateClass> = listOf(
