@@ -3,16 +3,13 @@ package com.example.sharetn
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
-import android.util.Base64.encodeToString
 import android.util.Base64
 import android.view.View
 import android.view.View.GONE
@@ -23,7 +20,6 @@ import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,8 +32,7 @@ import com.squareup.picasso.Picasso
 import io.realm.Realm
 import io.realm.RealmResults
 import java.io.ByteArrayOutputStream
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -48,7 +43,7 @@ class EditActivity : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
+//    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("UseCompatLoadingForDrawables")
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,9 +80,9 @@ class EditActivity : AppCompatActivity() {
         //データのはめ込み
         if (id == null){
 
-            val dateAndtime: LocalDate = LocalDate.now()
-            val formatter = DateTimeFormatter.ofPattern("yyyy年 MM月 dd日")
-            val formatted = dateAndtime.format(formatter)
+            val date = Date(System.currentTimeMillis())
+            val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
+            val formatted = df.format(date)
             dayText.text = formatted
 
         }else{
@@ -141,9 +136,9 @@ class EditActivity : AppCompatActivity() {
                 new?.memoText = memoEdit.text.toString()
                 new?.image = ""
 
-                val dateAndtime: LocalDate = LocalDate.now()
-                val formatter = DateTimeFormatter.ofPattern("yyyy年 MM月 dd日")
-                val formatted = dateAndtime.format(formatter)
+                val date = Date(System.currentTimeMillis())
+                val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
+                val formatted = df.format(date)
                 new?.dayText = formatted
 
 //                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
