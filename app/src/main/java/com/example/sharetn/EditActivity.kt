@@ -42,6 +42,18 @@ class EditActivity : AppCompatActivity() {
         Realm.getDefaultInstance()
     }
 
+    var subEdit:EditText? =  null
+    var subIcon:ImageView? =  null
+    var mainEdit:EditText? = null
+    var mainIcon:ImageView? = null
+    var dayText:TextView? =  null
+    var dayIcon:ImageView? =  null
+    var memoIcon:ImageView? = null
+    var memoEdit:EditText? = null
+    var image:ImageView? =    null
+
+    var id:String? = ""
+
 
 //    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -55,27 +67,27 @@ class EditActivity : AppCompatActivity() {
         var domein = ""
         var title = ""
 
-        val subEdit = findViewById<EditText>(R.id.subEdit)
-        val subIcon = findViewById<ImageView>(R.id.subIcon)
-        val mainEdit = findViewById<EditText>(R.id.mainEdit)
-        val mainIcon = findViewById<ImageView>(R.id.mainIcon)
-        val dayText = findViewById<TextView>(R.id.dayText)
-        val dayIcon = findViewById<ImageView>(R.id.dayIcon)
-        val memoIcon = findViewById<ImageView>(R.id.memoIcon)
-        val memoEdit = findViewById<EditText>(R.id.memoEdit)
-        val image = findViewById<ImageView>(R.id.image)
+        subEdit = findViewById<EditText>(R.id.subEdit)
+        subIcon = findViewById<ImageView>(R.id.subIcon)
+        mainEdit = findViewById<EditText>(R.id.mainEdit)
+        mainIcon = findViewById<ImageView>(R.id.mainIcon)
+        dayText = findViewById<TextView>(R.id.dayText)
+        dayIcon = findViewById<ImageView>(R.id.dayIcon)
+        memoIcon = findViewById<ImageView>(R.id.memoIcon)
+        memoEdit = findViewById<EditText>(R.id.memoEdit)
+        image = findViewById<ImageView>(R.id.image)
 
         //URLのViewの非表示
-        subEdit.visibility = GONE
-        subIcon.visibility = GONE
+        subEdit?.visibility = GONE
+        subIcon?.visibility = GONE
 
         //スクロールできるように設定
-        mainEdit.movementMethod = ScrollingMovementMethod()
-        subEdit.movementMethod = ScrollingMovementMethod()
-        memoEdit.movementMethod = ScrollingMovementMethod()
+        mainEdit?.movementMethod = ScrollingMovementMethod()
+        subEdit?.movementMethod = ScrollingMovementMethod()
+        memoEdit?.movementMethod = ScrollingMovementMethod()
 
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
-        val id = intent.getStringExtra("id")
+        id = intent.getStringExtra("id")
 
         //データのはめ込み
         if (id == null){
@@ -83,26 +95,26 @@ class EditActivity : AppCompatActivity() {
             val date = Date(System.currentTimeMillis())
             val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
             val formatted = df.format(date)
-            dayText.text = formatted
+            dayText?.text = formatted
 
         }else{
             val item = realm.where(MainDate::class.java).equalTo("Id", id).findFirst()
 
 
-            mainEdit.setText(item?.mainText)
-            subEdit.setText(item?.subText)
+            mainEdit?.setText(item?.mainText)
+            subEdit?.setText(item?.subText)
 
             val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
-            mainIcon.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
+            mainIcon?.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
 
-            dayText.text = item?.dayText
+            dayText?.text = item?.dayText
 
-            memoEdit.setText(item?.memoText)
+            memoEdit?.setText(item?.memoText)
 
             if (item != null) {
                 if(UrlDomein().check(item.subText)){
-                    subEdit.visibility = VISIBLE
-                    subIcon.visibility = VISIBLE
+                    subEdit?.visibility = VISIBLE
+                    subIcon?.visibility = VISIBLE
                 }
             }
         }
@@ -113,45 +125,7 @@ class EditActivity : AppCompatActivity() {
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
         findViewById<TextView>(R.id.saveButton).setOnClickListener {
-            realm.executeTransaction{
-
-                val new = if(id == null){
-                    it.createObject(MainDate::class.java,UUID.randomUUID().toString())
-                }else{
-                    it.where(MainDate::class.java).equalTo("Id",id).findFirst()
-                }
-
-                //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-                //データ受け取り
-                val bmp = (mainIcon.drawable as BitmapDrawable).bitmap
-                //エンコード
-                val baos = ByteArrayOutputStream()
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, baos)
-                val b: ByteArray = baos.toByteArray()
-                val output = Base64.encodeToString(b, Base64.NO_WRAP)
-
-                new?.icon = output
-                new?.mainText = mainEdit.text.toString()
-                new?.subText = subEdit.text.toString()
-                new?.memoText = memoEdit.text.toString()
-                new?.image = ""
-
-                val date = Date(System.currentTimeMillis())
-                val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
-                val formatted = df.format(date)
-                new?.dayText = formatted
-
-//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-//                    this.Icon = R.drawable.ic_baseline_more_vert_24
-//                    this.name = "タグ"
-//                    this.color = ""
-//                    this.mojiColor = ""
-//                }
-
-//                new?.tagList?.add(tagObject)
-
-                finish()
-            }
+            save()
         }
 
 
@@ -189,8 +163,8 @@ class EditActivity : AppCompatActivity() {
             val extras = intent.extras
             val extraText = extras!!.getCharSequence(Intent.EXTRA_TEXT).toString()
 
-            subEdit.visibility = VISIBLE
-            subIcon.visibility = VISIBLE
+            subEdit?.visibility = VISIBLE
+            subIcon?.visibility = VISIBLE
 
             //URLや文字の受け取り
             comeText = extraText
@@ -239,7 +213,7 @@ class EditActivity : AppCompatActivity() {
                     override fun onPageFinished(view: WebView, url: String) {
 
                         title = webview.title.toString()
-                        mainEdit.setText(title)
+                        mainEdit?.setText(title)
 
 
                     }
@@ -250,7 +224,7 @@ class EditActivity : AppCompatActivity() {
                         description: String?,
                         url: String?
                     ){
-                        mainEdit.setText("ネットワークエラー")
+                        mainEdit?.setText("ネットワークエラー")
                     }
 
                 }
@@ -262,6 +236,48 @@ class EditActivity : AppCompatActivity() {
 
 
 
+    }
+
+    fun save(){
+        realm.executeTransaction{
+
+            val new = if(id == null){
+                it.createObject(MainDate::class.java,UUID.randomUUID().toString())
+            }else{
+                it.where(MainDate::class.java).equalTo("Id",id).findFirst()
+            }
+
+            //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+            //データ受け取り
+            val bmp = (mainIcon?.drawable as BitmapDrawable).bitmap
+            //エンコード
+            val baos = ByteArrayOutputStream()
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            val b: ByteArray = baos.toByteArray()
+            val output = Base64.encodeToString(b, Base64.NO_WRAP)
+
+            new?.icon = output
+            new?.mainText = mainEdit?.text.toString()
+            new?.subText = subEdit?.text.toString()
+            new?.memoText = memoEdit?.text.toString()
+            new?.image = ""
+
+            val date = Date(System.currentTimeMillis())
+            val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
+            val formatted = df.format(date)
+            new?.dayText = formatted
+
+//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+//                    this.Icon = R.drawable.ic_baseline_more_vert_24
+//                    this.name = "タグ"
+//                    this.color = ""
+//                    this.mojiColor = ""
+//                }
+
+//                new?.tagList?.add(tagObject)
+
+            finish()
+        }
     }
 
     //戻るボタンの処理
