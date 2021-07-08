@@ -295,7 +295,7 @@ class EditActivity : AppCompatActivity() {
             }
             .setNeutralButton("保存") { dialog, which ->
                 //その他が押された時の挙動
-//                datekanri()
+                save()
                 finish()
             }
             .show()
