@@ -14,6 +14,7 @@ import com.example.sharetn.Date.MainDate
 import com.example.sharetn.dousa.JapaneseChange
 import io.realm.Realm
 import io.realm.RealmResults
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -92,11 +93,12 @@ class MainActivity : AppCompatActivity() {
 
                 //カタカナは全部ひらがなに変換する
                 //大文字の英語は小文字の英語に変換する
-                val filterMain = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase()))
-                                        .containsMatchIn(JapaneseChange().converted(it.mainText.toLowerCase()))}
+                val filterMain = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase(Locale.ROOT)))
+                                        .containsMatchIn(JapaneseChange().converted(it.mainText.toLowerCase(Locale.ROOT)))
+                }
 
-                val filterMemo = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase()))
-                                        .containsMatchIn(JapaneseChange().converted(it.memoText.toLowerCase()))}
+                val filterMemo = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase(Locale.ROOT)))
+                                        .containsMatchIn(JapaneseChange().converted(it.memoText.toLowerCase(Locale.ROOT)))}
 
                 mainPerson = (filterMain + filterMemo) as MutableList<MainDate>
 
