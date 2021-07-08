@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     var adapter: MainRecyclerViewAdapter? = null
 
-    @RequiresApi(Build.VERSION_CODES.Q)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
