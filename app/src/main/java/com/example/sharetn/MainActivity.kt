@@ -1,7 +1,6 @@
 package com.example.sharetn
 
 import android.content.Intent
-import android.icu.text.Transliterator
 import android.os.Build
 import android.os.Bundle
 import android.widget.EditText
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.MainRecyclerViewAdapter
 import com.example.sharetn.Date.MainDate
+import com.example.sharetn.dousa.JapaneseChange
 import io.realm.Realm
 import io.realm.RealmResults
 
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
+
     @Suppress("DEPRECATION")
     fun RVGo(){
 
@@ -90,15 +90,13 @@ class MainActivity : AppCompatActivity() {
 
             for(p in all){
 
-                val transliterator = Transliterator.getInstance("Katakana-Hiragana")
-
                 //カタカナは全部ひらがなに変換する
                 //大文字の英語は小文字の英語に変換する
-                val filterMain = mainPerson.filter{Regex(transliterator.transliterate(p.toLowerCase()))
-                                        .containsMatchIn(transliterator.transliterate(it.mainText.toLowerCase()))}
+                val filterMain = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase()))
+                                        .containsMatchIn(JapaneseChange().converted(it.mainText.toLowerCase()))}
 
-                val filterMemo = mainPerson.filter{Regex(transliterator.transliterate(p.toLowerCase()))
-                                        .containsMatchIn(transliterator.transliterate(it.memoText.toLowerCase()))}
+                val filterMemo = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase()))
+                                        .containsMatchIn(JapaneseChange().converted(it.memoText.toLowerCase()))}
 
                 mainPerson = (filterMain + filterMemo) as MutableList<MainDate>
 
