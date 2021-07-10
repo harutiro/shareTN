@@ -11,26 +11,26 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Adapter.TagRecyclerViewAdapter
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import com.squareup.picasso.Picasso
 import io.realm.Realm
-import io.realm.RealmResults
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -51,6 +51,7 @@ class EditActivity : AppCompatActivity() {
     var memoIcon:ImageView? = null
     var memoEdit:EditText? = null
     var image:ImageView? =    null
+    var editTagChipGroup:ChipGroup? = null
 
     var id:String? = ""
 
@@ -76,6 +77,7 @@ class EditActivity : AppCompatActivity() {
         memoIcon = findViewById<ImageView>(R.id.memoIcon)
         memoEdit = findViewById<EditText>(R.id.memoEdit)
         image = findViewById<ImageView>(R.id.image)
+        editTagChipGroup = findViewById<ChipGroup>(R.id.editTagChipGroup)
 
         //URLのViewの非表示
         subEdit?.visibility = GONE
@@ -111,6 +113,22 @@ class EditActivity : AppCompatActivity() {
 
             memoEdit?.setText(item?.memoText)
 
+            print(item?.tagList)
+
+            for (index in item?.tagList!!) {
+
+                Log.d("debag","this: "+index.name)
+
+                val chip = Chip(editTagChipGroup?.context)
+                chip.text= index.name
+
+                // necessary to get single selection working
+                chip.isClickable = true
+                chip.isCheckable = true
+                editTagChipGroup?.addView(chip)
+            }
+
+
             if (item != null) {
                 if(UrlDomein().check(item.subText)){
                     subEdit?.visibility = VISIBLE
@@ -129,31 +147,23 @@ class EditActivity : AppCompatActivity() {
         }
 
 
+        findViewById<Button>(R.id.editTagButtonTest).setOnClickListener {
+            realm.executeTransaction{
+                val new = it.where(MainDate::class.java).equalTo("Id",id).findFirst()
 
 
+                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+                    this.Icon = R.drawable.ic_baseline_more_vert_24
+                    this.name = "タグ"
+                    this.color = ""
+                    this.mojiColor = ""
+                    this.copyId = id
+                }
 
+                new?.tagList?.add(tagObject)
 
-        //タグ関係
-        val courseDate: List <TagDateClass> = listOf(
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作dddddddddddddddddddddddddd者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-
-
-            )
-
-        val tagPersons: RealmResults<TagDateClass> = realm.where(TagDateClass::class.java).findAll()
-        val RView = findViewById<RecyclerView>(R.id.EditRView)
-        val adapter = TagRecyclerViewAdapter(this )
-        RView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
-        RView.adapter = adapter
-
-        adapter.addAll(courseDate)
+            }
+        }
 
 
 

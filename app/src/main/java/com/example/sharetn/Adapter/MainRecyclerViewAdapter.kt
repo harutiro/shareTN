@@ -3,19 +3,20 @@ package com.example.sharetn.Adapter
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
-import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.R
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import io.realm.Realm
-import java.util.*
 
 class MainRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):
     RecyclerView.Adapter<MainRecyclerViewAdapter.ViewHolder>() {
@@ -32,10 +33,10 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         val iconImageView: ImageView = view.findViewById(R.id.iconImageView)
         val mainTextView: TextView = view.findViewById(R.id.mainTextView)
         val subTextView:TextView = view.findViewById(R.id.subTextView)
-        val tagRView: RecyclerView = view.findViewById(R.id.tagRView)
         val moreButton: ImageView =  view.findViewById(R.id.moreButton)
         val imageView:ImageView = view.findViewById(R.id.imageView)
         val container: ConstraintLayout = view.findViewById(R.id.constraint)
+        val itemTagChipGroup: ChipGroup = view.findViewById(R.id.itemTagChipGroup)
 
 
 
@@ -70,27 +71,22 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
             holder.imageView.setImageResource(R.drawable.ramen2)
         }
 
-        val courseDate: List <TagDateClass> = listOf(
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作dddddddddddddddddddddddddd者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
+        //chip関係
+        //chipgroupの全消去
+        holder.itemTagChipGroup.removeAllViews()
 
+        for (index in item.tagList!!) {
+            val chip = Chip(holder.itemTagChipGroup.context)
+            chip.text= index.name
 
-        )
+            // necessary to get single selection working
+            chip.isClickable = true
+            chip.isCheckable = true
+            holder.itemTagChipGroup.addView(chip)
+        }
 
-//        タグのリサイクラービューの部分の結びつけ
-        val adapter = TagRecyclerViewAdapter(context)
-        holder.tagRView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
-        holder.tagRView.adapter = adapter
+//        Log.d("debag", holder.itemTagChipGroup.size.toString())
 
-        //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
-//        item.tagList?.let { adapter.addAll(it) }
-        adapter.addAll(courseDate)
 
     }
 

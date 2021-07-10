@@ -9,15 +9,15 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp">
 
             <EditText
                 android:id="@+id/memoEdit"
@@ -42,10 +42,10 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="16dp"
+                android:src="@drawable/outline_travel_explore_black_24dp"
                 app:layout_constraintBottom_toBottomOf="@+id/mainEdit"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mainEdit"
-                android:src="@drawable/outline_travel_explore_black_24dp" />
+                app:layout_constraintTop_toTopOf="@+id/mainEdit" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image"
@@ -60,19 +60,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/memoEdit"
                 app:shapeAppearanceOverlay="@style/roundimageview" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/EditRView"
-                android:layout_width="0dp"
-                android:layout_height="42dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image" />
 
             <TextView
                 android:id="@+id/dayText"
@@ -157,6 +144,26 @@
                 app:layout_constraintTop_toTopOf="@+id/memoEdit"
                 app:srcCompat="@drawable/description_black_24dp"
                 app:tint="@color/textBlock" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/editTagChipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <Button
+                android:id="@+id/editTagButtonTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
