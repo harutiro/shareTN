@@ -3,6 +3,7 @@ package com.example.sharetn
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
@@ -42,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
             findViewById<EditText>(R.id.searchEditText).setText("")
             RVGo()
+        }
+        findViewById<Button>(R.id.testButton).setOnClickListener{
+            adapter?.reView()
         }
 
 

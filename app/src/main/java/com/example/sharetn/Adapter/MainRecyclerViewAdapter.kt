@@ -3,12 +3,14 @@ package com.example.sharetn.Adapter
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.R
@@ -70,15 +72,22 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         }
 
         //TODO:!!の対策
-        for (index in item.tagList!!) {
-            val chip = Chip(holder.itemTagChipGroup.context)
-            chip.text= index.name
+        if(item.tagList!!.size > holder.itemTagChipGroup.size){
+            for (index in item.tagList!!) {
 
-            // necessary to get single selection working
-            chip.isClickable = true
-            chip.isCheckable = true
-            holder.itemTagChipGroup.addView(chip)
+                val chip = Chip(holder.itemTagChipGroup.context)
+                chip.text= index.name
+
+                // necessary to get single selection working
+                chip.isClickable = true
+                chip.isCheckable = true
+                holder.itemTagChipGroup.addView(chip)
+
+            }
         }
+
+
+        Log.d("debag", holder.itemTagChipGroup.size.toString())
 
 //        val courseDate: List <TagDateClass> = listOf(
 //            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
