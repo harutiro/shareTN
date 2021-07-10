@@ -72,16 +72,20 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         }
 
         //TODO:!!の対策
+
+        holder.itemTagChipGroup.removeAllViews()
         if(item.tagList!!.size > holder.itemTagChipGroup.size){
             for (index in item.tagList!!) {
+                if(item.Id == index.copyId){
+                    val chip = Chip(holder.itemTagChipGroup.context)
+                    chip.text= index.name
 
-                val chip = Chip(holder.itemTagChipGroup.context)
-                chip.text= index.name
+                    // necessary to get single selection working
+                    chip.isClickable = true
+                    chip.isCheckable = true
+                    holder.itemTagChipGroup.addView(chip)
+                }
 
-                // necessary to get single selection working
-                chip.isClickable = true
-                chip.isCheckable = true
-                holder.itemTagChipGroup.addView(chip)
 
             }
         }

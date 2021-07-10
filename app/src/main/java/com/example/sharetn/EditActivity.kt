@@ -157,6 +157,7 @@ class EditActivity : AppCompatActivity() {
                     this.name = "タグ"
                     this.color = ""
                     this.mojiColor = ""
+                    this.copyId = id
                 }
 
                 new?.tagList?.add(tagObject)
