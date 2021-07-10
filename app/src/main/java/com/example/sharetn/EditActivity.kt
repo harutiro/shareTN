@@ -168,37 +168,6 @@ class EditActivity : AppCompatActivity() {
 
 
 
-
-
-        //タグ関係
-
-
-
-
-//        val courseDate: List <TagDateClass> = listOf(
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作dddddddddddddddddddddddddd者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//
-//
-//            )
-//
-//        val tagPersons: RealmResults<TagDateClass> = realm.where(TagDateClass::class.java).findAll()
-//        val RView = findViewById<RecyclerView>(R.id.EditRView)
-//        val adapter = TagRecyclerViewAdapter(this )
-//        RView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
-//        RView.adapter = adapter
-//
-//        adapter.addAll(courseDate)
-
-
-
-
 //=============================共有で飛ばされたときに動く部分
         if (TextUtils.equals(intent.action, Intent.ACTION_SEND)) {
             val extras = intent.extras

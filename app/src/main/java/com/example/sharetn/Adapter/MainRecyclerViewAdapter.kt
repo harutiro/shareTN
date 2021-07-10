@@ -87,27 +87,6 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
 
 //        Log.d("debag", holder.itemTagChipGroup.size.toString())
 
-//        val courseDate: List <TagDateClass> = listOf(
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作dddddddddddddddddddddddddd者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
-//
-//
-//        )
-//
-////        タグのリサイクラービューの部分の結びつけ
-//        val adapter = TagRecyclerViewAdapter(context)
-//        holder.tagRView.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false)
-//        holder.tagRView.adapter = adapter
-//
-//        //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
-////        item.tagList?.let { adapter.addAll(it) }
-//        adapter.addAll(courseDate)
 
     }
 
