@@ -71,27 +71,21 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
             holder.imageView.setImageResource(R.drawable.ramen2)
         }
 
-        //TODO:!!の対策
-
+        //chip関係
+        //chipgroupの全消去
         holder.itemTagChipGroup.removeAllViews()
-        if(item.tagList!!.size > holder.itemTagChipGroup.size){
-            for (index in item.tagList!!) {
-                if(item.Id == index.copyId){
-                    val chip = Chip(holder.itemTagChipGroup.context)
-                    chip.text= index.name
 
-                    // necessary to get single selection working
-                    chip.isClickable = true
-                    chip.isCheckable = true
-                    holder.itemTagChipGroup.addView(chip)
-                }
+        for (index in item.tagList!!) {
+            val chip = Chip(holder.itemTagChipGroup.context)
+            chip.text= index.name
 
-
-            }
+            // necessary to get single selection working
+            chip.isClickable = true
+            chip.isCheckable = true
+            holder.itemTagChipGroup.addView(chip)
         }
 
-
-        Log.d("debag", holder.itemTagChipGroup.size.toString())
+//        Log.d("debag", holder.itemTagChipGroup.size.toString())
 
 //        val courseDate: List <TagDateClass> = listOf(
 //            TagDateClass(UUID.randomUUID().toString(),R.drawable.ic_baseline_more_vert_24 ,"作者"),
