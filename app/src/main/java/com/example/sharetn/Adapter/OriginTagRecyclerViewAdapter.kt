@@ -46,35 +46,36 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        // MainActivity側でタップしたときの動作を記述するため，n番目の要素を渡す
-//        holder.container.setOnClickListener { listener.onItemClick(item) }
-
         holder.itemEditTagText.setText(item.name)
 
         holder.brItemTop.visibility = View.GONE
         holder.brItemBottom.visibility = View.GONE
 
+//        EditTextをフォーカスしているか判定
         holder.itemEditTagText.setOnFocusChangeListener { view, hasFocus ->
 
-            var state = true
-
+//            フォーカスしているとき
             if (hasFocus) {
+//                前後のBrを表示
                 holder.brItemTop.visibility = View.VISIBLE
                 holder.brItemBottom.visibility = View.VISIBLE
                 holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp)
 
+//                消去するときに呼び出し元に1temを送る
                 holder.dellEditButton.setOnClickListener {
                     listener.onItemClick(item)
 
                 }
 
 
+//                フォーカスしていないとき
             }else{
+//                前後のBrの非表示
                 holder.brItemTop.visibility = View.GONE
                 holder.brItemBottom.visibility = View.GONE
                 holder.dellEditButton.setImageResource(R.drawable.label_black_24dp)
 
-
+//                  フォーカスが外れたらRealmに記入
                 realm.executeTransaction{
 
                     val new = it.where(OriginTagDateClass::class.java).equalTo("Id",item.Id).findFirst()
