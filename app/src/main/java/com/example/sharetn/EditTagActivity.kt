@@ -1,14 +1,18 @@
 package com.example.sharetn
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextWatcher
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.MainRecyclerViewAdapter
@@ -28,9 +32,17 @@ class EditTagActivity : AppCompatActivity(){
 
     var adapter: OriginTagRecyclerViewAdapter? = null
 
+    // キーボード表示を制御するためのオブジェクト
+    private lateinit var inputMethodManager: InputMethodManager
+    private lateinit var container: ConstraintLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_tag)
+
+        inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        container = findViewById(R.id.constraintEditTag)
+
 
         findViewById<View>(R.id.brEdit).visibility = GONE
 
@@ -89,5 +101,17 @@ class EditTagActivity : AppCompatActivity(){
 
         val mainPersons: RealmResults<OriginTagDateClass> = realm.where(OriginTagDateClass::class.java).findAll()
         adapter?.setList(mainPersons)
+    }
+
+    // 画面タップ時に呼ばれる
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+
+        // キーボードを隠す
+        inputMethodManager.hideSoftInputFromWindow(container.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
+        // 背景にフォーカスを移す
+        container.requestFocus()
+
+        return false
     }
 }
