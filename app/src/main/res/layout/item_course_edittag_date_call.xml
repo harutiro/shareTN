@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintEditTag"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".SearchActivity">
+    android:layout_height="wrap_content">
 
     <View
         android:id="@+id/view"
