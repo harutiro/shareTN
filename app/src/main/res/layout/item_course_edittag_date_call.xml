@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/brItemTop"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
@@ -60,7 +60,7 @@
         app:tint="@color/textBlock" />
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/brItemBottom"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"

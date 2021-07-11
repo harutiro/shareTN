@@ -7,7 +7,7 @@
     tools:context=".EditTagActivity">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/brEdit"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginStart="16dp"
@@ -60,9 +60,9 @@
         android:id="@+id/rVTagEdit"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginTop="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,6 +28,9 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val container: ConstraintLayout = view.findViewById(R.id.constraintEditTag)
         val itemEditTagText: EditText = view.findViewById(R.id.itemEditTagText)
+        val brItemTop: View = view.findViewById(R.id.brItemTop)
+        val brItemBottom:View = view.findViewById(R.id.brItemBottom)
+
     }
 
     //はめ込むものを指定
@@ -44,6 +47,20 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
         holder.container.setOnClickListener { listener.onItemClick(item) }
 
         holder.itemEditTagText.setText(item.name)
+
+        holder.brItemTop.visibility = View.GONE
+        holder.brItemBottom.visibility = View.GONE
+
+        holder.itemEditTagText.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                holder.brItemTop.visibility = View.VISIBLE
+                holder.brItemBottom.visibility = View.VISIBLE
+            }else{
+                holder.brItemTop.visibility = View.GONE
+                holder.brItemBottom.visibility = View.GONE
+            }
+        }
+
 
 
 

@@ -2,6 +2,10 @@ package com.example.sharetn
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextWatcher
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
@@ -16,15 +20,28 @@ import io.realm.Realm
 import io.realm.RealmResults
 import java.util.*
 
-class EditTagActivity : AppCompatActivity() {
+class EditTagActivity : AppCompatActivity(){
 
     private val realm by lazy {
         Realm.getDefaultInstance()
     }
 
+    var adapter: OriginTagRecyclerViewAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_tag)
+
+        findViewById<View>(R.id.brEdit).visibility = GONE
+
+        val editTextTextMultiLine = findViewById<EditText>(R.id.editTextTextMultiLine)
+        editTextTextMultiLine.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                findViewById<View>(R.id.brEdit).visibility = VISIBLE
+            }else{
+                findViewById<View>(R.id.brEdit).visibility = GONE
+            }
+        }
 
         val id = intent.getStringExtra("id")
 
@@ -36,16 +53,19 @@ class EditTagActivity : AppCompatActivity() {
                     it.where(OriginTagDateClass::class.java).equalTo("Id",id).findFirst()
                 }
 
-                new?.name = findViewById<EditText>(R.id.editTextTextMultiLine).text.toString()
+                new?.name = editTextTextMultiLine.text.toString()
             }
 
-            findViewById<EditText>(R.id.editTextTextMultiLine).setText("")
+            editTextTextMultiLine.setText("")
+            rVGo()
         }
 
 
 
+
+
         val rView = findViewById<RecyclerView>(R.id.rVTagEdit)
-        val adapter = OriginTagRecyclerViewAdapter(this , object: OriginTagRecyclerViewAdapter.OnItemClickListner{
+        adapter = OriginTagRecyclerViewAdapter(this , object: OriginTagRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: OriginTagDateClass) {
                 // SecondActivityに遷移するためのIntent
                 val intent = Intent(applicationContext, EditActivity::class.java)
@@ -57,6 +77,11 @@ class EditTagActivity : AppCompatActivity() {
         })
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter
+
+        rVGo()
+    }
+
+    fun rVGo(){
 
         val mainPersons: RealmResults<OriginTagDateClass> = realm.where(OriginTagDateClass::class.java).findAll()
         adapter?.setList(mainPersons)
