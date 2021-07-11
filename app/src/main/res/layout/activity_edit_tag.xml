@@ -29,7 +29,7 @@
         android:gravity="start|top"
         android:hint="Create new tag"
         android:inputType="textMultiLine"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/EditTagSaveButton"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +45,7 @@
         app:srcCompat="@drawable/close_black_24dp" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/EditTagSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
@@ -57,11 +57,9 @@
         app:srcCompat="@drawable/done_black_24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rVTagEdit"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
