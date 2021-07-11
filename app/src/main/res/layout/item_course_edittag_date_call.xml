@@ -32,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/itemTagSaveButton"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/dellEditButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -49,7 +49,7 @@
         app:tint="@color/textBlock" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/dellEditButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"

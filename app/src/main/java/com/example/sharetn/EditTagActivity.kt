@@ -83,12 +83,20 @@ class EditTagActivity : AppCompatActivity(){
         val rView = findViewById<RecyclerView>(R.id.rVTagEdit)
         adapter = OriginTagRecyclerViewAdapter(this , object: OriginTagRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: OriginTagDateClass) {
-//                // SecondActivityに遷移するためのIntent
-//                val intent = Intent(applicationContext, EditActivity::class.java)
-//                // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
-//                // また，要素のidをSecondActivityに渡す
-//                intent.putExtra("id", item.Id)
-//                startActivity(intent)
+
+                container.requestFocus()
+
+                val persons = realm.where(OriginTagDateClass::class.java).equalTo("Id",item.Id).findAll()
+                val personArray = mutableListOf<OriginTagDateClass>()
+                for (p in persons){
+                    personArray.add(p)
+                }
+                realm.executeTransaction {
+                    for(p in persons){
+                        p.deleteFromRealm()
+                    }
+                }
+                rVGo()
             }
         })
         rView.layoutManager = LinearLayoutManager(this)
