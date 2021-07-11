@@ -13,6 +13,7 @@ import com.example.sharetn.Date.OriginTagDateClass
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.R
 import io.realm.Realm
+import java.util.*
 
 class OriginTagRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):
     RecyclerView.Adapter<OriginTagRecyclerViewAdapter.ViewHolder>() {
@@ -55,9 +56,18 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
             if (hasFocus) {
                 holder.brItemTop.visibility = View.VISIBLE
                 holder.brItemBottom.visibility = View.VISIBLE
+
+
             }else{
                 holder.brItemTop.visibility = View.GONE
                 holder.brItemBottom.visibility = View.GONE
+
+                realm.executeTransaction{
+                    val new = it.where(OriginTagDateClass::class.java).equalTo("Id",item.Id).findFirst()
+
+                    new?.name = holder.itemEditTagText.text.toString()
+
+                }
             }
         }
 

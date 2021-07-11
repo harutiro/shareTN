@@ -47,13 +47,17 @@ class EditTagActivity : AppCompatActivity(){
 
         findViewById<ImageButton>(R.id.EditTagSaveButton).setOnClickListener{
             realm.executeTransaction{
-                val new = if(id == null){
-                    it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
-                }else{
-                    it.where(OriginTagDateClass::class.java).equalTo("Id",id).findFirst()
-                }
 
-                new?.name = editTextTextMultiLine.text.toString()
+
+                if(editTextTextMultiLine.text.toString() != ""){
+                    val new = if(id == null){
+                        it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
+                    }else{
+                        it.where(OriginTagDateClass::class.java).equalTo("Id",id).findFirst()
+                    }
+
+                    new?.name = editTextTextMultiLine.text.toString()
+                }
             }
 
             editTextTextMultiLine.setText("")
@@ -67,12 +71,12 @@ class EditTagActivity : AppCompatActivity(){
         val rView = findViewById<RecyclerView>(R.id.rVTagEdit)
         adapter = OriginTagRecyclerViewAdapter(this , object: OriginTagRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: OriginTagDateClass) {
-                // SecondActivityに遷移するためのIntent
-                val intent = Intent(applicationContext, EditActivity::class.java)
-                // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
-                // また，要素のidをSecondActivityに渡す
-                intent.putExtra("id", item.Id)
-                startActivity(intent)
+//                // SecondActivityに遷移するためのIntent
+//                val intent = Intent(applicationContext, EditActivity::class.java)
+//                // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
+//                // また，要素のidをSecondActivityに渡す
+//                intent.putExtra("id", item.Id)
+//                startActivity(intent)
             }
         })
         rView.layoutManager = LinearLayoutManager(this)
