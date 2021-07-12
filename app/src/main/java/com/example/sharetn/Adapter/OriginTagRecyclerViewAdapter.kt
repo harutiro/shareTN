@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
@@ -33,7 +32,6 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
         val itemEditTagText: EditText = view.findViewById(R.id.itemEditTagText)
         val brItemTop: View = view.findViewById(R.id.brItemTop)
         val brItemBottom:View = view.findViewById(R.id.brItemBottom)
-        val dellEditButton: ImageButton = view.findViewById(R.id.dellEditButton)
 
     }
 
@@ -48,7 +46,7 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
         val item = items[position]
 
         // MainActivity側でタップしたときの動作を記述するため，n番目の要素を渡す
-//        holder.container.setOnClickListener { listener.onItemClick(item) }
+        holder.container.setOnClickListener { listener.onItemClick(item) }
 
         holder.itemEditTagText.setText(item.name)
 
@@ -56,29 +54,18 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
         holder.brItemBottom.visibility = View.GONE
 
         holder.itemEditTagText.setOnFocusChangeListener { view, hasFocus ->
-
-            var state = true
-
             if (hasFocus) {
                 holder.brItemTop.visibility = View.VISIBLE
                 holder.brItemBottom.visibility = View.VISIBLE
-                holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp)
-
-                holder.dellEditButton.setOnClickListener {
-                    listener.onItemClick(item)
-
-                }
 
 
             }else{
                 holder.brItemTop.visibility = View.GONE
                 holder.brItemBottom.visibility = View.GONE
-                holder.dellEditButton.setImageResource(R.drawable.label_black_24dp)
-
 
                 realm.executeTransaction{
-
                     val new = it.where(OriginTagDateClass::class.java).equalTo("Id",item.Id).findFirst()
+
                     new?.name = holder.itemEditTagText.text.toString()
 
                 }
