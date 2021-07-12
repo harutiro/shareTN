@@ -23,6 +23,7 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
         Realm.getDefaultInstance()
     }
 
+
     //リサイクラービューに表示するリストを宣言する
     val items: MutableList<OriginTagDateClass> = mutableListOf()
 
