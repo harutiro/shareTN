@@ -59,7 +59,7 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 //                前後のBrを表示
                 holder.brItemTop.visibility = View.VISIBLE
                 holder.brItemBottom.visibility = View.VISIBLE
-                holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp)
+                holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp__1_)
 
 //                消去するときに呼び出し元に1temを送る
                 holder.dellEditButton.setOnClickListener {

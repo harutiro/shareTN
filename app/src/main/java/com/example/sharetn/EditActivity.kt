@@ -24,9 +24,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.squareup.picasso.Picasso
@@ -91,6 +93,12 @@ class EditActivity : AppCompatActivity() {
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         id = intent.getStringExtra("id")
 
+        val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.edit_bottom_sheet)
+        val mBottomSheetBehavior = BottomSheetBehavior.from(view)
+        findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.detailsFAB).setOnClickListener{
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+        }
+
         //データのはめ込み
         if (id == null){
 
@@ -116,8 +124,6 @@ class EditActivity : AppCompatActivity() {
             print(item?.tagList)
 
             for (index in item?.tagList!!) {
-
-                Log.d("debag","this: "+index.name)
 
                 val chip = Chip(editTagChipGroup?.context)
                 chip.text= index.name
