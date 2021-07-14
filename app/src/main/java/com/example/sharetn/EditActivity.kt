@@ -26,6 +26,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.OriginTagDateClass
+import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
@@ -273,6 +274,15 @@ class EditActivity : AppCompatActivity() {
             val formatted = df.format(date)
             new?.dayText = formatted
 
+
+            //TODO: 同じものがたくさん重複する可能性あり
+            for( i in stateTagList!!){
+                val tagObject = realm.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+                    this.copyId = i
+                }
+                new?.tagList?.add(tagObject)
+            }
+
             finish()
         }
     }
@@ -312,6 +322,20 @@ class EditActivity : AppCompatActivity() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     stateTagList = data?.getStringArrayListExtra("stateTagList")
+
+                    //TODO: 同じものを関数でまとめておく
+                    for (index in stateTagList!!) {
+                        val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index).findFirst()
+
+
+                        val chip = Chip(editTagChipGroup?.context)
+                        chip.text= new?.name
+
+                        // necessary to get single selection working
+                        chip.isClickable = true
+                        chip.isCheckable = true
+                        editTagChipGroup?.addView(chip)
+                    }
                 }
 
                 else -> {
