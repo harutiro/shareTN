@@ -3,6 +3,7 @@ package com.example.sharetn
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -29,13 +30,20 @@ class SelectTagActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_tag)
 
+//        val stateTagList:
+
         val id = intent.getStringExtra("id")
 
 
         val rView = findViewById<RecyclerView>(R.id.selectTagRV)
         adapter = OriginTagSelectRecyclerViewAdapter(this , object: OriginTagSelectRecyclerViewAdapter.OnItemClickListner{
-            override fun onItemClick(item: OriginTagDateClass) {
+            override fun onItemClick(item: OriginTagDateClass,state:Boolean) {
+                Log.d("debag",state.toString())
+                Log.d("debag",item.name.toString())
 
+                if(state){
+
+                }
             }
         })
         rView.layoutManager = LinearLayoutManager(this)

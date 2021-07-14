@@ -16,7 +16,7 @@ import io.realm.Realm
 import java.util.*
 
 class OriginTagSelectRecyclerViewAdapter(private val context: Context, private val listener: OnItemClickListner):
-    RecyclerView.Adapter<OriginTagSelectRecyclerViewAdapter.ViewHolder>() {
+    RecyclerView.Adapter<OriginTagSelectRecyclerViewAdapter.ViewHolder>(){
 
     private val realm by lazy {
         Realm.getDefaultInstance()
@@ -46,11 +46,13 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
         holder.tagTextView.text = item.name
 
         holder.checkBox.setOnClickListener{
-
+            listener.onItemClick(item,holder.checkBox.isChecked)
         }
 
         holder.constraintSelectTag.setOnClickListener{
             holder.checkBox.isChecked = !holder.checkBox.isChecked
+
+            listener.onItemClick(item,holder.checkBox.isChecked)
         }
 
 
@@ -72,7 +74,7 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
 
     // RecyclerViewの要素をタップするためのもの
     interface OnItemClickListner{
-        fun onItemClick(item: OriginTagDateClass)
+        fun onItemClick(item: OriginTagDateClass,state:Boolean)
     }
 
     fun reView(){
