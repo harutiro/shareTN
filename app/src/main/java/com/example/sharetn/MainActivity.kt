@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         adapter?.setList(mainPersons)
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
+
     override fun onResume(){
         super.onResume()
 
