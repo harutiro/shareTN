@@ -146,11 +146,9 @@ class EditActivity : AppCompatActivity() {
             }
 
 
-            if (item != null) {
-                if(UrlDomein().check(item.subText)){
-                    subEdit?.visibility = VISIBLE
-                    subIcon?.visibility = VISIBLE
-                }
+            if(UrlDomein().check(item.subText)){
+                subEdit?.visibility = VISIBLE
+                subIcon?.visibility = VISIBLE
             }
         }
 
