@@ -1,6 +1,7 @@
 package com.example.sharetn
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -18,16 +19,13 @@ import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.OriginTagDateClass
-import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
@@ -40,6 +38,8 @@ import java.util.*
 
 
 class EditActivity : AppCompatActivity() {
+
+    val REQUEST_CODE = 1000
 
     private val realm by lazy {
         Realm.getDefaultInstance()
@@ -57,6 +57,8 @@ class EditActivity : AppCompatActivity() {
     var editTagChipGroup:ChipGroup? = null
 
     var id:String? = ""
+
+    var stateTagList: ArrayList<String>? = ArrayList<String>()
 
 
 //    @RequiresApi(Build.VERSION_CODES.O)
@@ -103,7 +105,7 @@ class EditActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.tagSelecetTextView).setOnClickListener{
             val intent = Intent(this , SelectTagActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent,REQUEST_CODE)
         }
 
         //データのはめ込み
@@ -159,27 +161,6 @@ class EditActivity : AppCompatActivity() {
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
         findViewById<TextView>(R.id.saveButton).setOnClickListener {
             save()
-        }
-
-
-        findViewById<Button>(R.id.editTagButtonTest).setOnClickListener {
-
-            //TODO:また消しておく
-//            realm.executeTransaction{
-//                val new = it.where(MainDate::class.java).equalTo("Id",id).findFirst()
-//
-//
-//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-//                    this.Icon = R.drawable.ic_baseline_more_vert_24
-//                    this.name = "タグ"
-//                    this.color = ""
-//                    this.mojiColor = ""
-//                    this.copyId = id
-//                }
-//
-//                new?.tagList?.add(tagObject)
-//
-//            }
         }
 
 
@@ -294,15 +275,6 @@ class EditActivity : AppCompatActivity() {
             val formatted = df.format(date)
             new?.dayText = formatted
 
-//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-//                    this.Icon = R.drawable.ic_baseline_more_vert_24
-//                    this.name = "タグ"
-//                    this.color = ""
-//                    this.mojiColor = ""
-//                }
-
-//                new?.tagList?.add(tagObject)
-
             finish()
         }
     }
@@ -333,4 +305,23 @@ class EditActivity : AppCompatActivity() {
         super.onDestroy()
 
     }
+
+    override fun onActivityResult(requestCode:Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+        if(requestCode == 1000) {
+            when (resultCode) {
+                Activity.RESULT_OK -> {
+                    stateTagList = data?.getStringArrayListExtra("stateTagList")
+                }
+
+                else -> {
+                }
+            }
+        }
+
+    }
+
+
 }
