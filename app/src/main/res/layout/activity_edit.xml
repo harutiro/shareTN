@@ -219,15 +219,15 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view3"
-            app:srcCompat="@drawable/label_black_24dp" />
+            app:srcCompat="@drawable/image_black_24dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/alubumSelectTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:gravity="center|left"
-            android:text="TextView"
+            android:text="アルバムから写真を選択"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -242,15 +242,15 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:srcCompat="@drawable/label_black_24dp" />
+            app:srcCompat="@drawable/travel_explore_black_24dp" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/reIconGetTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:gravity="center|left"
-            android:text="TextView"
+            android:text="URLからアイコンを再取得"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
@@ -268,12 +268,12 @@
             app:srcCompat="@drawable/label_black_24dp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tagSelecetTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:gravity="center|left"
-            android:text="TextView"
+            android:text="タグの設定"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView5"

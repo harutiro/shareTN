@@ -93,10 +93,15 @@ class EditActivity : AppCompatActivity() {
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         id = intent.getStringExtra("id")
 
+//        ボトムシートを上に浮き上がらせる
         val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.edit_bottom_sheet)
         val mBottomSheetBehavior = BottomSheetBehavior.from(view)
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.detailsFAB).setOnClickListener{
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+        }
+
+        findViewById<TextView>(R.id.tagSelecetTextView).setOnClickListener{
+
         }
 
         //データのはめ込み
