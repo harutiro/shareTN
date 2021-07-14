@@ -4,9 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
+import android.widget.*
+import androidx.constraintlayout.solver.state.State
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
@@ -28,17 +27,15 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
 
     //データをcourseDateと結びつける？？
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val container: ConstraintLayout = view.findViewById(R.id.constraintEditTag)
-        val itemEditTagText: EditText = view.findViewById(R.id.itemEditTagText)
-        val brItemTop: View = view.findViewById(R.id.brItemTop)
-        val brItemBottom:View = view.findViewById(R.id.brItemBottom)
-        val dellEditButton: ImageButton = view.findViewById(R.id.dellEditButton)
+        val tagTextView: TextView = view.findViewById(R.id.tagTextView)
+        val checkBox: CheckBox = view.findViewById(R.id.checkBox)
+        val constraintSelectTag:ConstraintLayout = view.findViewById(R.id.constraintSelectTag)
 
     }
 
     //はめ込むものを指定
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_course_edittag_date_call,parent,false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_course_edittag_select_date_call,parent,false)
         return ViewHolder(view)
     }
 
@@ -46,46 +43,15 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.itemEditTagText.setText(item.name)
+        holder.tagTextView.text = item.name
 
-        holder.brItemTop.visibility = View.GONE
-        holder.brItemBottom.visibility = View.GONE
+        holder.checkBox.setOnClickListener{
 
-//        EditTextをフォーカスしているか判定
-        holder.itemEditTagText.setOnFocusChangeListener { view, hasFocus ->
-
-//            フォーカスしているとき
-            if (hasFocus) {
-//                前後のBrを表示
-                holder.brItemTop.visibility = View.VISIBLE
-                holder.brItemBottom.visibility = View.VISIBLE
-                holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp__1_)
-
-//                消去するときに呼び出し元に1temを送る
-                holder.dellEditButton.setOnClickListener {
-                    listener.onItemClick(item)
-
-                }
-
-
-//                フォーカスしていないとき
-            }else{
-//                前後のBrの非表示
-                holder.brItemTop.visibility = View.GONE
-                holder.brItemBottom.visibility = View.GONE
-                holder.dellEditButton.setImageResource(R.drawable.label_black_24dp)
-
-//                  フォーカスが外れたらRealmに記入
-                realm.executeTransaction{
-
-                    val new = it.where(OriginTagDateClass::class.java).equalTo("Id",item.Id).findFirst()
-                    new?.name = holder.itemEditTagText.text.toString()
-
-                }
-            }
         }
 
-
+        holder.constraintSelectTag.setOnClickListener{
+            holder.checkBox.isChecked = !holder.checkBox.isChecked
+        }
 
 
 

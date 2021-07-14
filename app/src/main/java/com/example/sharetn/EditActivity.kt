@@ -101,7 +101,8 @@ class EditActivity : AppCompatActivity() {
         }
 
         findViewById<TextView>(R.id.tagSelecetTextView).setOnClickListener{
-
+            val intent = Intent(this , SelectTagActivity::class.java)
+            startActivity(intent)
         }
 
         //データのはめ込み
