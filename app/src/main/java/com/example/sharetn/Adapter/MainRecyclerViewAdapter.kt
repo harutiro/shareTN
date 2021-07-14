@@ -13,6 +13,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
+import com.example.sharetn.Date.OriginTagDateClass
+import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.R
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -76,8 +78,12 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         holder.itemTagChipGroup.removeAllViews()
 
         for (index in item.tagList!!) {
+            val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index.copyId).findFirst()
+
+
             val chip = Chip(holder.itemTagChipGroup.context)
-            chip.text= index.name
+
+            chip.text= new?.name
 
             // necessary to get single selection working
             chip.isClickable = true

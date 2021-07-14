@@ -133,6 +133,11 @@
             <PaintGroupHighlightMap>
               <option name="paintGroups">
                 <map>
+                  <entry key="0">
+                    <value>
+                      <EditorHighlightsForPaintGroup />
+                    </value>
+                  </entry>
                   <entry key="1">
                     <value>
                       <EditorHighlightsForPaintGroup />

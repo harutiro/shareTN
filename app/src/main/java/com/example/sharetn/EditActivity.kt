@@ -26,6 +26,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sharetn.Date.MainDate
+import com.example.sharetn.Date.OriginTagDateClass
 import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.dousa.UrlDomein
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -130,9 +131,11 @@ class EditActivity : AppCompatActivity() {
             print(item?.tagList)
 
             for (index in item?.tagList!!) {
+                val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index.copyId).findFirst()
+
 
                 val chip = Chip(editTagChipGroup?.context)
-                chip.text= index.name
+                chip.text= new?.name
 
                 // necessary to get single selection working
                 chip.isClickable = true
@@ -160,21 +163,23 @@ class EditActivity : AppCompatActivity() {
 
 
         findViewById<Button>(R.id.editTagButtonTest).setOnClickListener {
-            realm.executeTransaction{
-                val new = it.where(MainDate::class.java).equalTo("Id",id).findFirst()
 
-
-                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-                    this.Icon = R.drawable.ic_baseline_more_vert_24
-                    this.name = "タグ"
-                    this.color = ""
-                    this.mojiColor = ""
-                    this.copyId = id
-                }
-
-                new?.tagList?.add(tagObject)
-
-            }
+            //TODO:また消しておく
+//            realm.executeTransaction{
+//                val new = it.where(MainDate::class.java).equalTo("Id",id).findFirst()
+//
+//
+//                val tagObject = it.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+//                    this.Icon = R.drawable.ic_baseline_more_vert_24
+//                    this.name = "タグ"
+//                    this.color = ""
+//                    this.mojiColor = ""
+//                    this.copyId = id
+//                }
+//
+//                new?.tagList?.add(tagObject)
+//
+//            }
         }
 
 
