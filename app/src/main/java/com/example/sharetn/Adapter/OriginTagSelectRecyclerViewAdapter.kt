@@ -1,6 +1,7 @@
 package com.example.sharetn.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,8 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
 
     //リサイクラービューに表示するリストを宣言する
     val items: MutableList<OriginTagDateClass> = mutableListOf()
+
+    val states: MutableList<String> = mutableListOf()
 
     //データをcourseDateと結びつける？？
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -55,6 +58,14 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
             listener.onItemClick(item,holder.checkBox.isChecked)
         }
 
+        for( i in states){
+            if( i == item.Id){
+                holder.checkBox.isChecked = true
+            }
+        }
+
+
+
 
 
 
@@ -81,9 +92,17 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
         notifyDataSetChanged()
     }
 
-    fun setList(list: List<OriginTagDateClass>){
+    fun setList(list: List<OriginTagDateClass>,stateList:List<String>){
         items.clear()
         items.addAll(list)
+        states.clear()
+        states.addAll(stateList)
+
+        Log.d("debag","========================================")
+        for(i in states){
+            Log.d("debag",i)
+
+        }
         notifyDataSetChanged()
     }
 }

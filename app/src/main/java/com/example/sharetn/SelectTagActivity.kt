@@ -28,7 +28,7 @@ class SelectTagActivity : AppCompatActivity() {
     }
 
     var adapter: OriginTagSelectRecyclerViewAdapter? = null
-    val stateTagList = ArrayList<String>()
+    var stateTagList = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +37,7 @@ class SelectTagActivity : AppCompatActivity() {
 
 
         val id = intent.getStringExtra("id")
+        stateTagList = intent.getStringArrayListExtra("stateTagList") as ArrayList<String>
 
 
         val rView = findViewById<RecyclerView>(R.id.selectTagRV)
@@ -75,6 +76,6 @@ class SelectTagActivity : AppCompatActivity() {
     fun rVGo(){
 
         val mainPersons: RealmResults<OriginTagDateClass> = realm.where(OriginTagDateClass::class.java).findAll()
-        adapter?.setList(mainPersons)
+        adapter?.setList(mainPersons,stateTagList)
     }
 }

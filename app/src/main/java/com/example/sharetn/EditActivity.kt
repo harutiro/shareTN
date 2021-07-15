@@ -106,6 +106,7 @@ class EditActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.tagSelecetTextView).setOnClickListener{
             val intent = Intent(this , SelectTagActivity::class.java)
+            intent.putExtra("stateTagList",stateTagList)
             startActivityForResult(intent,REQUEST_CODE)
         }
 
@@ -131,11 +132,8 @@ class EditActivity : AppCompatActivity() {
 
             memoEdit?.setText(item?.memoText)
 
-            print(item?.tagList)
-
             for (index in item?.tagList!!) {
                 val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index.copyId).findFirst()
-
 
                 val chip = Chip(editTagChipGroup?.context)
                 chip.text= new?.name
@@ -144,6 +142,8 @@ class EditActivity : AppCompatActivity() {
                 chip.isClickable = true
                 chip.isCheckable = true
                 editTagChipGroup?.addView(chip)
+
+                stateTagList?.addAll(listOf(index.copyId.toString()))
             }
 
 
@@ -324,6 +324,7 @@ class EditActivity : AppCompatActivity() {
                     stateTagList = data?.getStringArrayListExtra("stateTagList")
 
                     //TODO: 同じものを関数でまとめておく
+                    editTagChipGroup?.removeAllViews()
                     for (index in stateTagList!!) {
                         val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index).findFirst()
 
