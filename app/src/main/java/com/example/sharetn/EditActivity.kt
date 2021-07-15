@@ -97,13 +97,14 @@ class EditActivity : AppCompatActivity() {
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         id = intent.getStringExtra("id")
 
-//        ボトムシートを上に浮き上がらせる
+        //ボトムシートを上に浮き上がらせる
         val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.edit_bottom_sheet)
         val mBottomSheetBehavior = BottomSheetBehavior.from(view)
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.detailsFAB).setOnClickListener{
             mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
         }
 
+        //============================タグセレクトへのインテント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
         findViewById<TextView>(R.id.tagSelecetTextView).setOnClickListener{
             val intent = Intent(this , SelectTagActivity::class.java)
             intent.putExtra("stateTagList",stateTagList)
@@ -113,25 +114,27 @@ class EditActivity : AppCompatActivity() {
         //データのはめ込み
         if (id == null){
 
+            //＝＝＝＝＝＝＝＝＝＝＝＝＝＝日付のはめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             val date = Date(System.currentTimeMillis())
             val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
             val formatted = df.format(date)
             dayText?.text = formatted
 
         }else{
+
             val item = realm.where(MainDate::class.java).equalTo("Id", id).findFirst()
 
-
-            mainEdit?.setText(item?.mainText)
-            subEdit?.setText(item?.subText)
-
+            //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４の画像はめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
             mainIcon?.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
 
+            //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝その他はめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             dayText?.text = item?.dayText
-
             memoEdit?.setText(item?.memoText)
+            mainEdit?.setText(item?.mainText)
+            subEdit?.setText(item?.subText)
 
+            //＝＝＝＝＝＝＝＝＝＝＝＝タグのはめ込み部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             for (index in item?.tagList!!) {
                 val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index.copyId).findFirst()
 
@@ -146,7 +149,7 @@ class EditActivity : AppCompatActivity() {
                 stateTagList?.addAll(listOf(index.copyId.toString()))
             }
 
-
+            //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             if(UrlDomein().check(item.subText)){
                 subEdit?.visibility = VISIBLE
                 subIcon?.visibility = VISIBLE
@@ -263,19 +266,21 @@ class EditActivity : AppCompatActivity() {
             val b: ByteArray = baos.toByteArray()
             val output = Base64.encodeToString(b, Base64.NO_WRAP)
 
+            //====================その他データの保存=========================
             new?.icon = output
             new?.mainText = mainEdit?.text.toString()
             new?.subText = subEdit?.text.toString()
             new?.memoText = memoEdit?.text.toString()
             new?.image = ""
 
+            //=====================日付==========================
             val date = Date(System.currentTimeMillis())
             val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
             val formatted = df.format(date)
             new?.dayText = formatted
 
-
-            //TODO: 同じものがたくさん重複する可能性あり
+            //＝＝＝＝＝＝＝＝＝＝＝＝タグの保存===================
+            new?.tagList?.clear()
             for( i in stateTagList!!){
                 val tagObject = realm.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
                     this.copyId = i
