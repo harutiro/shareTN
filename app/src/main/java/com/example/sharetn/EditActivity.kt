@@ -135,19 +135,10 @@ class EditActivity : AppCompatActivity() {
             subEdit?.setText(item?.subText)
 
             //＝＝＝＝＝＝＝＝＝＝＝＝タグのはめ込み部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-            for (index in item?.tagList!!) {
-                val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index.copyId).findFirst()
-
-                val chip = Chip(editTagChipGroup?.context)
-                chip.text= new?.name
-
-                // necessary to get single selection working
-                chip.isClickable = true
-                chip.isCheckable = true
-                editTagChipGroup?.addView(chip)
-
-                stateTagList?.addAll(listOf(index.copyId.toString()))
+            for(i in item?.tagList!!){
+                stateTagList?.addAll(listOf(i.copyId.toString()))
             }
+            setChip()
 
             //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             if(UrlDomein().check(item.subText)){
@@ -292,6 +283,26 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
+    fun setChip(){
+        editTagChipGroup?.removeAllViews()
+        for (index in stateTagList!!) {
+            val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index).findFirst()
+
+
+            val chip = Chip(editTagChipGroup?.context)
+            chip.text= new?.name
+
+            // necessary to get single selection working
+            chip.isCloseIconVisible = true
+
+            chip.setOnCloseIconClickListener {
+                stateTagList!!.removeAll(listOf(index))
+                setChip()
+            }
+            editTagChipGroup?.addView(chip)
+        }
+    }
+
     //戻るボタンの処理
     override fun onBackPressed() {
         // 行いたい処理
@@ -329,19 +340,7 @@ class EditActivity : AppCompatActivity() {
                     stateTagList = data?.getStringArrayListExtra("stateTagList")
 
                     //TODO: 同じものを関数でまとめておく
-                    editTagChipGroup?.removeAllViews()
-                    for (index in stateTagList!!) {
-                        val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index).findFirst()
-
-
-                        val chip = Chip(editTagChipGroup?.context)
-                        chip.text= new?.name
-
-                        // necessary to get single selection working
-                        chip.isClickable = true
-                        chip.isCheckable = true
-                        editTagChipGroup?.addView(chip)
-                    }
+                    setChip()
                 }
 
                 else -> {
