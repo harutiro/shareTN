@@ -3,16 +3,21 @@ package com.example.sharetn
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.MainRecyclerViewAdapter
 import com.example.sharetn.Date.MainDate
+import com.example.sharetn.Date.OriginTagDateClass
 import com.example.sharetn.dousa.JapaneseChange
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 import io.realm.Realm
 import io.realm.RealmResults
 import java.util.*
@@ -25,12 +30,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     var adapter: MainRecyclerViewAdapter? = null
+    var serchTagChipGroup:ChipGroup? = null
 
+    val stateTagList:MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+        serchTagChipGroup = findViewById<ChipGroup>(R.id.serchTagChipGroup)
 
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.puraFAB).setOnClickListener{
             val intent = Intent(this, EditActivity::class.java)
@@ -48,6 +58,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,EditTagActivity::class.java)
             startActivity(intent)
         }
+
+        setChip()
+
+
 
 
         val rView = findViewById<RecyclerView>(R.id.RView)
@@ -73,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         RVGo()
+        setChip()
 
     }
 
@@ -82,6 +97,37 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun setChip(){
+        serchTagChipGroup?.removeAllViews()
+        val new = realm.where(OriginTagDateClass::class.java).findAll()
+        for (i in new) {
+
+            val chip = Chip(serchTagChipGroup?.context)
+
+            chip.text= i.name
+
+            // necessary to get single selection working
+            chip.isCheckable = true
+            chip.isClickable = true
+            chip.checkedIcon = ContextCompat.getDrawable(this,R.drawable.ic_mtrl_chip_checked_black)
+
+            chip.setOnCheckedChangeListener { buttonView, isChecked ->
+                Log.d("debag",buttonView.text.toString())
+                Log.d("debag",isChecked.toString())
+
+                if(isChecked){
+                    stateTagList.addAll(listOf(i.Id.toString()))
+                }else{
+                    stateTagList.removeAll(listOf(i.Id.toString()))
+                }
+                RVGo()
+
+            }
+
+            serchTagChipGroup?.addView(chip)
+        }
+    }
+
 
     @Suppress("DEPRECATION")
     fun RVGo(){
@@ -89,7 +135,27 @@ class MainActivity : AppCompatActivity() {
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
         val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
 
-        var mainPerson: MutableList<MainDate> = mainPersons
+        var mainPerson: MutableList<MainDate> = mutableListOf()
+        for (person in mainPersons){
+            mainPerson.add(person)
+        }
+
+
+        for(i in stateTagList){
+            outer@for(j in mainPerson){
+                for(tag in j.tagList!!){
+
+                    Log.d("debag",tag.copyId.toString())
+                    Log.d("debag",i)
+                    if(tag.copyId != i){
+                        Log.d("debag","Ok")
+                        mainPerson.remove(j)
+
+                        break@outer
+                    }
+                }
+            }
+        }
 
         if(word != ""){
             val all = word.split(" ","　")
@@ -109,12 +175,9 @@ class MainActivity : AppCompatActivity() {
 
 
             }
-            //リサイクラービューアダプターで宣言したaddAllメソッドを呼んであげてデータも渡している
-            adapter?.setList(mainPerson)
-        }else{
-            adapter?.setList(mainPersons)
-
         }
+
+        adapter?.setList(mainPerson)
 
 
     }
