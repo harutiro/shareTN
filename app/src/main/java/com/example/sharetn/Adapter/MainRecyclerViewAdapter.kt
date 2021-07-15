@@ -4,12 +4,15 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Date.MainDate
@@ -81,13 +84,21 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
             val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index.copyId).findFirst()
 
 
-            val chip = Chip(holder.itemTagChipGroup.context)
+            val chip = Chip(ContextThemeWrapper(holder.itemTagChipGroup.context,R.style.Widget_MaterialComponents_Chip_Choice))
 
             chip.text= new?.name
 
             // necessary to get single selection working
-            chip.isClickable = true
             chip.isCheckable = true
+            chip.isClickable = true
+            chip.checkedIcon = ContextCompat.getDrawable(context,R.drawable.ic_mtrl_chip_checked_black)
+
+            chip.setOnCheckedChangeListener { buttonView, isChecked ->
+                Log.d("debag",buttonView.text.toString())
+                Log.d("debag",isChecked.toString())
+
+            }
+
             holder.itemTagChipGroup.addView(chip)
         }
 
