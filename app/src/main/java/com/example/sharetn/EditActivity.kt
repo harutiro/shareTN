@@ -13,6 +13,8 @@ import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
 import android.util.Base64
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -348,6 +350,33 @@ class EditActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_settings -> {
+            // User chose the "Settings" item, show the app settings UI...
+            true
+        }
+
+        R.id.action_edit_mode -> {
+            // User chose the "Favorite" action, mark the current item
+            // as a favorite...
+
+            Log.d("debag","OK")
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.edit_activity_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
 
