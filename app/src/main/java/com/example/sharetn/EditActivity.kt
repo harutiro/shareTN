@@ -16,8 +16,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -63,6 +62,8 @@ class EditActivity : AppCompatActivity() {
 
     var stateTagList: ArrayList<String>? = ArrayList<String>()
 
+    var stateEditMode: Boolean = false
+
 
 //    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -95,6 +96,12 @@ class EditActivity : AppCompatActivity() {
         mainEdit?.movementMethod = ScrollingMovementMethod()
         subEdit?.movementMethod = ScrollingMovementMethod()
         memoEdit?.movementMethod = ScrollingMovementMethod()
+
+        //タッチできないように規制
+        subEdit?.isFocusable = false
+        mainEdit?.isFocusable = false
+        memoEdit?.isFocusable = false
+        findViewById<TextView>(R.id.saveButton).visibility = INVISIBLE
 
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         id = intent.getStringExtra("id")
@@ -308,22 +315,27 @@ class EditActivity : AppCompatActivity() {
     //戻るボタンの処理
     override fun onBackPressed() {
         // 行いたい処理
-        AlertDialog.Builder(this) // FragmentではActivityを取得して生成
-            .setTitle("注意")
-            .setMessage("入力したデータを保存しないでホームに戻りますか？")
-            .setPositiveButton("OK") { dialog, which ->
-                //Yesが押された時の挙動
-                finish()
-            }
-            .setNegativeButton("Cancel") { dialog, which ->
-                // Noが押された時の挙動
-            }
-            .setNeutralButton("保存") { dialog, which ->
-                //その他が押された時の挙動
-                save()
-                finish()
-            }
-            .show()
+        if(stateEditMode){
+            AlertDialog.Builder(this) // FragmentではActivityを取得して生成
+                .setTitle("ホームへ戻る")
+                .setMessage("入力したデータを保存しないでホームに戻りますか？")
+                .setPositiveButton("OK") { dialog, which ->
+                    //Yesが押された時の挙動
+                    finish()
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+                    // Noが押された時の挙動
+                }
+                .setNeutralButton("保存") { dialog, which ->
+                    //その他が押された時の挙動
+                    save()
+                    finish()
+                }
+                .show()
+        }else{
+            finish()
+        }
+
     }
 
     override fun onDestroy() {
@@ -362,7 +374,17 @@ class EditActivity : AppCompatActivity() {
             // User chose the "Favorite" action, mark the current item
             // as a favorite...
 
-            Log.d("debag","OK")
+            subEdit?.isFocusable = true
+            subEdit?.isFocusableInTouchMode = true
+            mainEdit?.isFocusable = true
+            mainEdit?.isFocusableInTouchMode = true
+            mainEdit?.requestFocus()
+            memoEdit?.isFocusable = true
+            memoEdit?.isFocusableInTouchMode = true
+
+            findViewById<TextView>(R.id.saveButton).visibility = VISIBLE
+
+            stateEditMode = true
             true
         }
 
