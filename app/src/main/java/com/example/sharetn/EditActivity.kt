@@ -131,7 +131,7 @@ class EditActivity : AppCompatActivity() {
 
         }else{
 
-            val item = realm.where(MainDate::class.java).equalTo("Id", id).findFirst()
+            val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
 
             //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４の画像はめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
@@ -254,7 +254,7 @@ class EditActivity : AppCompatActivity() {
             val new = if(id == null){
                 it.createObject(MainDate::class.java,UUID.randomUUID().toString())
             }else{
-                it.where(MainDate::class.java).equalTo("Id",id).findFirst()
+                it.where(MainDate::class.java).equalTo("id",id).findFirst()
             }
 
             //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -295,7 +295,7 @@ class EditActivity : AppCompatActivity() {
     fun setChip(){
         editTagChipGroup?.removeAllViews()
         for (index in stateTagList!!) {
-            val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index).findFirst()
+            val new = realm.where(OriginTagDateClass::class.java).equalTo("id",index).findFirst()
 
 
             val chip = Chip(editTagChipGroup?.context)

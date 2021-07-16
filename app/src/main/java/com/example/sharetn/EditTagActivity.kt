@@ -60,7 +60,7 @@ class EditTagActivity : AppCompatActivity(){
                     val new = if(id == null){
                         it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
                     }else{
-                        it.where(OriginTagDateClass::class.java).equalTo("Id",id).findFirst()
+                        it.where(OriginTagDateClass::class.java).equalTo("id",id).findFirst()
                     }
 
                     new?.name = editTextTextMultiLine.text.toString()
@@ -80,7 +80,7 @@ class EditTagActivity : AppCompatActivity(){
             override fun onItemClick(item: OriginTagDateClass) {
                 container.requestFocus()
 
-                val persons = realm.where(OriginTagDateClass::class.java).equalTo("Id",item.id).findAll()
+                val persons = realm.where(OriginTagDateClass::class.java).equalTo("id",item.id).findAll()
                 val personArray = mutableListOf<OriginTagDateClass>()
                 for (p in persons){
                     personArray.add(p)

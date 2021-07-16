@@ -74,7 +74,7 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 //                  フォーカスが外れたらRealmに記入
                 realm.executeTransaction{
 
-                    val new = it.where(OriginTagDateClass::class.java).equalTo("Id",item.id).findFirst()
+                    val new = it.where(OriginTagDateClass::class.java).equalTo("id",item.id).findFirst()
                     new?.name = holder.itemEditTagText.text.toString()
 
                 }

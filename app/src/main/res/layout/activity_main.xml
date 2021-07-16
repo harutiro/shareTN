@@ -57,7 +57,7 @@
         android:backgroundTint="@color/white"
         android:paddingTop="16dp"
         android:paddingBottom="24dp"
-        app:behavior_peekHeight="96dp"
+        app:behavior_peekHeight="64dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         tools:context=".BottomSheetFragment">
 
@@ -76,8 +76,7 @@
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
             android:ems="10"
             android:gravity="start|top"
             android:imeOptions="actionDone"
@@ -85,7 +84,7 @@
             android:scrollbars="vertical"
             android:singleLine="true"
             android:textColor="@color/textBlock"
-            app:layout_constraintEnd_toStartOf="@+id/searchButton"
+            app:layout_constraintEnd_toStartOf="@+id/dellButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view3" />
 
@@ -93,7 +92,7 @@
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@null"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
@@ -104,12 +103,11 @@
         <ImageButton
             android:id="@+id/dellButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_height="0dp"
             android:background="@null"
             android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
-            app:layout_constraintEnd_toEndOf="@+id/searchEditText"
+            app:layout_constraintEnd_toStartOf="@+id/searchButton"
             app:layout_constraintTop_toTopOf="@+id/searchEditText"
             app:srcCompat="@drawable/close_black_24dp" />
 

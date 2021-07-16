@@ -81,7 +81,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         holder.itemTagChipGroup.removeAllViews()
 
         for (index in item.tagList!!) {
-            val new = realm.where(OriginTagDateClass::class.java).equalTo("Id",index.copyId).findFirst()
+            val new = realm.where(OriginTagDateClass::class.java).equalTo("id",index.copyId).findFirst()
 
 
             val chip = Chip(ContextThemeWrapper(holder.itemTagChipGroup.context,R.style.Widget_MaterialComponents_Chip_Choice))
