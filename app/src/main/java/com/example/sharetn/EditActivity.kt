@@ -97,16 +97,22 @@ class EditActivity : AppCompatActivity() {
         subEdit?.movementMethod = ScrollingMovementMethod()
         memoEdit?.movementMethod = ScrollingMovementMethod()
 
-        //タッチできないように規制
-        subEdit?.isFocusable = false
-        mainEdit?.isFocusable = false
-        memoEdit?.isFocusable = false
-        findViewById<TextView>(R.id.saveButton).visibility = INVISIBLE
-
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         id = intent.getStringExtra("id")
+        stateEditMode = intent.getBooleanExtra("editMode",false)
 
-        //ボトムシートを上に浮き上がらせる
+        //タッチできないように規制
+        if(!stateEditMode){
+            subEdit?.isFocusable = false
+            mainEdit?.isFocusable = false
+            memoEdit?.isFocusable = false
+            findViewById<TextView>(R.id.saveButton).visibility = INVISIBLE
+
+        }
+
+
+
+    //ボトムシートを上に浮き上がらせる
         val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.edit_bottom_sheet)
         val mBottomSheetBehavior = BottomSheetBehavior.from(view)
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.detailsFAB).setOnClickListener{

@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.puraFAB).setOnClickListener{
             val intent = Intent(this, EditActivity::class.java)
+            intent.putExtra("editMode", true)
             startActivity(intent)
         }
 
