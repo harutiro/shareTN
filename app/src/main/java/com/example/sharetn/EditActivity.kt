@@ -344,14 +344,14 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode:Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode:Int, resultCode: Int, date: Intent?) {
+        super.onActivityResult(requestCode, resultCode, date)
 
 
         if(requestCode == 1000) {
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    stateTagList = data?.getStringArrayListExtra("stateTagList")
+                    stateTagList = date?.getStringArrayListExtra("stateTagList")
 
                     //TODO: 同じものを関数でまとめておく
                     setChip()
