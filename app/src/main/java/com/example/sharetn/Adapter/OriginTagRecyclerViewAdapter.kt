@@ -4,17 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.OriginTagDateClass
-import com.example.sharetn.Date.TagDateClass
 import com.example.sharetn.R
 import io.realm.Realm
-import java.util.*
 
 class OriginTagRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):
     RecyclerView.Adapter<OriginTagRecyclerViewAdapter.ViewHolder>() {
@@ -78,7 +74,7 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 //                  フォーカスが外れたらRealmに記入
                 realm.executeTransaction{
 
-                    val new = it.where(OriginTagDateClass::class.java).equalTo("Id",item.Id).findFirst()
+                    val new = it.where(OriginTagDateClass::class.java).equalTo("Id",item.id).findFirst()
                     new?.name = holder.itemEditTagText.text.toString()
 
                 }

@@ -1,22 +1,13 @@
 package com.example.sharetn
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageButton
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Adapter.OriginTagRecyclerViewAdapter
 import com.example.sharetn.Adapter.OriginTagSelectRecyclerViewAdapter
 import com.example.sharetn.Date.OriginTagDateClass
-import com.example.sharetn.Date.TagDateClass
 import io.realm.Realm
 import io.realm.RealmResults
 import java.util.*
@@ -45,9 +36,9 @@ class SelectTagActivity : AppCompatActivity() {
             override fun onItemClick(item: OriginTagDateClass,state:Boolean) {
 
                 if(state){
-                    stateTagList.addAll(listOf(item.Id.toString()))
+                    stateTagList.addAll(listOf(item.id.toString()))
                 }else{
-                    stateTagList.removeAll(listOf(item.Id.toString()))
+                    stateTagList.removeAll(listOf(item.id.toString()))
                 }
 
             }

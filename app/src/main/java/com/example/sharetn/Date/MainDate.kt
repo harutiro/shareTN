@@ -6,7 +6,7 @@ import io.realm.annotations.PrimaryKey
 import java.util.*
 
 open class MainDate(
-    @PrimaryKey open var Id: String? = UUID.randomUUID().toString(),
+    @PrimaryKey open var id: String? = UUID.randomUUID().toString(),
     open var icon: String = "",
     open var mainText: String = "",
     open var subText: String = "",

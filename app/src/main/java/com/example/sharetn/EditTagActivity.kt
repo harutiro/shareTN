@@ -1,9 +1,7 @@
 package com.example.sharetn
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.text.TextWatcher
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
@@ -15,11 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Adapter.MainRecyclerViewAdapter
 import com.example.sharetn.Adapter.OriginTagRecyclerViewAdapter
-import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.OriginTagDateClass
-import com.example.sharetn.Date.TagDateClass
 import io.realm.Realm
 import io.realm.RealmResults
 import java.util.*
@@ -85,7 +80,7 @@ class EditTagActivity : AppCompatActivity(){
             override fun onItemClick(item: OriginTagDateClass) {
                 container.requestFocus()
 
-                val persons = realm.where(OriginTagDateClass::class.java).equalTo("Id",item.Id).findAll()
+                val persons = realm.where(OriginTagDateClass::class.java).equalTo("Id",item.id).findAll()
                 val personArray = mutableListOf<OriginTagDateClass>()
                 for (p in persons){
                     personArray.add(p)

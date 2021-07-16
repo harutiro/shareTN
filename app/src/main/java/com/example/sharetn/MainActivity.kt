@@ -1,13 +1,11 @@
 package com.example.sharetn
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(applicationContext, EditActivity::class.java)
                 // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
                 // また，要素のidをSecondActivityに渡す
-                intent.putExtra("id", item.Id)
+                intent.putExtra("id", item.id)
                 startActivity(intent)
             }
         })
@@ -116,9 +114,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d("debag",isChecked.toString())
 
                 if(isChecked){
-                    stateTagList.addAll(listOf(i.Id.toString()))
+                    stateTagList.addAll(listOf(i.id.toString()))
                 }else{
-                    stateTagList.removeAll(listOf(i.Id.toString()))
+                    stateTagList.removeAll(listOf(i.id.toString()))
                 }
                 RVGo()
 
