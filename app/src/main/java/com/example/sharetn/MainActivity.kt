@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.MainRecyclerViewAdapter
@@ -36,7 +37,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        findViewById<EditText>(R.id.searchEditText).doOnTextChanged{  text, start, count, after ->
+            RVGo()
+        }
 
         serchTagChipGroup = findViewById<ChipGroup>(R.id.serchTagChipGroup)
 
