@@ -71,6 +71,8 @@ class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+        setTitle( "編集" )
+
 
 
         var comeText = ""
@@ -107,6 +109,8 @@ class EditActivity : AppCompatActivity() {
             mainEdit?.isFocusable = false
             memoEdit?.isFocusable = false
             findViewById<TextView>(R.id.saveButton).visibility = INVISIBLE
+            setTitle( "詳細" )
+
 
         }
 
@@ -359,7 +363,6 @@ class EditActivity : AppCompatActivity() {
                 Activity.RESULT_OK -> {
                     stateTagList = date?.getStringArrayListExtra("stateTagList")
 
-                    //TODO: 同じものを関数でまとめておく
                     setChip()
                 }
 
@@ -391,6 +394,8 @@ class EditActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.saveButton).visibility = VISIBLE
 
             stateEditMode = true
+
+            setTitle( "編集" )
             true
         }
 
