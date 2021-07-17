@@ -2,6 +2,8 @@ package com.example.sharetn
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -32,6 +34,7 @@ import com.example.sharetn.dousa.UrlDomein
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import io.realm.Realm
 import java.io.ByteArrayOutputStream
@@ -112,6 +115,16 @@ class EditActivity : AppCompatActivity() {
             setTitle( "詳細" )
 
 
+        }else{
+            subEdit?.setOnClickListener{
+                copyToClipboard(subEdit?.text.toString())
+            }
+            mainEdit?.setOnClickListener{
+                copyToClipboard(mainEdit?.text.toString())
+            }
+            memoEdit?.setOnClickListener{
+                copyToClipboard(memoEdit?.text.toString())
+            }
         }
 
 
@@ -255,6 +268,20 @@ class EditActivity : AppCompatActivity() {
 
 
 
+
+    }
+
+    fun copyToClipboard(text: String?) {
+
+        val layoutId = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.editConstraintLayout)
+
+        //クリップボードの保存
+        val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("", text)
+        clipboard.setPrimaryClip(clip)
+
+        //スナックバーの表示
+        Snackbar.make(layoutId,"保存しました！！", Snackbar.LENGTH_SHORT).show()
 
     }
 
