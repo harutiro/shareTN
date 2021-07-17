@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     var adapter: MainRecyclerViewAdapter? = null
     var serchTagChipGroup:ChipGroup? = null
 
-    val stateTagList:MutableList<String> = mutableListOf()
+   // val stateTagList:MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,11 +60,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this,EditTagActivity::class.java)
             startActivity(intent)
         }
-
-        setChip()
-
-
-
 
         val rView = findViewById<RecyclerView>(R.id.RView)
         adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
@@ -114,16 +109,7 @@ class MainActivity : AppCompatActivity() {
             chip.checkedIcon = ContextCompat.getDrawable(this,R.drawable.ic_mtrl_chip_checked_black)
 
             chip.setOnCheckedChangeListener { buttonView, isChecked ->
-                Log.d("debag",buttonView.text.toString())
-                Log.d("debag",isChecked.toString())
-
-                if(isChecked){
-                    stateTagList.add(i.id.toString())
-                }else{
-                    stateTagList.remove(i.id.toString())
-                }
                 RVGo()
-
             }
 
             serchTagChipGroup?.addView(chip)
@@ -135,25 +121,17 @@ class MainActivity : AppCompatActivity() {
     fun RVGo(){
 
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
-        val RealmPerson: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
+        var mutablePerson: MutableList<MainDate> = realm.where(MainDate::class.java).findAll().toMutableList()
 
-        var mutablePerson: MutableList<MainDate> = RealmPerson.toMutableList()
+        var mutableNewPerson: MutableList<MainDate> = mutableListOf()
 
+        val stateTagList = mutableListOf<String>()
+        Log.d("debag","=============================" )
 
-        for(i in stateTagList){
-            outer@for(j in mutablePerson){
-                for(tag in j.tagList!!){
+        for(i in serchTagChipGroup?.checkedChipIds!!){
+            stateTagList.add(findViewById<Chip>(i).text.toString())
+            Log.d("debag",findViewById<Chip>(i).text.toString() )
 
-                    Log.d("debag",tag.copyId.toString())
-                    Log.d("debag",i)
-                    if(tag.copyId != i){
-                        Log.d("debag","Ok")
-                        mutablePerson.remove(j)
-
-                        break@outer
-                    }
-                }
-            }
         }
 
         if(word != ""){
@@ -176,7 +154,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        adapter?.setList(mutablePerson)
+
+
+
+        for(data in mutablePerson){
+            Log.d("debug", data.mainText)
+            val tempTagList = mutableListOf<String>()
+            for(tag in data.tagList!!){
+                tempTagList.add(tag.copyId.toString())
+            }
+            if(tempTagList.containsAll(stateTagList)) mutableNewPerson.add(data)
+        }
+
+
+
+        adapter?.setList(mutableNewPerson)
 
 
     }
