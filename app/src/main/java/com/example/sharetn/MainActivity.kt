@@ -124,14 +124,10 @@ class MainActivity : AppCompatActivity() {
         var mutablePerson: MutableList<MainDate> = realm.where(MainDate::class.java).findAll().toMutableList()
 
         var mutableNewPerson: MutableList<MainDate> = mutableListOf()
-
         val stateTagList = mutableListOf<String>()
-        Log.d("debag","=============================" )
 
         for(i in serchTagChipGroup?.checkedChipIds!!){
             stateTagList.add(findViewById<Chip>(i).text.toString())
-            Log.d("debag",findViewById<Chip>(i).text.toString() )
-
         }
 
         if(word != ""){
@@ -158,12 +154,17 @@ class MainActivity : AppCompatActivity() {
 
 
         for(data in mutablePerson){
-            Log.d("debug", data.mainText)
-            val tempTagList = mutableListOf<String>()
+
+            val tempItemTagList = mutableListOf<String>()
             for(tag in data.tagList!!){
-                tempTagList.add(tag.copyId.toString())
+                tempItemTagList.add(tag.copyId.toString())
             }
-            if(tempTagList.containsAll(stateTagList)) mutableNewPerson.add(data)
+            val realmStateResult = mutableListOf<String>()
+            for( item in stateTagList){
+                realmStateResult.add(realm.where(OriginTagDateClass::class.java).equalTo("name",item).findFirst()?.id.toString())
+            }
+            if(tempItemTagList.containsAll(realmStateResult)) mutableNewPerson.add(data)
+
         }
 
 
