@@ -36,9 +36,9 @@ class SelectTagActivity : AppCompatActivity() {
             override fun onItemClick(item: OriginTagDateClass,state:Boolean) {
 
                 if(state){
-                    stateTagList.addAll(listOf(item.id.toString()))
+                    stateTagList.add(item.id.toString())
                 }else{
-                    stateTagList.removeAll(listOf(item.id.toString()))
+                    stateTagList.remove(item.id.toString())
                 }
 
             }

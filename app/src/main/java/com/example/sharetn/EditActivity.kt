@@ -155,7 +155,7 @@ class EditActivity : AppCompatActivity() {
 
             //＝＝＝＝＝＝＝＝＝＝＝＝タグのはめ込み部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
             for(i in item?.tagList!!){
-                stateTagList?.addAll(listOf(i.copyId.toString()))
+                stateTagList?.add(i.copyId.toString())
             }
             setChip()
 
@@ -315,7 +315,7 @@ class EditActivity : AppCompatActivity() {
             chip.isCloseIconVisible = true
 
             chip.setOnCloseIconClickListener {
-                stateTagList!!.removeAll(listOf(index))
+                stateTagList!!.remove(index)
                 setChip()
             }
             editTagChipGroup?.addView(chip)

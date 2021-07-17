@@ -118,9 +118,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d("debag",isChecked.toString())
 
                 if(isChecked){
-                    stateTagList.addAll(listOf(i.id.toString()))
+                    stateTagList.add(i.id.toString())
                 }else{
-                    stateTagList.removeAll(listOf(i.id.toString()))
+                    stateTagList.remove(i.id.toString())
                 }
                 RVGo()
 
