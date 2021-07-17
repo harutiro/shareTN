@@ -135,23 +135,20 @@ class MainActivity : AppCompatActivity() {
     fun RVGo(){
 
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
-        val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
+        val RealmPerson: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
 
-        var mainPerson: MutableList<MainDate> = mutableListOf()
-        for (person in mainPersons){
-            mainPerson.add(person)
-        }
+        var mutablePerson: MutableList<MainDate> = RealmPerson.toMutableList()
 
 
         for(i in stateTagList){
-            outer@for(j in mainPerson){
+            outer@for(j in mutablePerson){
                 for(tag in j.tagList!!){
 
                     Log.d("debag",tag.copyId.toString())
                     Log.d("debag",i)
                     if(tag.copyId != i){
                         Log.d("debag","Ok")
-                        mainPerson.remove(j)
+                        mutablePerson.remove(j)
 
                         break@outer
                     }
@@ -166,20 +163,20 @@ class MainActivity : AppCompatActivity() {
 
                 //カタカナは全部ひらがなに変換する
                 //大文字の英語は小文字の英語に変換する
-                val filterMain = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase(Locale.ROOT)))
+                val filterMain = mutablePerson.filter{Regex(JapaneseChange().converted(p.toLowerCase(Locale.ROOT)))
                                         .containsMatchIn(JapaneseChange().converted(it.mainText.toLowerCase(Locale.ROOT)))
                 }
 
-                val filterMemo = mainPerson.filter{Regex(JapaneseChange().converted(p.toLowerCase(Locale.ROOT)))
+                val filterMemo = mutablePerson.filter{Regex(JapaneseChange().converted(p.toLowerCase(Locale.ROOT)))
                                         .containsMatchIn(JapaneseChange().converted(it.memoText.toLowerCase(Locale.ROOT)))}
 
-                mainPerson = (filterMain + filterMemo) as MutableList<MainDate>
+                mutablePerson = (filterMain + filterMemo) as MutableList<MainDate>
 
 
             }
         }
 
-        adapter?.setList(mainPerson)
+        adapter?.setList(mutablePerson)
 
 
     }
