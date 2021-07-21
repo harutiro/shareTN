@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShareTN">
-        <activity android:name=".SelectTagActivity"></activity>
+        <activity android:name=".ViewActivity"></activity>
+        <activity android:name=".SelectTagActivity" />
         <activity android:name=".EditTagActivity" />
         <activity android:name=".EditActivity">
             <intent-filter>
