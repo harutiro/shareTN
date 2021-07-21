@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             RVGo()
         }
         findViewById<Button>(R.id.testButton).setOnClickListener{
-            val intent = Intent(this,EditTagActivity::class.java)
+            val intent = Intent(this,ViewActivity::class.java)
             startActivity(intent)
         }
 
