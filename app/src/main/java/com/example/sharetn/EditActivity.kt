@@ -30,7 +30,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.OriginTagDateClass
 import com.example.sharetn.Date.TagDateClass
-import com.example.sharetn.dousa.UrlDomein
+import com.example.sharetn.dousa.JapaneseChange
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -75,12 +75,6 @@ class EditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
         setTitle( "編集" )
-
-
-
-        var comeText = ""
-        var domein = ""
-        var title = ""
 
         subEdit = findViewById<EditText>(R.id.subEdit)
         subIcon = findViewById<ImageView>(R.id.subIcon)
@@ -173,7 +167,7 @@ class EditActivity : AppCompatActivity() {
             setChip()
 
             //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-            if(UrlDomein().check(item.subText)){
+            if(!Regex("http://").containsMatchIn(item.subText) || !Regex("https://").containsMatchIn(item.subText)){
                 subEdit?.visibility = VISIBLE
                 subIcon?.visibility = VISIBLE
             }
@@ -196,19 +190,25 @@ class EditActivity : AppCompatActivity() {
             val extras = intent.extras
             val extraText = extras!!.getCharSequence(Intent.EXTRA_TEXT).toString()
 
+            var comeText = ""
+            var domein = ""
+            var title = ""
+
             subEdit?.visibility = VISIBLE
             subIcon?.visibility = VISIBLE
 
             //URLや文字の受け取り
             comeText = extraText
-            domein = UrlDomein().hen(comeText)
+            domein = comeText.removePrefix("https://").removePrefix("http://").split("/")[0]
 
             findViewById<EditText>(R.id.subEdit).setText(comeText)
             findViewById<EditText>(R.id.mainEdit).setText("NowLoading...")
 
 
+
+
             //URLで動く部分
-            if(UrlDomein().check(comeText)) {
+            if(Regex("http://").containsMatchIn(comeText) || Regex("https://").containsMatchIn(comeText)) {
 
                 //faviconの取得
                 Picasso.get()
@@ -239,7 +239,7 @@ class EditActivity : AppCompatActivity() {
                 wm.addView(webview, params)
 
                 //非表示
-                webview.visibility = View.GONE
+                webview.visibility = GONE
 
                 //画像取得部分
                 webview.webViewClient = object : WebViewClient() {
