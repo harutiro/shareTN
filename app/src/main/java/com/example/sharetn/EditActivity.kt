@@ -34,6 +34,7 @@ import com.example.sharetn.dousa.JapaneseChange
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import io.realm.Realm
@@ -87,10 +88,6 @@ class EditActivity : AppCompatActivity() {
         image = findViewById<ImageView>(R.id.image)
         editTagChipGroup = findViewById<ChipGroup>(R.id.editTagChipGroup)
 
-        //URLのViewの非表示
-        subEdit?.visibility = GONE
-        subIcon?.visibility = GONE
-
         //スクロールできるように設定
         mainEdit?.movementMethod = ScrollingMovementMethod()
         subEdit?.movementMethod = ScrollingMovementMethod()
@@ -99,36 +96,6 @@ class EditActivity : AppCompatActivity() {
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         id = intent.getStringExtra("id")
         stateEditMode = intent.getBooleanExtra("editMode",false)
-
-        //タッチできないように規制
-        if(!stateEditMode){
-            subEdit?.isFocusable = false
-            mainEdit?.isFocusable = false
-            memoEdit?.isFocusable = false
-            findViewById<TextView>(R.id.saveButton).visibility = INVISIBLE
-            setTitle( "詳細" )
-
-
-        }else{
-            subEdit?.setOnClickListener{
-                copyToClipboard(subEdit?.text.toString())
-            }
-            mainEdit?.setOnClickListener{
-                copyToClipboard(mainEdit?.text.toString())
-            }
-            memoEdit?.setOnClickListener{
-                copyToClipboard(memoEdit?.text.toString())
-            }
-        }
-
-
-
-    //ボトムシートを上に浮き上がらせる
-        val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.edit_bottom_sheet)
-        val mBottomSheetBehavior = BottomSheetBehavior.from(view)
-        findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.detailsFAB).setOnClickListener{
-            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
-        }
 
         //============================タグセレクトへのインテント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
         findViewById<TextView>(R.id.tagSelecetTextView).setOnClickListener{
@@ -178,7 +145,8 @@ class EditActivity : AppCompatActivity() {
 
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
-        findViewById<TextView>(R.id.saveButton).setOnClickListener {
+        findViewById<FloatingActionButton>(R.id.saveFAB).setOnClickListener {
+//            TODO: Mainが空白時に保存されないようにする
             save()
         }
 
@@ -271,20 +239,6 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-    fun copyToClipboard(text: String?) {
-
-        val layoutId = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.editConstraintLayout)
-
-        //クリップボードの保存
-        val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText("", text)
-        clipboard.setPrimaryClip(clip)
-
-        //スナックバーの表示
-        Snackbar.make(layoutId,"保存しました！！", Snackbar.LENGTH_SHORT).show()
-
-    }
-
     fun save(){
         realm.executeTransaction{
 
@@ -352,22 +306,17 @@ class EditActivity : AppCompatActivity() {
     //戻るボタンの処理
     override fun onBackPressed() {
         // 行いたい処理
-        if(stateEditMode){
-            AlertDialog.Builder(this) // FragmentではActivityを取得して生成
-                .setTitle("ホームへ戻る")
-                .setMessage("入力したデータを保存しないでホームに戻りますか？")
-                .setPositiveButton("OK") { dialog, which ->
-                    //Yesが押された時の挙動
-                    finish()
-                }
-                .setNegativeButton("Cancel") { dialog, which ->
-                    // Noが押された時の挙動
-                }
-                .show()
-        }else{
-            finish()
-        }
-
+        AlertDialog.Builder(this) // FragmentではActivityを取得して生成
+            .setTitle("ホームへ戻る")
+            .setMessage("入力したデータを保存しないでホームに戻りますか？")
+            .setPositiveButton("OK") { dialog, which ->
+                //Yesが押された時の挙動
+                finish()
+            }
+            .setNegativeButton("Cancel") { dialog, which ->
+            // Noが押された時の挙動
+            }
+            .show()
     }
 
     override fun onDestroy() {
@@ -398,6 +347,11 @@ class EditActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
             // User chose the "Settings" item, show the app settings UI...
+            //ボトムシートを上に浮き上がらせる
+            val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.edit_bottom_sheet)
+            val mBottomSheetBehavior = BottomSheetBehavior.from(view)
+            mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+
             true
         }
 
