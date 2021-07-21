@@ -30,7 +30,9 @@
         android:focusableInTouchMode="true"
         android:gravity="start|top"
         android:hint="Create new tag"
-        android:inputType="textMultiLine"
+        android:inputType="text"
+        android:scrollbars="vertical"
+        android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@+id/EditTagSaveButton"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="parent" />

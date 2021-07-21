@@ -60,6 +60,10 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
             }else{
                 holder.dellEditButton.setImageResource(R.drawable.label_black_24dp)
 
+                holder.dellEditButton.setOnClickListener {
+
+                }
+
 //                  フォーカスが外れたらRealmに記入
                 realm.executeTransaction{
 
