@@ -84,12 +84,6 @@ class ViewActivity : AppCompatActivity() {
         editTagChipGroup = findViewById(R.id.editTagChipGroup)
         layoutId = findViewById(R.id.viewConstraintLayout)
 
-
-        //スクロールできるように設定
-        mainText?.movementMethod = ScrollingMovementMethod()
-        subText?.movementMethod = ScrollingMovementMethod()
-        memoText?.movementMethod = ScrollingMovementMethod()
-
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         val id = intent.getStringExtra("id")
 
