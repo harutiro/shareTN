@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/edit_black_24dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/editConstraintLayout"
+        android:id="@+id/viewConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
