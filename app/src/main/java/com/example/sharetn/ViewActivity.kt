@@ -4,25 +4,16 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.text.TextUtils
-import android.text.method.ScrollingMovementMethod
 import android.util.Base64
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.View.*
-import android.view.WindowManager
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import android.widget.EditText
+import android.view.View.GONE
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -31,13 +22,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sharetn.Date.MainDate
 import com.example.sharetn.Date.OriginTagDateClass
 import com.example.sharetn.Date.TagDateClass
-import com.example.sharetn.dousa.JapaneseChange
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.squareup.picasso.Picasso
 import io.realm.Realm
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -46,7 +35,7 @@ import java.util.*
 
 class ViewActivity : AppCompatActivity() {
 
-    val REQUEST_CODE = 1000
+    private val REQUESTCODE = 1000
 
     private val realm by lazy {
         Realm.getDefaultInstance()
@@ -62,9 +51,11 @@ class ViewActivity : AppCompatActivity() {
     var memoText:TextView? = null
     var image:ImageView? =    null
     var editTagChipGroup:ChipGroup? = null
-    var layoutId:ConstraintLayout? = null
+    private var layoutId:ConstraintLayout? = null
 
     var stateTagList: ArrayList<String>? = ArrayList<String>()
+
+    var id = ""
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Suppress("DEPRECATION")
@@ -86,7 +77,7 @@ class ViewActivity : AppCompatActivity() {
         layoutId = findViewById(R.id.viewConstraintLayout)
 
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
-        val id = intent.getStringExtra("id")
+        id = intent.getStringExtra("id").toString()
 
         subText?.setOnClickListener{
             copyToClipboard(subText?.text.toString())
@@ -96,6 +87,13 @@ class ViewActivity : AppCompatActivity() {
         }
         memoText?.setOnClickListener{
             copyToClipboard(memoText?.text.toString())
+        }
+
+        //============================タグセレクトへのインテント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        findViewById<TextView>(R.id.viewTagSelecetTextView).setOnClickListener{
+            val intent = Intent(this , SelectTagActivity::class.java)
+            intent.putExtra("stateTagList",stateTagList)
+            startActivityForResult(intent,REQUESTCODE)
         }
 
         findViewById<FloatingActionButton>(R.id.editFAB).setOnClickListener{
@@ -124,12 +122,8 @@ class ViewActivity : AppCompatActivity() {
         }
         setChip()
 
-        Log.d("debug",Regex("https://").containsMatchIn(item.subText) .toString())
-        Log.d("debug",Regex("http://").containsMatchIn(item.subText) .toString())
-
         //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
         if(!(Regex("http://").containsMatchIn(item.subText) || Regex("https://").containsMatchIn(item.subText))){
-            Log.d("debug","caome")
             subText?.visibility = GONE
             subIcon?.visibility = GONE
         }
@@ -139,7 +133,6 @@ class ViewActivity : AppCompatActivity() {
     }
 
     private fun copyToClipboard(text: String?) {
-
         //クリップボードの保存
         val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("", text)
@@ -152,7 +145,7 @@ class ViewActivity : AppCompatActivity() {
 
     }
 
-    fun setChip(){
+    private fun setChip(){
         editTagChipGroup?.removeAllViews()
         for (index in stateTagList!!) {
             val new = realm.where(OriginTagDateClass::class.java).equalTo("id",index).findFirst()
@@ -211,6 +204,24 @@ class ViewActivity : AppCompatActivity() {
         val inflater = menuInflater
         inflater.inflate(R.menu.edit_activity_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    //戻るボタンの処理
+    override fun onBackPressed() {
+        realm.executeTransaction{
+            val new = it.where(MainDate::class.java).equalTo("id",id).findFirst()
+
+            //＝＝＝＝＝＝＝＝＝＝＝＝タグの保存===================
+            new?.tagList?.clear()
+            for( i in stateTagList!!){
+                val tagObject = realm.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+                    this.copyId = i
+                }
+                new?.tagList?.add(tagObject)
+            }
+        }
+
+        finish()
     }
 
 

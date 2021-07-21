@@ -203,7 +203,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/itemRemoveIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -211,19 +211,19 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view3"
-            app:srcCompat="@drawable/close_black_24dp" />
+            app:srcCompat="@drawable/delete_black_24dp__1_" />
 
         <TextView
-            android:id="@+id/none"
+            android:id="@+id/itemRemoveText"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:gravity="center|left"
-            android:text="とくにないよ"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            android:text="消去"
+            app:layout_constraintBottom_toBottomOf="@+id/itemRemoveIcon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView3"
-            app:layout_constraintTop_toTopOf="@+id/imageView3" />
+            app:layout_constraintStart_toEndOf="@+id/itemRemoveIcon"
+            app:layout_constraintTop_toTopOf="@+id/itemRemoveIcon" />
 
         <ImageView
             android:id="@+id/archiveSelectIcon"
@@ -233,7 +233,7 @@
             android:layout_marginTop="16dp"
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/itemRemoveIcon"
             app:srcCompat="@drawable/archive_black_24dp" />
 
         <TextView
@@ -249,7 +249,7 @@
             app:layout_constraintTop_toTopOf="@+id/archiveSelectIcon" />
 
         <ImageView
-            android:id="@+id/itemRemoveIcon"
+            android:id="@+id/viewTagIcon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="24dp"
@@ -257,19 +257,19 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/archiveSelectIcon"
-            app:srcCompat="@drawable/delete_black_24dp__1_" />
+            app:srcCompat="@drawable/label_black_24dp" />
 
         <TextView
-            android:id="@+id/itemRemoveText"
+            android:id="@+id/viewTagSelecetTextView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:gravity="center|left"
-            android:text="消去"
-            app:layout_constraintBottom_toBottomOf="@+id/itemRemoveIcon"
+            android:text="タグの設定"
+            app:layout_constraintBottom_toBottomOf="@+id/viewTagIcon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/itemRemoveIcon"
-            app:layout_constraintTop_toTopOf="@+id/itemRemoveIcon" />
+            app:layout_constraintStart_toEndOf="@+id/viewTagIcon"
+            app:layout_constraintTop_toTopOf="@+id/viewTagIcon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
