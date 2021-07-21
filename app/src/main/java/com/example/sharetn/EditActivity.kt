@@ -363,11 +363,6 @@ class EditActivity : AppCompatActivity() {
                 .setNegativeButton("Cancel") { dialog, which ->
                     // Noが押された時の挙動
                 }
-                .setNeutralButton("保存") { dialog, which ->
-                    //その他が押された時の挙動
-                    save()
-                    finish()
-                }
                 .show()
         }else{
             finish()
