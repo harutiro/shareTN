@@ -78,14 +78,22 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
 
         //chip関係
         holder.itemTagChipGroup.removeAllViews()
-        for (index in item.tagList!!) {
+
+        for (index in item.tagList!!.toMutableList()) {
             val new = realm.where(OriginTagDateClass::class.java).equalTo("id",index.copyId).findFirst()
 
-            val chip = Chip(holder.itemTagChipGroup.context)
-            chip.text= new?.name
-            chip.isClickable = false
-            holder.itemTagChipGroup.addView(chip)
+            if(new == null){
+                realm.executeTransaction{
+                    index.deleteFromRealm()
+                }
+            }else{
+                val chip = Chip(holder.itemTagChipGroup.context)
+                chip.text= new?.name
+                chip.isClickable = false
+                holder.itemTagChipGroup.addView(chip)
+            }
         }
+
 
 
     }

@@ -71,9 +71,7 @@ class MainActivity : AppCompatActivity() {
         })
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter
-
-        val mainPersons: RealmResults<MainDate> = realm.where(MainDate::class.java).findAll()
-        adapter?.setList(mainPersons)
+        RVGo()
     }
 
 
