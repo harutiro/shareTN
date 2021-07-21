@@ -401,26 +401,6 @@ class EditActivity : AppCompatActivity() {
             true
         }
 
-        R.id.action_edit_mode -> {
-            // User chose the "Favorite" action, mark the current item
-            // as a favorite...
-
-            subEdit?.isFocusable = true
-            subEdit?.isFocusableInTouchMode = true
-            mainEdit?.isFocusable = true
-            mainEdit?.isFocusableInTouchMode = true
-            mainEdit?.requestFocus()
-            memoEdit?.isFocusable = true
-            memoEdit?.isFocusableInTouchMode = true
-
-            findViewById<TextView>(R.id.saveButton).visibility = VISIBLE
-
-            stateEditMode = true
-
-            setTitle( "編集" )
-            true
-        }
-
         else -> {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.
