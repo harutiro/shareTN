@@ -35,6 +35,7 @@ import com.example.sharetn.dousa.JapaneseChange
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import io.realm.Realm
@@ -95,6 +96,13 @@ class ViewActivity : AppCompatActivity() {
         }
         memoText?.setOnClickListener{
             copyToClipboard(memoText?.text.toString())
+        }
+
+        findViewById<FloatingActionButton>(R.id.editFAB).setOnClickListener{
+            val intent = Intent(this,EditActivity::class.java)
+            intent.putExtra("id",id)
+            startActivity(intent)
+            finish()
         }
 
         //データのはめ込み
