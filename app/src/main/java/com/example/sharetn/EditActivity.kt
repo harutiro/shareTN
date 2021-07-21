@@ -146,8 +146,13 @@ class EditActivity : AppCompatActivity() {
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
         findViewById<FloatingActionButton>(R.id.saveFAB).setOnClickListener {
-//            TODO: Mainが空白時に保存されないようにする
-            save()
+            if (mainEdit?.text.toString() == "") {
+                val snackbar = Snackbar.make(findViewById(android.R.id.content),"タイトルが入力されていません。", Snackbar.LENGTH_SHORT)
+                snackbar.view.setBackgroundResource(R.color.error)
+                snackbar.show()
+            }else{
+                save()
+            }
         }
 
 
