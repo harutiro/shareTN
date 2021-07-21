@@ -1,5 +1,6 @@
 package com.example.sharetn
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.Adapter.OriginTagRecyclerViewAdapter
 import com.example.sharetn.Date.OriginTagDateClass
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmResults
 import java.util.*
@@ -31,6 +33,7 @@ class EditTagActivity : AppCompatActivity(){
     private lateinit var inputMethodManager: InputMethodManager
     private lateinit var container: ConstraintLayout
 
+    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_tag)
@@ -43,22 +46,39 @@ class EditTagActivity : AppCompatActivity(){
         val id = intent.getStringExtra("id")
 
         findViewById<ImageButton>(R.id.EditTagSaveButton).setOnClickListener{
-            realm.executeTransaction{
 
+            var state = true
 
-                if(editTextTextMultiLine.text.toString() != ""){
-                    val new = if(id == null){
-                        it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
-                    }else{
-                        it.where(OriginTagDateClass::class.java).equalTo("id",id).findFirst()
-                    }
+            val result = realm.where(OriginTagDateClass::class.java).findAll()
+            for(i in result){
+                if(i.name == editTextTextMultiLine.text.toString()){
+                    val snackbar = Snackbar.make(findViewById(android.R.id.content),"重複した名前があります。", Snackbar.LENGTH_SHORT)
+                    snackbar.view.setBackgroundResource(R.color.error)
+                    snackbar.show()
 
-                    new?.name = editTextTextMultiLine.text.toString()
+                    state = false
+                    break
                 }
             }
 
-            editTextTextMultiLine.setText("")
-            rVGo()
+            if(state){
+                realm.executeTransaction{
+                    if(editTextTextMultiLine.text.toString() != ""){
+                        val new = if(id == null){
+                            it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
+                        }else{
+                            it.where(OriginTagDateClass::class.java).equalTo("id",id).findFirst()
+                        }
+
+
+                        new?.name = editTextTextMultiLine.text.toString()
+                    }
+                }
+
+                editTextTextMultiLine.setText("")
+                rVGo()
+            }
+
         }
 
 

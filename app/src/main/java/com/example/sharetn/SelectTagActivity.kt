@@ -25,11 +25,7 @@ class SelectTagActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_tag)
 
-
-
-        val id = intent.getStringExtra("id")
         stateTagList = intent.getStringArrayListExtra("stateTagList") as ArrayList<String>
-
 
         val rView = findViewById<RecyclerView>(R.id.selectTagRV)
         adapter = OriginTagSelectRecyclerViewAdapter(this , object: OriginTagSelectRecyclerViewAdapter.OnItemClickListner{
@@ -40,7 +36,6 @@ class SelectTagActivity : AppCompatActivity() {
                 }else{
                     stateTagList.remove(item.id.toString())
                 }
-
             }
         })
         rView.layoutManager = LinearLayoutManager(this)
