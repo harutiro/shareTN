@@ -38,17 +38,7 @@ class EditTagActivity : AppCompatActivity(){
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         container = findViewById(R.id.constraintEditTag)
 
-
-        findViewById<View>(R.id.brEdit).visibility = GONE
-
         val editTextTextMultiLine = findViewById<EditText>(R.id.editTextTextMultiLine)
-        editTextTextMultiLine.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                findViewById<View>(R.id.brEdit).visibility = VISIBLE
-            }else{
-                findViewById<View>(R.id.brEdit).visibility = GONE
-            }
-        }
 
         val id = intent.getStringExtra("id")
 
