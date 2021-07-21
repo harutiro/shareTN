@@ -59,12 +59,6 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
                 holder.checkBox.isChecked = true
             }
         }
-
-
-
-
-
-
     }
 
     //引数にとったリストをadapterに追加するメソッド
@@ -94,11 +88,6 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
         states.clear()
         states.addAll(stateList)
 
-        Log.d("debag","========================================")
-        for(i in states){
-            Log.d("debag",i)
-
-        }
         notifyDataSetChanged()
     }
 }
