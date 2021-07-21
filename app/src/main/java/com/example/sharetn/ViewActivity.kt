@@ -63,9 +63,6 @@ class ViewActivity : AppCompatActivity() {
     var editTagChipGroup:ChipGroup? = null
     var layoutId:ConstraintLayout? = null
 
-
-    var id:String? = ""
-
     var stateTagList: ArrayList<String>? = ArrayList<String>()
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -75,7 +72,7 @@ class ViewActivity : AppCompatActivity() {
         setContentView(R.layout.activity_view)
         title = "詳細"
 
-        subText = findViewById(R.id.subEdit)
+        subText = findViewById(R.id.subText)
         subIcon = findViewById(R.id.subIcon)
         mainText = findViewById(R.id.mainText)
         mainIcon = findViewById(R.id.mainIcon)
@@ -94,7 +91,7 @@ class ViewActivity : AppCompatActivity() {
         memoText?.movementMethod = ScrollingMovementMethod()
 
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
-        id = intent.getStringExtra("id")
+        val id = intent.getStringExtra("id")
 
         subText?.setOnClickListener{
             copyToClipboard(subText?.text.toString())
@@ -106,30 +103,34 @@ class ViewActivity : AppCompatActivity() {
             copyToClipboard(memoText?.text.toString())
         }
 
-//        //データのはめ込み
-//        val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
-//
-//        //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４の画像はめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//        val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
-//        mainIcon?.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
-//
-//        //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝その他はめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//        dayText?.text = item?.dayText
-//        memoText?.text = item?.memoText
-//        mainText?.text = item?.mainText
-//        subText?.text = item?.subText
-//
-//        //＝＝＝＝＝＝＝＝＝＝＝＝タグのはめ込み部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//        for(i in item?.tagList!!){
-//            stateTagList?.add(i.copyId.toString())
-//        }
-//        setChip()
-//
-//        //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-//        if(!Regex("http://").containsMatchIn(item.subText) || !Regex("https://").containsMatchIn(item.subText)){
-//            subText?.visibility = GONE
-//            subIcon?.visibility = GONE
-//        }
+        //データのはめ込み
+        val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
+
+        //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４の画像はめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        val decodedByte: ByteArray = Base64.decode(item?.icon, 0)
+        mainIcon?.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
+
+        //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝その他はめ込み＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        dayText?.text = item?.dayText
+        memoText?.text = item?.memoText
+        mainText?.text = item?.mainText
+        subText?.text = item?.subText
+
+        //＝＝＝＝＝＝＝＝＝＝＝＝タグのはめ込み部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        for(i in item?.tagList!!){
+            stateTagList?.add(i.copyId.toString())
+        }
+        setChip()
+
+        Log.d("debug",Regex("https://").containsMatchIn(item.subText) .toString())
+        Log.d("debug",Regex("http://").containsMatchIn(item.subText) .toString())
+
+        //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        if(!(Regex("http://").containsMatchIn(item.subText) || Regex("https://").containsMatchIn(item.subText))){
+            Log.d("debug","caome")
+            subText?.visibility = GONE
+            subIcon?.visibility = GONE
+        }
 
 
 

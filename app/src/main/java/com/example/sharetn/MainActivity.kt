@@ -3,6 +3,7 @@ package com.example.sharetn
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             RVGo()
         }
         findViewById<Button>(R.id.testButton).setOnClickListener{
-            val intent = Intent(this,ViewActivity::class.java)
+            val intent = Intent(this,EditTagActivity::class.java)
             startActivity(intent)
         }
 
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: MainDate) {
                 // SecondActivityに遷移するためのIntent
-                val intent = Intent(applicationContext, EditActivity::class.java)
+                val intent = Intent(applicationContext, ViewActivity::class.java)
                 // RecyclerViewの要素をタップするとintentによりSecondActivityに遷移する
                 // また，要素のidをSecondActivityに渡す
                 intent.putExtra("id", item.id)
