@@ -49,10 +49,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("editMode", true)
             startActivity(intent)
         }
-
-        findViewById<ImageButton>(R.id.searchButton).setOnClickListener{
-            RVGo()
-        }
         findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
             findViewById<EditText>(R.id.searchEditText).setText("")
             RVGo()
