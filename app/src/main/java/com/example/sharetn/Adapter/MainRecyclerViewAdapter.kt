@@ -77,32 +77,15 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         }
 
         //chip関係
-        //chipgroupの全消去
         holder.itemTagChipGroup.removeAllViews()
-
         for (index in item.tagList!!) {
             val new = realm.where(OriginTagDateClass::class.java).equalTo("id",index.copyId).findFirst()
 
-
-            val chip = Chip(ContextThemeWrapper(holder.itemTagChipGroup.context,R.style.Widget_MaterialComponents_Chip_Choice))
-
+            val chip = Chip(holder.itemTagChipGroup.context)
             chip.text= new?.name
-
-            // necessary to get single selection working
-            chip.isCheckable = true
-            chip.isClickable = true
-            chip.checkedIcon = ContextCompat.getDrawable(context,R.drawable.ic_mtrl_chip_checked_black)
-
-            chip.setOnCheckedChangeListener { buttonView, isChecked ->
-                Log.d("debag",buttonView.text.toString())
-                Log.d("debag",isChecked.toString())
-
-            }
-
+            chip.isClickable = false
             holder.itemTagChipGroup.addView(chip)
         }
-
-//        Log.d("debag", holder.itemTagChipGroup.size.toString())
 
 
     }

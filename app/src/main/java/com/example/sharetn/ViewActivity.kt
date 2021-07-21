@@ -157,17 +157,9 @@ class ViewActivity : AppCompatActivity() {
         for (index in stateTagList!!) {
             val new = realm.where(OriginTagDateClass::class.java).equalTo("id",index).findFirst()
 
-
             val chip = Chip(editTagChipGroup?.context)
             chip.text= new?.name
-
-            // necessary to get single selection working
-            chip.isCloseIconVisible = true
-
-            chip.setOnCloseIconClickListener {
-                stateTagList!!.remove(index)
-                setChip()
-            }
+            chip.isClickable = false
             editTagChipGroup?.addView(chip)
         }
     }
