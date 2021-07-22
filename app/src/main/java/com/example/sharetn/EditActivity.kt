@@ -132,12 +132,12 @@ class EditActivity : AppCompatActivity() {
                 stateTagList?.add(i.copyId.toString())
             }
             setChip()
+        }
 
-            //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-            if(!Regex("http://").containsMatchIn(item.subText) || !Regex("https://").containsMatchIn(item.subText)){
-                subEdit?.visibility = VISIBLE
-                subIcon?.visibility = VISIBLE
-            }
+        //＝＝＝＝＝＝＝＝＝＝＝＝URLじゃなかった場合URL部分の表示を消す＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+        if(!Regex("http://").containsMatchIn(subEdit?.text.toString()) && !Regex("https://").containsMatchIn(subEdit?.text.toString())){
+            subEdit?.visibility = GONE
+            subIcon?.visibility = GONE
         }
 
 
