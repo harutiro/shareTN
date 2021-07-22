@@ -1,23 +1,17 @@
-package com.example.sharetn.Adapter
+package com.example.sharetn.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
-import android.util.Log
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.size
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Date.MainDate
-import com.example.sharetn.Date.OriginTagDateClass
-import com.example.sharetn.Date.TagDateClass
+import com.example.sharetn.date.MainDate
+import com.example.sharetn.date.OriginTagDateClass
 import com.example.sharetn.R
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -38,7 +32,6 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         val iconImageView: ImageView = view.findViewById(R.id.iconImageView)
         val mainTextView: TextView = view.findViewById(R.id.mainTextView)
         val subTextView:TextView = view.findViewById(R.id.subTextView)
-        val moreButton: ImageView =  view.findViewById(R.id.moreButton)
         val imageView:ImageView = view.findViewById(R.id.imageView)
         val container: ConstraintLayout = view.findViewById(R.id.constraint)
         val itemTagChipGroup: ChipGroup = view.findViewById(R.id.itemTagChipGroup)
@@ -88,7 +81,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
                 }
             }else{
                 val chip = Chip(holder.itemTagChipGroup.context)
-                chip.text= new?.name
+                chip.text= new.name
                 chip.isClickable = false
                 holder.itemTagChipGroup.addView(chip)
             }
@@ -96,12 +89,6 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
 
 
 
-    }
-
-    //引数にとったリストをadapterに追加するメソッド
-    fun addAll(items: List<MainDate>){
-        this.items.addAll(items)
-        notifyDataSetChanged()
     }
 
     //リストの要素数を返すメソッド

@@ -1,4 +1,4 @@
-package com.example.sharetn.Date
+package com.example.sharetn.date
 
 import io.realm.RealmList
 import io.realm.RealmObject

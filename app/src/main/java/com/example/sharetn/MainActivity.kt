@@ -2,8 +2,6 @@ package com.example.sharetn
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -12,14 +10,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Adapter.MainRecyclerViewAdapter
-import com.example.sharetn.Date.MainDate
-import com.example.sharetn.Date.OriginTagDateClass
+import com.example.sharetn.adapter.MainRecyclerViewAdapter
+import com.example.sharetn.date.MainDate
+import com.example.sharetn.date.OriginTagDateClass
 import com.example.sharetn.dousa.JapaneseChange
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import io.realm.Realm
-import io.realm.RealmResults
 import java.util.*
 
 
@@ -38,11 +35,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<EditText>(R.id.searchEditText).doOnTextChanged{  text, start, count, after ->
-            RVGo()
+        findViewById<EditText>(R.id.searchEditText).doOnTextChanged{ _, _, _, _ ->
+            recyclerViewGo()
         }
 
-        serchTagChipGroup = findViewById<ChipGroup>(R.id.serchTagChipGroup)
+        serchTagChipGroup = findViewById(R.id.serchTagChipGroup)
 
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.puraFAB).setOnClickListener{
             val intent = Intent(this, EditActivity::class.java)
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
         findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
             findViewById<EditText>(R.id.searchEditText).setText("")
-            RVGo()
+            recyclerViewGo()
         }
         findViewById<Button>(R.id.testButton).setOnClickListener{
             val intent = Intent(this,EditTagActivity::class.java)
@@ -71,14 +68,14 @@ class MainActivity : AppCompatActivity() {
         })
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter
-        RVGo()
+        recyclerViewGo()
     }
 
 
     override fun onResume(){
         super.onResume()
 
-        RVGo()
+        recyclerViewGo()
         setChip()
 
     }
@@ -103,8 +100,8 @@ class MainActivity : AppCompatActivity() {
             chip.isClickable = true
             chip.checkedIcon = ContextCompat.getDrawable(this,R.drawable.ic_mtrl_chip_checked_black)
 
-            chip.setOnCheckedChangeListener { buttonView, isChecked ->
-                RVGo()
+            chip.setOnCheckedChangeListener { _, _ ->
+                recyclerViewGo()
             }
 
             serchTagChipGroup?.addView(chip)
@@ -113,12 +110,12 @@ class MainActivity : AppCompatActivity() {
 
 
     @Suppress("DEPRECATION")
-    fun RVGo(){
+    fun recyclerViewGo(){
 
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
         var mutablePerson: MutableList<MainDate> = realm.where(MainDate::class.java).findAll().toMutableList()
 
-        var mutableNewPerson: MutableList<MainDate> = mutableListOf()
+        val mutableNewPerson: MutableList<MainDate> = mutableListOf()
         val stateTagList = mutableListOf<String>()
 
         for(i in serchTagChipGroup?.checkedChipIds!!){

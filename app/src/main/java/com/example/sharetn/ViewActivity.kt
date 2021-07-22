@@ -5,37 +5,31 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Base64
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.sharetn.Date.MainDate
-import com.example.sharetn.Date.OriginTagDateClass
-import com.example.sharetn.Date.TagDateClass
+import com.example.sharetn.date.MainDate
+import com.example.sharetn.date.OriginTagDateClass
+import com.example.sharetn.date.TagDateClass
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
-import java.io.ByteArrayOutputStream
-import java.text.SimpleDateFormat
 import java.util.*
 
 
 class ViewActivity : AppCompatActivity() {
 
-    private val REQUESTCODE = 1000
+    private val requestCode = 1000
 
     private val realm by lazy {
         Realm.getDefaultInstance()
@@ -93,7 +87,7 @@ class ViewActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.viewTagSelecetTextView).setOnClickListener{
             val intent = Intent(this , SelectTagActivity::class.java)
             intent.putExtra("stateTagList",stateTagList)
-            startActivityForResult(intent,REQUESTCODE)
+            startActivityForResult(intent,requestCode)
         }
 
         findViewById<FloatingActionButton>(R.id.editFAB).setOnClickListener{

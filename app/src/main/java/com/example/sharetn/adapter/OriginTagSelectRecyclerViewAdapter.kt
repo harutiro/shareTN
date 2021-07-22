@@ -1,23 +1,18 @@
-package com.example.sharetn.Adapter
+package com.example.sharetn.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CheckBox
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Date.OriginTagDateClass
 import com.example.sharetn.R
-import io.realm.Realm
+import com.example.sharetn.date.OriginTagDateClass
 
 class OriginTagSelectRecyclerViewAdapter(private val context: Context, private val listener: OnItemClickListner):
     RecyclerView.Adapter<OriginTagSelectRecyclerViewAdapter.ViewHolder>(){
-
-    private val realm by lazy {
-        Realm.getDefaultInstance()
-    }
 
     //リサイクラービューに表示するリストを宣言する
     val items: MutableList<OriginTagDateClass> = mutableListOf()
@@ -59,12 +54,6 @@ class OriginTagSelectRecyclerViewAdapter(private val context: Context, private v
                 holder.checkBox.isChecked = true
             }
         }
-    }
-
-    //引数にとったリストをadapterに追加するメソッド
-    fun addAll(items: List<OriginTagDateClass>){
-        this.items.addAll(items)
-        notifyDataSetChanged()
     }
 
     //リストの要素数を返すメソッド

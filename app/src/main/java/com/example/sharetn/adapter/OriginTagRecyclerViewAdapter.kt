@@ -1,4 +1,4 @@
-package com.example.sharetn.Adapter
+package com.example.sharetn.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.Date.OriginTagDateClass
 import com.example.sharetn.R
+import com.example.sharetn.date.OriginTagDateClass
 import io.realm.Realm
 
 class OriginTagRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):
@@ -24,7 +23,6 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 
     //データをcourseDateと結びつける？？
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val container: ConstraintLayout = view.findViewById(R.id.constraintEditTag)
         val itemEditTagText: EditText = view.findViewById(R.id.itemEditTagText)
         val dellEditButton: ImageButton = view.findViewById(R.id.dellEditButton)
 
@@ -43,7 +41,7 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
         holder.itemEditTagText.setText(item.name)
 
 //        EditTextをフォーカスしているか判定
-        holder.itemEditTagText.setOnFocusChangeListener { view, hasFocus ->
+        holder.itemEditTagText.setOnFocusChangeListener { _, hasFocus ->
 
 //            フォーカスしているとき
             if (hasFocus) {
@@ -79,12 +77,6 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 
 
 
-    }
-
-    //引数にとったリストをadapterに追加するメソッド
-    fun addAll(items: List<OriginTagDateClass>){
-        this.items.addAll(items)
-        notifyDataSetChanged()
     }
 
     //リストの要素数を返すメソッド
