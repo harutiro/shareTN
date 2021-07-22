@@ -60,7 +60,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/outline_travel_explore_black_24dp"
+                    android:src="@drawable/title_black_24dp"
                     app:layout_constraintBottom_toBottomOf="@+id/mainEdit"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/mainEdit" />
