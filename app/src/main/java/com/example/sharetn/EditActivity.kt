@@ -41,6 +41,7 @@ import io.realm.Realm
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.String as String1
 
 
 class EditActivity : AppCompatActivity() {
@@ -62,9 +63,9 @@ class EditActivity : AppCompatActivity() {
     var image:ImageView? =    null
     var editTagChipGroup:ChipGroup? = null
 
-    var id:String? = ""
+    var id: String1? = ""
 
-    var stateTagList: ArrayList<String>? = ArrayList<String>()
+    var stateTagList: ArrayList<String1>? = ArrayList<String1>()
 
     var stateEditMode: Boolean = false
 
@@ -161,18 +162,13 @@ class EditActivity : AppCompatActivity() {
 //=============================共有で飛ばされたときに動く部分
         if (TextUtils.equals(intent.action, Intent.ACTION_SEND)) {
             val extras = intent.extras
-            val extraText = extras!!.getCharSequence(Intent.EXTRA_TEXT).toString()
-
-            var comeText = ""
-            var domein = ""
-            var title = ""
+            val comeText = extras!!.getCharSequence(Intent.EXTRA_TEXT).toString()
 
             subEdit?.visibility = VISIBLE
             subIcon?.visibility = VISIBLE
 
             //URLや文字の受け取り
-            comeText = extraText
-            domein = comeText.removePrefix("https://").removePrefix("http://").split("/")[0]
+            val domein: String1 = comeText.removePrefix("https://").removePrefix("http://").split("/")[0]
 
             findViewById<EditText>(R.id.subEdit).setText(comeText)
             findViewById<EditText>(R.id.mainEdit).setText("NowLoading...")
@@ -214,11 +210,11 @@ class EditActivity : AppCompatActivity() {
                 //非表示
                 webview.visibility = GONE
 
-                //画像取得部分
+                //タイトルの取得
                 webview.webViewClient = object : WebViewClient() {
-                    override fun onPageFinished(view: WebView, url: String) {
+                    override fun onPageFinished(view: WebView, url: String1) {
 
-                        title = webview.title.toString()
+                        val title = webview.title.toString()
                         mainEdit?.setText(title)
 
 
@@ -227,8 +223,8 @@ class EditActivity : AppCompatActivity() {
                     override fun onReceivedError(
                         view: WebView?,
                         errorCode: Int,
-                        description: String?,
-                        url: String?
+                        description: String1?,
+                        url: String1?
                     ){
                         mainEdit?.setText("ネットワークエラー")
                     }
