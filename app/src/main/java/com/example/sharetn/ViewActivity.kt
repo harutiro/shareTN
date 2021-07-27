@@ -97,6 +97,17 @@ class ViewActivity : AppCompatActivity() {
             finish()
         }
 
+        findViewById<TextView>(R.id.itemRemoveText).setOnClickListener{
+            val person = realm.where(MainDate::class.java).equalTo("id",id).findFirst()
+
+            realm.executeTransaction {
+                person?.deleteFromRealm()
+            }
+
+            finish()
+
+        }
+
         //データのはめ込み
         val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
 
