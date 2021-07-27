@@ -2,6 +2,7 @@ package com.example.sharetn
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -89,6 +90,23 @@ class MainActivity : AppCompatActivity() {
     fun setChip(){
         serchTagChipGroup?.removeAllViews()
         val new = realm.where(OriginTagDateClass::class.java).findAll()
+
+        //アーカイブ部分の特別なチップの作成
+        val chip = Chip(serchTagChipGroup?.context)
+
+        chip.text= "アーカイブ"
+
+        // necessary to get single selection working
+        chip.isCheckable = true
+        chip.isClickable = true
+        chip.checkedIcon = ContextCompat.getDrawable(this,R.drawable.ic_mtrl_chip_checked_black)
+
+        chip.setOnCheckedChangeListener { _, _ ->
+            recyclerViewGo()
+        }
+
+        serchTagChipGroup?.addView(chip)
+
         for (i in new) {
 
             val chip = Chip(serchTagChipGroup?.context)
@@ -106,6 +124,10 @@ class MainActivity : AppCompatActivity() {
 
             serchTagChipGroup?.addView(chip)
         }
+
+
+
+
     }
 
 
@@ -120,12 +142,21 @@ class MainActivity : AppCompatActivity() {
         val mutableNewPerson: MutableList<MainDate> = mutableListOf()
         val stateTagList = mutableListOf<String>()
 
+        Log.d("debug","===========================================")
         //選択されているタグの選択
         for(i in serchTagChipGroup?.checkedChipIds!!){
             stateTagList.add(findViewById<Chip>(i).text.toString())
+            Log.d("debug",findViewById<Chip>(i).text.toString())
         }
 
-        mutablePerson = mutablePerson.filter{!it.archive}.toMutableList()
+        if(stateTagList.contains("アーカイブ")){
+            mutablePerson = mutablePerson.filter{it.archive}.toMutableList()
+            stateTagList.remove("アーカイブ")
+        }else{
+            mutablePerson = mutablePerson.filter{!it.archive}.toMutableList()
+        }
+
+
 
         //検索バーでの検索
         if(word != ""){
