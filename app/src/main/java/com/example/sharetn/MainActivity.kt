@@ -125,6 +125,8 @@ class MainActivity : AppCompatActivity() {
             stateTagList.add(findViewById<Chip>(i).text.toString())
         }
 
+        mutablePerson = mutablePerson.filter{!it.archive}.toMutableList()
+
         //検索バーでの検索
         if(word != ""){
             val all = word.split(" ","　")
