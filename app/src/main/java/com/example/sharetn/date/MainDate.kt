@@ -13,5 +13,6 @@ open class MainDate(
     open var image: String = "",
     open var tagList: RealmList<TagDateClass>? = null,
     open var memoText: String = "",
-    open var dayText: String = ""
+    open var dayText: String = "",
+    open var archive:Boolean = false
         ): RealmObject()
