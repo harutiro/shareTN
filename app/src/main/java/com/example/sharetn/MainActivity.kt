@@ -112,16 +112,20 @@ class MainActivity : AppCompatActivity() {
     @Suppress("DEPRECATION")
     fun recyclerViewGo(){
 
+        //Realmデータや、検索枠の取得
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
         var mutablePerson: MutableList<MainDate> = realm.where(MainDate::class.java).findAll().toMutableList()
 
+        //一時保存配列の作成
         val mutableNewPerson: MutableList<MainDate> = mutableListOf()
         val stateTagList = mutableListOf<String>()
 
+        //選択されているタグの選択
         for(i in serchTagChipGroup?.checkedChipIds!!){
             stateTagList.add(findViewById<Chip>(i).text.toString())
         }
 
+        //検索バーでの検索
         if(word != ""){
             val all = word.split(" ","　")
 
@@ -142,9 +146,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-
-
+        //tagにおける検索
         for(data in mutablePerson){
 
             val tempItemTagList = mutableListOf<String>()
@@ -158,8 +160,6 @@ class MainActivity : AppCompatActivity() {
             if(tempItemTagList.containsAll(realmStateResult)) mutableNewPerson.add(data)
 
         }
-
-
 
         adapter?.setList(mutableNewPerson)
 
