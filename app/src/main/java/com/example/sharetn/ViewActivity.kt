@@ -198,6 +198,24 @@ class ViewActivity : AppCompatActivity() {
             true
         }
 
+        R.id.archive_settings -> {
+            val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
+
+            realm.executeTransaction {
+                item?.archive = !item?.archive!!
+            }
+
+            if(item?.archive == true){
+                Snackbar.make(findViewById(android.R.id.content),"アーカイブしました", Snackbar.LENGTH_SHORT).show()
+            }else{
+                Snackbar.make(findViewById(android.R.id.content),"アーカイブを解除しました", Snackbar.LENGTH_SHORT).show()
+            }
+
+            invalidateOptionsMenu()
+
+            true
+        }
+
         else -> {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.
@@ -208,6 +226,17 @@ class ViewActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.edit_activity_menu, menu)
+
+        val menuArchive = menu?.findItem(R.id.archive_settings)
+        val person = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
+
+        if(person?.archive == true){
+            menuArchive?.setIcon(R.drawable.unarchive_black_24dp)
+        }else{
+            menuArchive?.setIcon(R.drawable.archive_black_24dp)
+        }
+
+
         return super.onCreateOptionsMenu(menu)
     }
 

@@ -24,6 +24,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sharetn.date.MainDate
 import com.example.sharetn.date.OriginTagDateClass
 import com.example.sharetn.date.TagDateClass
@@ -341,13 +342,31 @@ class EditActivity : AppCompatActivity() {
 
     }
 
+    //　アプリバーの部分
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
-            // User chose the "Settings" item, show the app settings UI...
             //ボトムシートを上に浮き上がらせる
-            val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.edit_bottom_sheet)
+            val view = findViewById<ConstraintLayout>(R.id.edit_bottom_sheet)
             val mBottomSheetBehavior = BottomSheetBehavior.from(view)
             mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+            true
+        }
+
+        R.id.archive_settings -> {
+            val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
+
+            realm.executeTransaction {
+                item?.archive = !item?.archive!!
+            }
+
+            if(item?.archive == true){
+                Snackbar.make(findViewById(android.R.id.content),"アーカイブしました", Snackbar.LENGTH_SHORT).show()
+            }else{
+                Snackbar.make(findViewById(android.R.id.content),"アーカイブを解除しました", Snackbar.LENGTH_SHORT).show()
+            }
+
+            invalidateOptionsMenu()
 
             true
         }
@@ -362,6 +381,17 @@ class EditActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.edit_activity_menu, menu)
+
+        val menuArchive = menu?.findItem(R.id.archive_settings)
+        val person = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
+
+        if(person?.archive == true){
+            menuArchive?.setIcon(R.drawable.unarchive_black_24dp)
+        }else{
+            menuArchive?.setIcon(R.drawable.archive_black_24dp)
+        }
+
+
         return super.onCreateOptionsMenu(menu)
     }
 
