@@ -51,12 +51,11 @@ class EditTagActivity : AppCompatActivity(){
                 return@setOnClickListener
             }
 
-            realm.executeTransaction{
-                if(editTextTextMultiLine.text.toString() != ""){
-                    val new = it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
-                    new?.name = editTextTextMultiLine.text.toString()
-                }
+            if(editTextTextMultiLine.text.toString() != ""){
+                val new = realm.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
+                realm.executeTransaction { new?.name = editTextTextMultiLine.text.toString() }
             }
+
             editTextTextMultiLine.setText("")
             recyclerViewGo()
 
