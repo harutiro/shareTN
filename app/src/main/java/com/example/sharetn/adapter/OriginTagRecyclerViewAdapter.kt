@@ -40,37 +40,32 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 
         holder.itemEditTagText.setText(item.name)
 
-//        EditTextをフォーカスしているか判定
-        holder.itemEditTagText.setOnFocusChangeListener { _, hasFocus ->
+//      消去するときに呼び出し元に1temを送る
+        holder.dellEditButton.setOnClickListener {
+            listener.onItemClick(item)
 
-//            フォーカスしているとき
-            if (hasFocus) {
-                holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp__1_)
-
-//                消去するときに呼び出し元に1temを送る
-                holder.dellEditButton.setOnClickListener {
-                    listener.onItemClick(item)
-
-                }
-
-
-//                フォーカスしていないとき
-            }else{
-                holder.dellEditButton.setImageResource(R.drawable.label_black_24dp)
-
-                holder.dellEditButton.setOnClickListener {
-
-                }
-
-//                  フォーカスが外れたらRealmに記入
-                realm.executeTransaction{
-
-                    val new = it.where(OriginTagDateClass::class.java).equalTo("id",item.id).findFirst()
-                    new?.name = holder.itemEditTagText.text.toString()
-
-                }
-            }
         }
+//
+////        EditTextをフォーカスしているか判定
+//        holder.itemEditTagText.setOnFocusChangeListener { _, hasFocus ->
+//
+////          フォーカスしているとき
+//            if (hasFocus) {
+//                holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp__1_)
+//
+////          フォーカスしていないとき
+//            }else{
+//                holder.dellEditButton.setImageResource(R.drawable.label_black_24dp)
+//
+////              フォーカスが外れたらRealmに記入
+//                realm.executeTransaction{
+//
+//                    val new = it.where(OriginTagDateClass::class.java).equalTo("id",item.id).findFirst()
+//                    new?.name = holder.itemEditTagText.text.toString()
+//
+//                }
+//            }
+//        }
 
 
 

@@ -50,7 +50,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/itemEditTagText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/itemEditTagText"
-        app:srcCompat="@drawable/label_black_24dp"
+        app:srcCompat="@drawable/delete_black_24dp__1_"
         app:tint="@color/textBlock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
