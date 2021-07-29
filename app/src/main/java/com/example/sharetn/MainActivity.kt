@@ -92,20 +92,20 @@ class MainActivity : AppCompatActivity() {
         val new = realm.where(OriginTagDateClass::class.java).findAll()
 
         //アーカイブ部分の特別なチップの作成
-        val chip = Chip(serchTagChipGroup?.context)
+        val firstChip = Chip(serchTagChipGroup?.context)
 
-        chip.text= "アーカイブ"
+        firstChip.text= "アーカイブ"
 
         // necessary to get single selection working
-        chip.isCheckable = true
-        chip.isClickable = true
-        chip.checkedIcon = ContextCompat.getDrawable(this,R.drawable.ic_mtrl_chip_checked_black)
+        firstChip.isCheckable = true
+        firstChip.isClickable = true
+        firstChip.checkedIcon = ContextCompat.getDrawable(this,R.drawable.ic_mtrl_chip_checked_black)
 
-        chip.setOnCheckedChangeListener { _, _ ->
+        firstChip.setOnCheckedChangeListener { _, _ ->
             recyclerViewGo()
         }
 
-        serchTagChipGroup?.addView(chip)
+        serchTagChipGroup?.addView(firstChip)
 
         for (i in new) {
 
