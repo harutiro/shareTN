@@ -99,4 +99,10 @@ class EditTagActivity : AppCompatActivity(){
 
         return false
     }
+
+    override fun onDestroy() {
+        realm.close()
+        super.onDestroy()
+
+    }
 }
