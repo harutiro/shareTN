@@ -43,38 +43,27 @@ class EditTagActivity : AppCompatActivity(){
         val id = intent.getStringExtra("id")
 
         findViewById<ImageButton>(R.id.EditTagSaveButton).setOnClickListener{
+            if(realm.where(OriginTagDateClass::class.java).findAll().any { it.name == editTextTextMultiLine.text.toString()}){
+                val snackbar = Snackbar.make(findViewById(android.R.id.content),"重複した名前があります。", Snackbar.LENGTH_SHORT)
+                snackbar.view.setBackgroundResource(R.color.error)
+                snackbar.show()
 
-            var state = true
-
-            val result = realm.where(OriginTagDateClass::class.java).findAll()
-            for(i in result){
-                if(i.name == editTextTextMultiLine.text.toString()){
-                    val snackbar = Snackbar.make(findViewById(android.R.id.content),"重複した名前があります。", Snackbar.LENGTH_SHORT)
-                    snackbar.view.setBackgroundResource(R.color.error)
-                    snackbar.show()
-
-                    state = false
-                    break
-                }
+                return@setOnClickListener
             }
 
-            if(state){
-                realm.executeTransaction{
-                    if(editTextTextMultiLine.text.toString() != ""){
-                        val new = if(id == null){
-                            it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
-                        }else{
-                            it.where(OriginTagDateClass::class.java).equalTo("id",id).findFirst()
-                        }
-
-
-                        new?.name = editTextTextMultiLine.text.toString()
+            realm.executeTransaction{
+                if(editTextTextMultiLine.text.toString() != ""){
+                    val new = if(id == null){
+                        it.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
+                    }else{
+                        it.where(OriginTagDateClass::class.java).equalTo("id",id).findFirst()
                     }
+                    new?.name = editTextTextMultiLine.text.toString()
                 }
-
-                editTextTextMultiLine.setText("")
-                recyclerViewGo()
             }
+            editTextTextMultiLine.setText("")
+            recyclerViewGo()
+
 
         }
 
