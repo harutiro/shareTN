@@ -1,6 +1,7 @@
 package com.example.sharetn.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,26 +47,27 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 
         }
 //
-////        EditTextをフォーカスしているか判定
-//        holder.itemEditTagText.setOnFocusChangeListener { _, hasFocus ->
-//
-////          フォーカスしているとき
-//            if (hasFocus) {
-//                holder.dellEditButton.setImageResource(R.drawable.delete_black_24dp__1_)
-//
-////          フォーカスしていないとき
-//            }else{
-//                holder.dellEditButton.setImageResource(R.drawable.label_black_24dp)
-//
-////              フォーカスが外れたらRealmに記入
-//                realm.executeTransaction{
-//
-//                    val new = it.where(OriginTagDateClass::class.java).equalTo("id",item.id).findFirst()
-//                    new?.name = holder.itemEditTagText.text.toString()
-//
-//                }
-//            }
-//        }
+//        EditTextをフォーカスしているか判定
+        holder.itemEditTagText.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val new = realm.where(OriginTagDateClass::class.java).equalTo("id",item.id).findFirst()
+                realm.executeTransaction{ new?.name = holder.itemEditTagText.text.toString() }
+            }
+        }
+//        TODO: メンターにオートセーブについて考える。
+//        Gameとかではオートセーブだと自分の変更点まで戻るということを行う時があるのだが、タグなどの簡単な文字数で少ない変更点ならば、オートセーブのほうがいちいちボタンを
+//        押さなくてもよく、なおかつボタンを押し忘れて保存し忘れる問題もなくなるのではないかと考える。
+
+//        オートセーブの方が便利だが実際に保存されたか感覚的に判断できない。
+//        しかし、なにか通知してるとうざいため、理解している人はボタンも何も押さないで、保存するようにする。
+//        なおかつ、動作的にボタンを押したときに保存していると考えている人も、ボタンを押したときに保存をしてなおかつフォーカスを外して保存されたことを通知するようにオートセーブ寄りの
+//        セルフセーブを取り入れたほうがユーザー的にもわかりやすいのでわ無いかと改めて考えた。
+//        実際GoogleのタグやYoutubeの再生リスト等もオートセーブでも動くし、ボタンでも動くようになっているため、両方できるのがいいと考える。
+
+//        OnPauseでデータを保存するようにするとデータを消したときに変更していたデータが全部消えてしまうというのがあるため、消したときに差分だけ変更するようにすればいいのだが、
+//        今はこれで動くため一旦このままで放置
+
+
 
 
 
@@ -73,6 +75,8 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 
 
     }
+
+
 
     //リストの要素数を返すメソッド
     override fun getItemCount(): Int {
