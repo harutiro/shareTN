@@ -73,7 +73,7 @@ class EditTagActivity : AppCompatActivity(){
                 }
 
                 editTextTextMultiLine.setText("")
-                rVGo()
+                RecyclerViewGo()
             }
 
         }
@@ -89,16 +89,16 @@ class EditTagActivity : AppCompatActivity(){
 
                 val persons = realm.where(OriginTagDateClass::class.java).equalTo("id",item.id).findFirst()
                 realm.executeTransaction { persons?.deleteFromRealm() }
-                rVGo()
+                RecyclerViewGo()
             }
         })
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter
 
-        rVGo()
+        RecyclerViewGo()
     }
 
-    fun rVGo(){
+    fun RecyclerViewGo(){
 
         val mainPersons: RealmResults<OriginTagDateClass> = realm.where(OriginTagDateClass::class.java).findAll()
         adapter?.setList(mainPersons)
