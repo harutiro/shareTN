@@ -179,14 +179,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        val tempItemTagList = mutableListOf<String>()
+        val realmStateResult = mutableListOf<String>()
+
         //tagにおける検索
         for(data in mutablePerson){
 
-            val tempItemTagList = mutableListOf<String>()
             for(tag in data.tagList!!){
                 tempItemTagList.add(tag.copyId.toString())
             }
-            val realmStateResult = mutableListOf<String>()
             for( item in stateTagList){
                 realmStateResult.add(realm.where(OriginTagDateClass::class.java).equalTo("name",item).findFirst()?.id.toString())
             }
