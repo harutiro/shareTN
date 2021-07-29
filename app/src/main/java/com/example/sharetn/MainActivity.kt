@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     var adapter: MainRecyclerViewAdapter? = null
     var serchTagChipGroup:ChipGroup? = null
 
+    var tagState:Boolean = true
+
    // val stateTagList:MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             recyclerViewGo()
         }
         findViewById<Button>(R.id.testButton).setOnClickListener{
+            tagState = true
             val intent = Intent(this,EditTagActivity::class.java)
             startActivity(intent)
         }
@@ -76,8 +79,12 @@ class MainActivity : AppCompatActivity() {
     override fun onResume(){
         super.onResume()
 
+        //TODO: インテントのリザルトコードのより動作を変えるように変更
+        if(tagState){
+            setChip()
+            tagState = false
+        }
         recyclerViewGo()
-        setChip()
 
     }
 
