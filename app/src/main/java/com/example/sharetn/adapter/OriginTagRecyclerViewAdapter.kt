@@ -67,6 +67,8 @@ class OriginTagRecyclerViewAdapter(private val context: Context,private val list
 //        OnPauseでデータを保存するようにするとデータを消したときに変更していたデータが全部消えてしまうというのがあるため、消したときに差分だけ変更するようにすればいいのだが、
 //        今はこれで動くため一旦このままで放置
 
+//        TODO: 戻るボタンで戻ったときに保存されないバグ
+
 
 
 
