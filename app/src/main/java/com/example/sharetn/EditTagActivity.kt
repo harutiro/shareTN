@@ -87,16 +87,8 @@ class EditTagActivity : AppCompatActivity(){
             override fun onItemClick(item: OriginTagDateClass) {
                 container.requestFocus()
 
-                val persons = realm.where(OriginTagDateClass::class.java).equalTo("id",item.id).findAll()
-                val personArray = mutableListOf<OriginTagDateClass>()
-                for (p in persons){
-                    personArray.add(p)
-                }
-                realm.executeTransaction {
-                    for(p in persons){
-                        p.deleteFromRealm()
-                    }
-                }
+                val persons = realm.where(OriginTagDateClass::class.java).equalTo("id",item.id).findFirst()
+                realm.executeTransaction { persons?.deleteFromRealm() }
                 rVGo()
             }
         })
