@@ -8,11 +8,14 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sharetn.date.MainDate
@@ -161,24 +164,32 @@ class ViewActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode:Int, resultCode: Int, date: Intent?) {
-        super.onActivityResult(requestCode, resultCode, date)
+//    override fun onActivityResult(requestCode:Int, resultCode: Int, date: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, date)
+//
+//
+//        if(requestCode == 1000) {
+//            when (resultCode) {
+//                Activity.RESULT_OK -> {
+//
+//                }
+//
+//                else -> {
+//                }
+//            }
+//        }
+//
+//    }
 
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result: ActivityResult ->
+        if(result.resultCode == Activity.RESULT_OK){
+            val intent = result.data
 
-        if(requestCode == 1000) {
-            when (resultCode) {
-                Activity.RESULT_OK -> {
-                    stateTagList = date?.getStringArrayListExtra("stateTagList")
-
-                    setChip()
-                }
-
-                else -> {
-                }
-            }
+            stateTagList = intent?.getStringArrayListExtra("stateTagList")
+            setChip()
         }
-
     }
+
     
 //　アプリバーの部分
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
@@ -213,7 +224,7 @@ class ViewActivity : AppCompatActivity() {
             //タグへのインテント
             val intent = Intent(this , SelectTagActivity::class.java)
             intent.putExtra("stateTagList",stateTagList)
-            startActivityForResult(intent,requestCode)
+            launcher.launch(intent)
 
             true
         }
