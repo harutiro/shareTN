@@ -35,8 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     var tagState:Boolean = true
 
-   // val stateTagList:MutableList<String> = mutableListOf()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -150,13 +148,12 @@ class MainActivity : AppCompatActivity() {
         val mutableNewPerson: MutableList<MainDate> = mutableListOf()
         val stateTagList = mutableListOf<String>()
 
-        Log.d("debug","===========================================")
         //選択されているタグの選択
         for(i in serchTagChipGroup?.checkedChipIds!!){
             stateTagList.add(findViewById<Chip>(i).text.toString())
-            Log.d("debug",findViewById<Chip>(i).text.toString())
         }
 
+        //アーカイブの消去
         if(stateTagList.contains("アーカイブ")){
             mutablePerson = mutablePerson.filter{it.archive}.toMutableList()
             stateTagList.remove("アーカイブ")
