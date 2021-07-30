@@ -159,6 +159,22 @@ class EditActivity : AppCompatActivity() {
 
         }
 
+        findViewById<ImageButton>(R.id.shareButton).setOnClickListener{
+            var putText = "【タイトル】\n"
+            putText += mainEdit?.text.toString() + "\n"
+            putText += "【URL】\n"
+            putText += subEdit?.text.toString() + "\n"
+            putText += "【内容】\n"
+            putText += memoEdit?.text.toString()
+
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT,putText )
+            }
+            startActivity(intent)
+        }
+
 
 
 

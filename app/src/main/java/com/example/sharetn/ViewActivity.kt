@@ -105,6 +105,22 @@ class ViewActivity : AppCompatActivity() {
 
         }
 
+        findViewById<ImageButton>(R.id.viewShateButton).setOnClickListener{
+            var putText = "【タイトル】\n"
+            putText += mainText?.text.toString() + "\n"
+            putText += "【URL】\n"
+            putText += subText?.text.toString() + "\n"
+            putText += "【内容】\n"
+            putText += memoText?.text.toString()
+
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT,putText )
+            }
+            startActivity(intent)
+        }
+
         //データのはめ込み
         val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
 
