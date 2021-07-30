@@ -29,7 +29,7 @@
         android:ems="10"
         android:focusableInTouchMode="true"
         android:gravity="start|top"
-        android:hint="Create new tag"
+        android:hint="新しいタグを作成"
         android:inputType="text"
         android:scrollbars="vertical"
         android:singleLine="true"
