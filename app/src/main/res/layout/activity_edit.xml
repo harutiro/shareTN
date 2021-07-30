@@ -191,7 +191,7 @@
             app:srcCompat="@drawable/delete_black_24dp__1_" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/shareButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

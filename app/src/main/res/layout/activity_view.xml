@@ -15,7 +15,7 @@
         tools:context=".EditActivity">
 
         <ScrollView
-            android:id="@+id/scrollView2"
+            android:id="@+id/viewShareButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/view"
@@ -167,7 +167,7 @@
             android:clickable="true"
             android:contentDescription="add"
             android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+            app:layout_constraintBottom_toBottomOf="@+id/viewShareButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/edit_black_24dp" />
 
@@ -180,7 +180,7 @@
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:layout_constraintTop_toBottomOf="@+id/viewShareButton"
             app:srcCompat="@drawable/delete_black_24dp__1_" />
 
         <ImageButton
@@ -192,7 +192,7 @@
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:layout_constraintTop_toBottomOf="@+id/viewShareButton"
             app:srcCompat="@drawable/share_black_24dp" />
 
         <TextView
@@ -214,7 +214,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintEnd_toStartOf="@+id/dayText"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:layout_constraintTop_toBottomOf="@+id/viewShareButton"
             app:srcCompat="@drawable/today_black_24dp"
             app:tint="@color/textBlock" />
 
