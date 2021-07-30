@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
@@ -53,9 +53,6 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
             findViewById<EditText>(R.id.searchEditText).setText("")
             recyclerViewGo()
-        }
-        findViewById<Button>(R.id.testButton).setOnClickListener{
-
         }
 
         val rView = findViewById<RecyclerView>(R.id.RView)
@@ -143,6 +140,15 @@ class MainActivity : AppCompatActivity() {
         //Realmデータや、検索枠の取得
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
         var mutablePerson: MutableList<MainDate> = realm.where(MainDate::class.java).findAll().toMutableList()
+
+        Log.d("debug",mutablePerson.size.toString())
+        if(mutablePerson.size > 0){
+            findViewById<ImageView>(R.id.hintImage).visibility = GONE
+            findViewById<TextView>(R.id.hintText).visibility = GONE
+        }else{
+            findViewById<ImageView>(R.id.hintImage).visibility = VISIBLE
+            findViewById<TextView>(R.id.hintText).visibility = VISIBLE
+        }
 
         //一時保存配列の作成
         val mutableNewPerson: MutableList<MainDate> = mutableListOf()
