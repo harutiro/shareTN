@@ -23,6 +23,8 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -67,8 +69,6 @@ class EditActivity : AppCompatActivity() {
 
     var stateEditMode: Boolean = false
 
-
-//    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -329,23 +329,14 @@ class EditActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode:Int, resultCode: Int, date: Intent?) {
-        super.onActivityResult(requestCode, resultCode, date)
+    //    タグインテントにおける戻りデータの受け取り部分
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result: ActivityResult ->
+        if(result.resultCode == Activity.RESULT_OK){
+            val intent = result.data
 
-
-        if(requestCode == 1000) {
-            when (resultCode) {
-                Activity.RESULT_OK -> {
-                    stateTagList = date?.getStringArrayListExtra("stateTagList")
-
-                    setChip()
-                }
-
-                else -> {
-                }
-            }
+            stateTagList = intent?.getStringArrayListExtra("stateTagList")
+            setChip()
         }
-
     }
 
     //　アプリバーの部分
@@ -381,7 +372,7 @@ class EditActivity : AppCompatActivity() {
             //タグへのインテント
             val intent = Intent(this , SelectTagActivity::class.java)
             intent.putExtra("stateTagList",stateTagList)
-            startActivityForResult(intent,requestCode)
+            launcher.launch(intent)
 
             true
         }
