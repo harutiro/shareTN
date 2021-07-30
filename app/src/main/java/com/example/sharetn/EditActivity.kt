@@ -95,13 +95,6 @@ class EditActivity : AppCompatActivity() {
         id = intent.getStringExtra("id")
         stateEditMode = intent.getBooleanExtra("editMode",false)
 
-        //============================タグセレクトへのインテント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-        findViewById<TextView>(R.id.tagSelecetTextView).setOnClickListener{
-            val intent = Intent(this , SelectTagActivity::class.java)
-            intent.putExtra("stateTagList",stateTagList)
-            startActivityForResult(intent,requestCode)
-        }
-
         //データのはめ込み
         if (id == null){
 
@@ -346,9 +339,9 @@ class EditActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
             //ボトムシートを上に浮き上がらせる
-            val view = findViewById<ConstraintLayout>(R.id.edit_bottom_sheet)
-            val mBottomSheetBehavior = BottomSheetBehavior.from(view)
-            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+//            val view = findViewById<ConstraintLayout>(R.id.edit_bottom_sheet)
+//            val mBottomSheetBehavior = BottomSheetBehavior.from(view)
+//            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
             true
         }
@@ -367,6 +360,15 @@ class EditActivity : AppCompatActivity() {
             }
 
             invalidateOptionsMenu()
+
+            true
+        }
+
+        R.id.tag_settings ->{
+            //タグへのインテント
+            val intent = Intent(this , SelectTagActivity::class.java)
+            intent.putExtra("stateTagList",stateTagList)
+            startActivityForResult(intent,requestCode)
 
             true
         }

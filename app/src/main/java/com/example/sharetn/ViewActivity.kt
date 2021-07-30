@@ -83,13 +83,6 @@ class ViewActivity : AppCompatActivity() {
             copyToClipboard(memoText?.text.toString())
         }
 
-        //============================タグセレクトへのインテント＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-        findViewById<TextView>(R.id.viewTagSelecetTextView).setOnClickListener{
-            val intent = Intent(this , SelectTagActivity::class.java)
-            intent.putExtra("stateTagList",stateTagList)
-            startActivityForResult(intent,requestCode)
-        }
-
         findViewById<FloatingActionButton>(R.id.editFAB).setOnClickListener{
             val intent = Intent(this,EditActivity::class.java)
             intent.putExtra("id",id)
@@ -212,6 +205,15 @@ class ViewActivity : AppCompatActivity() {
             }
 
             invalidateOptionsMenu()
+
+            true
+        }
+
+        R.id.tag_settings ->{
+            //タグへのインテント
+            val intent = Intent(this , SelectTagActivity::class.java)
+            intent.putExtra("stateTagList",stateTagList)
+            startActivityForResult(intent,requestCode)
 
             true
         }
