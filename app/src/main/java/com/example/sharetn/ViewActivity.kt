@@ -164,23 +164,7 @@ class ViewActivity : AppCompatActivity() {
 
     }
 
-//    override fun onActivityResult(requestCode:Int, resultCode: Int, date: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, date)
-//
-//
-//        if(requestCode == 1000) {
-//            when (resultCode) {
-//                Activity.RESULT_OK -> {
-//
-//                }
-//
-//                else -> {
-//                }
-//            }
-//        }
-//
-//    }
-
+//    タグインテントにおける戻りデータの受け取り部分
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result: ActivityResult ->
         if(result.resultCode == Activity.RESULT_OK){
             val intent = result.data
