@@ -5,32 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:contentDescription="add"
-        android:focusable="true"
-        app:layout_anchor="@id/view_bottom_sheet"
-        app:layout_anchorGravity="top|end"
-        app:srcCompat="@drawable/edit_black_24dp" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/viewConstraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
+        app:layout_anchor="@+id/viewConstraintLayout"
+        app:layout_anchorGravity="center"
         tools:context=".EditActivity">
 
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -80,16 +73,6 @@
                     app:shapeAppearanceOverlay="@style/roundimageview" />
 
                 <TextView
-                    android:id="@+id/dayText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
                     android:id="@+id/mainText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -105,7 +88,7 @@
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/mainIcon"
-                    app:layout_constraintTop_toBottomOf="@+id/dayText" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/subText"
@@ -125,17 +108,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/subIcon"
                     app:layout_constraintTop_toBottomOf="@+id/mainText" />
-
-                <ImageView
-                    android:id="@+id/dayIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:radius="10dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/dayText"
-                    app:layout_constraintEnd_toStartOf="@+id/dayText"
-                    app:layout_constraintTop_toTopOf="@+id/dayText"
-                    app:srcCompat="@drawable/today_black_24dp"
-                    app:tint="@color/textBlock" />
 
                 <ImageView
                     android:id="@+id/subIcon"
@@ -177,99 +149,74 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view_bottom_sheet"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/shape_rounded_corners_10dp"
-        android:backgroundTint="@color/white"
-        android:paddingBottom="24dp"
-        app:behavior_peekHeight="0dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        tools:context=".BottomSheetFragment">
-
         <View
-            android:id="@+id/view3"
-            android:layout_width="32dp"
-            android:layout_height="2dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/textLightGray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/itemRemoveIcon"
-            android:layout_width="50dp"
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:contentDescription="add"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/edit_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/removeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
             app:srcCompat="@drawable/delete_black_24dp__1_" />
 
-        <TextView
-            android:id="@+id/itemRemoveText"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:gravity="center|left"
-            android:text="消去"
-            app:layout_constraintBottom_toBottomOf="@+id/itemRemoveIcon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/itemRemoveIcon"
-            app:layout_constraintTop_toTopOf="@+id/itemRemoveIcon" />
-
-        <ImageView
-            android:id="@+id/shareIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemRemoveIcon"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
             app:srcCompat="@drawable/share_black_24dp" />
 
         <TextView
-            android:id="@+id/shereText"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:gravity="center|left"
-            android:text="共有"
-            app:layout_constraintBottom_toBottomOf="@+id/shareIcon"
+            android:id="@+id/dayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/dayIcon"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/shareIcon"
-            app:layout_constraintTop_toTopOf="@+id/shareIcon" />
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/dayIcon" />
 
         <ImageView
-            android:id="@+id/viewTagIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shareIcon"
-            app:srcCompat="@drawable/label_black_24dp" />
-
-        <TextView
-            android:id="@+id/viewTagSelecetTextView"
-            android:layout_width="0dp"
+            android:id="@+id/dayIcon"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:gravity="center|left"
-            android:text="タグの設定"
-            app:layout_constraintBottom_toBottomOf="@+id/viewTagIcon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/viewTagIcon"
-            app:layout_constraintTop_toTopOf="@+id/viewTagIcon" />
+            android:radius="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/view"
+            app:layout_constraintEnd_toStartOf="@+id/dayText"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+            app:srcCompat="@drawable/today_black_24dp"
+            app:tint="@color/textBlock" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
@@ -93,7 +94,7 @@ class ViewActivity : AppCompatActivity() {
             finish()
         }
 
-        findViewById<TextView>(R.id.itemRemoveText).setOnClickListener{
+        findViewById<ImageButton>(R.id.removeButton).setOnClickListener{
             val person = realm.where(MainDate::class.java).equalTo("id",id).findFirst()
 
             realm.executeTransaction {
@@ -178,10 +179,6 @@ class ViewActivity : AppCompatActivity() {
 //　アプリバーの部分
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
-            //ボトムシートを上に浮き上がらせる
-            val view = findViewById<ConstraintLayout>(R.id.view_bottom_sheet)
-            val mBottomSheetBehavior = BottomSheetBehavior.from(view)
-            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
             true
         }
