@@ -5,10 +5,13 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sharetn.date.MainDate
 import com.example.sharetn.date.OriginTagDateClass
@@ -35,6 +38,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         val imageView:ImageView = view.findViewById(R.id.imageView)
         val container: ConstraintLayout = view.findViewById(R.id.constraint)
         val itemTagChipGroup: ChipGroup = view.findViewById(R.id.itemTagChipGroup)
+        val memoTextView:TextView = view.findViewById(R.id.memoTextView)
 
 
 
@@ -58,8 +62,14 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         holder.iconImageView.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
         holder.mainTextView.text = item.mainText
         holder.subTextView.text = item.subText
+        holder.memoTextView.text = item.memoText
 //        holder.tagListView
 //        holder.moreButton
+
+        if(!(Regex("http://").containsMatchIn(item.subText) || Regex("https://").containsMatchIn(item.subText))) {
+            holder.subTextView.visibility = GONE
+        }
+
 
 //        画像の結びつけ
         if(item.image != ""){

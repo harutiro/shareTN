@@ -9,14 +9,15 @@
     android:layout_marginLeft="16dp"
     android:layout_marginTop="16dp"
     android:layout_marginRight="16dp"
-    android:paddingEnd="8dp"
+    android:padding="0dp"
     card_view:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="4dp"
+        android:paddingLeft="0dp">
 
         <ImageView
             android:id="@+id/iconImageView"
@@ -50,8 +51,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="bottom"
-            android:text="URL"
             android:maxLines="1"
+            android:text="URL"
             android:textColor="@color/textLightGray"
             android:textSize="12sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
@@ -63,43 +64,55 @@
             android:id="@+id/moreButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            card_view:layout_constraintBottom_toBottomOf="@+id/subTextView"
+            card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintStart_toEndOf="@+id/mainTextView"
-            card_view:layout_constraintTop_toTopOf="@+id/mainTextView"
+            card_view:layout_constraintTop_toTopOf="@+id/iconImageView"
             card_view:srcCompat="@drawable/ic_baseline_more_vert_24"
             card_view:tint="@color/textBlock" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="240dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:padding="4dp"
+            android:layout_width="88dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:scaleType="fitCenter"
-            card_view:layout_constraintEnd_toEndOf="parent"
+            android:visibility="visible"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/iconImageView"
-            card_view:shapeAppearanceOverlay="@style/roundimageview"
+            card_view:layout_constraintVertical_bias="0.0"
             tools:srcCompat="@tools:sample/avatars" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/itemTagChipGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/imageView">
+            card_view:layout_constraintTop_toBottomOf="@+id/imageView"
+            card_view:layout_constraintVertical_bias="1.0">
 
         </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/memoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            card_view:layout_constraintBottom_toTopOf="@+id/itemTagChipGroup"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/imageView"
+            card_view:layout_constraintTop_toBottomOf="@+id/iconImageView"
+            card_view:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
