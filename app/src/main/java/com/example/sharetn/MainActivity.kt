@@ -3,6 +3,8 @@ package com.example.sharetn
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -17,6 +19,7 @@ import com.example.sharetn.date.OriginTagDateClass
 import com.example.sharetn.dousa.JapaneseChange
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import java.util.*
 
@@ -54,9 +57,7 @@ class MainActivity : AppCompatActivity() {
             recyclerViewGo()
         }
         findViewById<Button>(R.id.testButton).setOnClickListener{
-            tagState = true
-            val intent = Intent(this,EditTagActivity::class.java)
-            startActivity(intent)
+
         }
 
         val rView = findViewById<RecyclerView>(R.id.RView)
@@ -205,5 +206,35 @@ class MainActivity : AppCompatActivity() {
         adapter?.setList(mutableNewPerson)
 
 
+    }
+
+    //　アプリバーの部分
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_settings -> {
+            Snackbar.make(findViewById(android.R.id.content),"現在設定できるものはありません", Snackbar.LENGTH_SHORT).show()
+
+            true
+        }
+
+        R.id.create_tag_settings ->{
+            tagState = true
+            val intent = Intent(this,EditTagActivity::class.java)
+            startActivity(intent)
+
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_activity_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
     }
 }
