@@ -52,8 +52,10 @@ class EditTagActivity : AppCompatActivity(){
             }
 
             if(editTextTextMultiLine.text.toString() != ""){
-                val new = realm.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
-                realm.executeTransaction { new?.name = editTextTextMultiLine.text.toString() }
+                realm.executeTransaction {
+                    val new = realm.createObject(OriginTagDateClass::class.java,UUID.randomUUID().toString())
+                    new?.name = editTextTextMultiLine.text.toString()
+                }
             }
 
             editTextTextMultiLine.setText("")
