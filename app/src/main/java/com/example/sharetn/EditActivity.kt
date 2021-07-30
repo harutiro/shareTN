@@ -20,6 +20,7 @@ import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -144,6 +145,18 @@ class EditActivity : AppCompatActivity() {
             }else{
                 save()
             }
+        }
+
+//    ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝消去部分
+        findViewById<ImageButton>(R.id.removeButton2).setOnClickListener{
+            val person = realm.where(MainDate::class.java).equalTo("id",id).findFirst()
+
+            realm.executeTransaction {
+                person?.deleteFromRealm()
+            }
+
+            finish()
+
         }
 
 
