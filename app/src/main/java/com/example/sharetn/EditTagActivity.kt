@@ -35,6 +35,8 @@ class EditTagActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_tag)
 
+        title = "タグの編集"
+
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         container = findViewById(R.id.constraintEditTag)
 

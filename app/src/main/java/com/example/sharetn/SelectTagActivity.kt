@@ -25,6 +25,8 @@ class SelectTagActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_tag)
 
+        title = "タグの選択"
+
         stateTagList = intent.getStringArrayListExtra("stateTagList") as ArrayList<String>
 
         val rView = findViewById<RecyclerView>(R.id.selectTagRV)
