@@ -183,20 +183,19 @@ class EditActivity : AppCompatActivity() {
             val extras = intent.extras
             val comeText = extras!!.getCharSequence(Intent.EXTRA_TEXT).toString()
 
-            subEdit?.visibility = VISIBLE
-            subIcon?.visibility = VISIBLE
-
-            //URLや文字の受け取り
-            val domein: String1 = comeText.removePrefix("https://").removePrefix("http://").split("/")[0]
-
-            findViewById<EditText>(R.id.subEdit).setText(comeText)
-            findViewById<EditText>(R.id.mainEdit).setText("NowLoading...")
-
-
-
+            findViewById<EditText>(R.id.mainEdit).setText(comeText)
 
             //URLで動く部分
             if(Regex("http://").containsMatchIn(comeText) || Regex("https://").containsMatchIn(comeText)) {
+
+                //URLや文字の受け取り
+                val domein: String1 = comeText.removePrefix("https://").removePrefix("http://").split("/")[0]
+
+                findViewById<EditText>(R.id.subEdit).setText(comeText)
+                findViewById<EditText>(R.id.mainEdit).setText("NowLoading...")
+
+                subEdit?.visibility = VISIBLE
+                subIcon?.visibility = VISIBLE
 
                 //faviconの取得
                 Picasso.get()
