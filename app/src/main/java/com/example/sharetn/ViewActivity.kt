@@ -222,7 +222,7 @@ class ViewActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.edit_activity_menu, menu)
+        inflater.inflate(R.menu.view_activity_menu, menu)
 
         val menuArchive = menu?.findItem(R.id.archive_settings)
         val person = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
