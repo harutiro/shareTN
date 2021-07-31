@@ -86,7 +86,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
             realm.executeTransaction{
                 person?.archive = !item.archive
             }
-            listener.onReView(item.archive)
+            listener.onArchiveReView(item.archive)
 
         }
 
@@ -131,7 +131,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
     // RecyclerViewの要素をタップするためのもの
     interface OnItemClickListner{
         fun onItemClick(item: MainDate)
-        fun onReView(state: Boolean)
+        fun onArchiveReView(state: Boolean)
     }
 
     fun reView(){
