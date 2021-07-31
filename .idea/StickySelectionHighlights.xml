@@ -53,31 +53,6 @@
             </PaintGroupHighlightMap>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/build/generated/source/kapt/debug/io/realm/com_example_sharetn_date_MainDateRealmProxy.java">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/app/build/intermediates/packaged_manifests/debug/AndroidManifest.xml">
           <value>
             <PaintGroupHighlightMap>
@@ -453,31 +428,6 @@
             </PaintGroupHighlightMap>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/ViewActivity.kt">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/aa.java">
           <value>
             <PaintGroupHighlightMap>
@@ -503,82 +453,7 @@
             </PaintGroupHighlightMap>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/adapter/MainRecyclerViewAdapter.kt">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/adapter/OriginTagRecyclerViewAdapter.kt">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/adapter/OriginTagSelectRecyclerViewAdapter.kt">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/date/MainDate.kt">
           <value>
             <PaintGroupHighlightMap>
               <option name="paintGroups">
@@ -679,31 +554,6 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/dousa/JapaneseChange.kt">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/java/com/example/sharetn/dousa/MyArchiveUndoListener.kt">
           <value>
             <PaintGroupHighlightMap>
               <option name="paintGroups">
@@ -854,31 +704,6 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_select_tag.xml">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/layout/activity_view.xml">
           <value>
             <PaintGroupHighlightMap>
               <option name="paintGroups">
@@ -1054,81 +879,6 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/app/src/main/res/menu/edit_activity_menu.xml">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/menu/main_activity_menu.xml">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/menu/view_activity_menu.xml">
-          <value>
-            <PaintGroupHighlightMap>
-              <option name="paintGroups">
-                <map>
-                  <entry key="0">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="1">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                  <entry key="2">
-                    <value>
-                      <EditorHighlightsForPaintGroup />
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </PaintGroupHighlightMap>
-          </value>
-        </entry>
-        <entry key="$PROJECT_DIR$/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml">
           <value>
             <PaintGroupHighlightMap>
               <option name="paintGroups">
