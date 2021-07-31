@@ -34,11 +34,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:maxLines="1"
             android:text="テストコメント"
             android:textColor="@color/textBlock"
             android:textSize="20sp"
             card_view:layout_constraintBottom_toTopOf="@+id/subTextView"
+            card_view:layout_constraintEnd_toStartOf="@+id/imageButton"
             card_view:layout_constraintStart_toEndOf="@+id/iconImageView"
             card_view:layout_constraintTop_toTopOf="@+id/iconImageView" />
 
@@ -47,12 +49,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:gravity="bottom"
             android:maxLines="1"
             android:text="URL"
             android:textColor="@color/textLightGray"
             android:textSize="12sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+            card_view:layout_constraintEnd_toStartOf="@+id/imageButton"
             card_view:layout_constraintStart_toEndOf="@+id/iconImageView"
             card_view:layout_constraintTop_toBottomOf="@+id/mainTextView" />
 
@@ -103,17 +107,29 @@
             android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+            card_view:layout_constraintEnd_toStartOf="@+id/imageButton2"
+            card_view:layout_constraintTop_toTopOf="@+id/iconImageView"
             card_view:srcCompat="@drawable/delete_black_24dp__1_"
-            tools:layout_editor_absoluteX="250dp"
-            tools:layout_editor_absoluteY="7dp" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="@+id/iconImageView"
             card_view:srcCompat="@drawable/archive_black_24dp"
-            tools:layout_editor_absoluteX="315dp"
-            tools:layout_editor_absoluteY="7dp" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
