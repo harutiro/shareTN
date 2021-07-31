@@ -66,13 +66,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
-            override fun onArchiveReView(item:Boolean) {
-                if(item){
-                    Snackbar.make(findViewById(android.R.id.content),"アーカイブしました", Snackbar.LENGTH_SHORT).show()
-                }else{
-                    Snackbar.make(findViewById(android.R.id.content),"アーカイブを取り消しました", Snackbar.LENGTH_SHORT).show()
-                }
-
+            override fun onReView(moji:String) {
+                Snackbar.make(findViewById(android.R.id.content),moji, Snackbar.LENGTH_SHORT).show()
                 recyclerViewGo()
             }
         })

@@ -86,7 +86,21 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
             realm.executeTransaction{
                 person?.archive = !item.archive
             }
-            listener.onArchiveReView(item.archive)
+
+            if(item.archive){
+                listener.onReView("アーカイブしました")
+            }else{
+                listener.onReView("アーカイブを解除しました")
+           }
+
+        }
+
+//        消去の動作
+        holder.itemRemoveButton.setOnClickListener{
+            realm.executeTransaction {
+                person?.deleteFromRealm()
+            }
+            listener.onReView("消去しました")
 
         }
 
@@ -131,7 +145,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
     // RecyclerViewの要素をタップするためのもの
     interface OnItemClickListner{
         fun onItemClick(item: MainDate)
-        fun onArchiveReView(state: Boolean)
+        fun onReView(moji: String)
     }
 
     fun reView(){
