@@ -214,7 +214,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        adapter?.setList(mutableNewPerson)
+        adapter?.setList(mutableNewPerson.distinct())
 
 
     }
