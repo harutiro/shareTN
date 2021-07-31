@@ -30,36 +30,30 @@
         android:focusableInTouchMode="true"
         android:gravity="start|top"
         android:hint="新しいタグを作成"
+        app:hintTextColor="#757575"
         android:inputType="text"
+        android:minHeight="48dp"
         android:scrollbars="vertical"
         android:singleLine="true"
-        app:layout_constraintEnd_toStartOf="@+id/EditTagSaveButton"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/EditTagSaveButton"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:padding="8dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextMultiLine"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextMultiLine"
-        app:srcCompat="@drawable/close_black_24dp" />
 
     <ImageButton
         android:id="@+id/EditTagSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:minWidth="48dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextTextMultiLine"
-        app:srcCompat="@drawable/done_black_24dp" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/done_black_24dp"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        android:contentDescription="TODO" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rVTagEdit"

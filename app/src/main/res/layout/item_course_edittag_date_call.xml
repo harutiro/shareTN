@@ -15,30 +15,16 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
+        android:focusableInTouchMode="true"
         android:gravity="start|top"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:scrollbars="vertical"
         android:singleLine="true"
-        android:focusableInTouchMode="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/itemTagSaveButton"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dellEditButton"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/itemTagSaveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:padding="12dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        app:layout_constraintBottom_toBottomOf="@+id/itemEditTagText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/itemEditTagText"
-        app:srcCompat="@drawable/done_black_24dp"
-        app:tint="@color/textBlock" />
 
     <ImageButton
         android:id="@+id/dellEditButton"
