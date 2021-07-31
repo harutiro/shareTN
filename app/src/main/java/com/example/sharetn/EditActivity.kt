@@ -138,7 +138,7 @@ class EditActivity : AppCompatActivity() {
 
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
         findViewById<FloatingActionButton>(R.id.saveFAB).setOnClickListener {
-            if (mainEdit?.text.toString() == "") {
+            if (mainEdit?.text.toString().isBlank()) {
                 val snackbar = Snackbar.make(findViewById(android.R.id.content),"タイトルが入力されていません。", Snackbar.LENGTH_SHORT)
                 snackbar.view.setBackgroundResource(R.color.error)
                 snackbar.show()
