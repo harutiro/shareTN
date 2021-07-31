@@ -200,7 +200,10 @@ class MainActivity : AppCompatActivity() {
                 tempItemTagList.add(tag.copyId.toString())
             }
             for( item in stateTagList){
-                realmStateResult.add(realm.where(OriginTagDateClass::class.java).equalTo("name",item).findFirst()?.id.toString())
+                realmStateResult.add(realm.where(OriginTagDateClass::class.java)
+                    .equalTo("name",item)
+                    .findFirst()
+                    ?.id.toString())
             }
             if(tempItemTagList.containsAll(realmStateResult)) mutableNewPerson.add(data)
 
