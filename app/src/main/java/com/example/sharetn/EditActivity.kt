@@ -69,6 +69,8 @@ class EditActivity : AppCompatActivity() {
 
     var stateEditMode: Boolean = false
 
+    var archive :Boolean = false
+
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,9 +120,10 @@ class EditActivity : AppCompatActivity() {
             memoEdit?.setText(item?.memoText)
             mainEdit?.setText(item?.mainText)
             subEdit?.setText(item?.subText)
+            archive = item?.archive!!
 
             //＝＝＝＝＝＝＝＝＝＝＝＝タグのはめ込み部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-            for(i in item?.tagList!!){
+            for(i in item.tagList!!){
                 stateTagList?.add(i.copyId.toString())
             }
             setChip()
@@ -282,6 +285,7 @@ class EditActivity : AppCompatActivity() {
             new?.subText = subEdit?.text.toString()
             new?.memoText = memoEdit?.text.toString()
             new?.image = ""
+            new?.archive = archive
 
             //=====================日付==========================
             val date = Date(System.currentTimeMillis())
@@ -366,13 +370,10 @@ class EditActivity : AppCompatActivity() {
         }
 
         R.id.archive_settings -> {
-            val item = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
 
-            realm.executeTransaction {
-                item?.archive = !item?.archive!!
-            }
+            archive = !archive
 
-            if(item?.archive == true){
+            if(archive){
                 Snackbar.make(findViewById(android.R.id.content),"アーカイブしました", Snackbar.LENGTH_SHORT).show()
             }else{
                 Snackbar.make(findViewById(android.R.id.content),"アーカイブを解除しました", Snackbar.LENGTH_SHORT).show()
@@ -404,9 +405,8 @@ class EditActivity : AppCompatActivity() {
         inflater.inflate(R.menu.edit_activity_menu, menu)
 
         val menuArchive = menu?.findItem(R.id.archive_settings)
-        val person = realm.where(MainDate::class.java).equalTo("id", id).findFirst()
 
-        if(person?.archive == true){
+        if(archive){
             menuArchive?.setIcon(R.drawable.unarchive_black_24dp)
         }else{
             menuArchive?.setIcon(R.drawable.archive_black_24dp)
