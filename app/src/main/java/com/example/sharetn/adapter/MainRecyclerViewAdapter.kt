@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +19,7 @@ import com.example.sharetn.date.OriginTagDateClass
 import com.example.sharetn.R
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 
 class MainRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):
@@ -39,6 +41,8 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         val container: ConstraintLayout = view.findViewById(R.id.constraint)
         val itemTagChipGroup: ChipGroup = view.findViewById(R.id.itemTagChipGroup)
         val memoTextView:TextView = view.findViewById(R.id.memoTextView)
+        val archiveButton: ImageButton = view.findViewById(R.id.archiveButton)
+        val itemRemoveButton: ImageButton = view.findViewById(R.id.itemRemoveButton)
 
 
 
@@ -53,6 +57,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
     //itemsのposition番目の要素をviewに表示するコード
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
+        val person = realm.where(MainDate::class.java).equalTo("id",item.id).findFirst()
 
         // MainActivity側でタップしたときの動作を記述するため，n番目の要素を渡す
         holder.container.setOnClickListener { listener.onItemClick(item) }
@@ -63,12 +68,28 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         holder.mainTextView.text = item.mainText
         holder.subTextView.text = item.subText
         holder.memoTextView.text = item.memoText
-//        holder.tagListView
-//        holder.moreButton
 
+//        URLを表示するか判断するところ
         if(!(Regex("http://").containsMatchIn(item.subText) || Regex("https://").containsMatchIn(item.subText))) {
             holder.subTextView.visibility = GONE
         }
+
+//        アーカイブの見た目の判断
+        if(!item.archive){
+            holder.archiveButton.setImageResource(R.drawable.archive_black_24dp)
+        }else{
+            holder.archiveButton.setImageResource(R.drawable.unarchive_black_24dp)
+        }
+
+//        アーカイブの動作
+        holder.archiveButton.setOnClickListener{
+            realm.executeTransaction{
+                person?.archive = !item.archive
+            }
+            listener.onReView(item.archive)
+
+        }
+
 
 
 //        画像の結びつけ
@@ -110,6 +131,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
     // RecyclerViewの要素をタップするためのもの
     interface OnItemClickListner{
         fun onItemClick(item: MainDate)
+        fun onReView(state: Boolean)
     }
 
     fun reView(){

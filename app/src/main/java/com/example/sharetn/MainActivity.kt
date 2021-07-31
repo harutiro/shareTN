@@ -65,6 +65,17 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("id", item.id)
                 startActivity(intent)
             }
+
+            override fun onReView(item:Boolean) {
+                if(item){
+                    Snackbar.make(findViewById(android.R.id.content),"アーカイブしました", Snackbar.LENGTH_SHORT).show()
+                }else{
+                    Snackbar.make(findViewById(android.R.id.content),"アーカイブを取り消しました", Snackbar.LENGTH_SHORT).show()
+
+                }
+
+                recyclerViewGo()
+            }
         })
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter

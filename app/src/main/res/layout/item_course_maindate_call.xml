@@ -40,7 +40,7 @@
             android:textColor="@color/textBlock"
             android:textSize="20sp"
             card_view:layout_constraintBottom_toTopOf="@+id/subTextView"
-            card_view:layout_constraintEnd_toStartOf="@+id/imageButton"
+            card_view:layout_constraintEnd_toStartOf="@+id/itemRemoveButton"
             card_view:layout_constraintStart_toEndOf="@+id/iconImageView"
             card_view:layout_constraintTop_toTopOf="@+id/iconImageView" />
 
@@ -56,7 +56,7 @@
             android:textColor="@color/textLightGray"
             android:textSize="12sp"
             card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
-            card_view:layout_constraintEnd_toStartOf="@+id/imageButton"
+            card_view:layout_constraintEnd_toStartOf="@+id/itemRemoveButton"
             card_view:layout_constraintStart_toEndOf="@+id/iconImageView"
             card_view:layout_constraintTop_toBottomOf="@+id/mainTextView" />
 
@@ -104,7 +104,7 @@
             card_view:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/itemRemoveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -112,13 +112,13 @@
             android:minWidth="48dp"
             android:minHeight="48dp"
             card_view:layout_constraintBottom_toBottomOf="@+id/iconImageView"
-            card_view:layout_constraintEnd_toStartOf="@+id/imageButton2"
+            card_view:layout_constraintEnd_toStartOf="@+id/archiveButton"
             card_view:layout_constraintTop_toTopOf="@+id/iconImageView"
             card_view:srcCompat="@drawable/delete_black_24dp__1_"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/archiveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
