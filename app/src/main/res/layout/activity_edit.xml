@@ -38,6 +38,7 @@
                     android:gravity="start|top"
                     android:hint="メモ"
                     android:inputType="textMultiLine"
+                    android:minHeight="48dp"
                     android:scrollbars="vertical"
                     android:textColor="@color/textBlock"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -58,15 +59,19 @@
                     android:id="@+id/image"
                     android:layout_width="0dp"
                     android:layout_height="240dp"
+                    android:layout_centerInParent="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
-                    android:background="@drawable/ramen2"
-                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/memoEdit"
-                    app:shapeAppearanceOverlay="@style/roundimageview" />
+                    app:shapeAppearanceOverlay="@style/roundimageview"
+
+                    app:srcCompat="@drawable/ramen2" />
 
                 <EditText
                     android:id="@+id/mainEdit"
@@ -104,10 +109,12 @@
                     android:singleLine="true"
                     android:textColor="@color/textLightGray"
                     android:textSize="16sp"
+                    android:minHeight="48dp"
                     app:layout_constraintBottom_toTopOf="@+id/memoEdit"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/subIcon"
-                    app:layout_constraintTop_toBottomOf="@+id/mainEdit" />
+                    app:layout_constraintTop_toBottomOf="@+id/mainEdit"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                 <ImageView
                     android:id="@+id/subIcon"
@@ -184,11 +191,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view2"
-            app:srcCompat="@drawable/delete_black_24dp__1_" />
+            app:srcCompat="@drawable/delete_black_24dp__1_"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/shareButton"
@@ -196,11 +206,14 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/view2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view2"
-            app:srcCompat="@drawable/share_black_24dp" />
+            app:srcCompat="@drawable/share_black_24dp"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/saveFAB"
