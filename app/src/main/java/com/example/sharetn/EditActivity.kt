@@ -146,6 +146,7 @@ class EditActivity : AppCompatActivity() {
                 snackbar.view.setBackgroundResource(R.color.error)
                 snackbar.show()
             }else{
+//                Snackbar.make(findViewById(android.R.id.content),"保存しました。", Snackbar.LENGTH_SHORT).show()
                 save()
             }
         }
