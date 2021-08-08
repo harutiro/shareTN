@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import app.makino.harutiro.clips.adapter.OriginTagRecyclerViewAdapter
 import app.makino.harutiro.clips.date.OriginTagDateClass
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmResults
@@ -108,5 +109,12 @@ class EditTagActivity : AppCompatActivity(){
         realm.close()
         super.onDestroy()
 
+    }
+
+    //戻るボタンの処理
+    override fun onBackPressed() {
+        // 行いたい処理
+        container.requestFocus()
+        finish()
     }
 }
