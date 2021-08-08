@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
@@ -17,6 +18,7 @@ import app.makino.harutiro.clips.adapter.MainRecyclerViewAdapter
 import app.makino.harutiro.clips.date.MainDate
 import app.makino.harutiro.clips.date.OriginTagDateClass
 import app.makino.harutiro.clips.dousa.JapaneseChange
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
@@ -248,5 +250,14 @@ class MainActivity : AppCompatActivity() {
         inflater.inflate(R.menu.main_activity_menu, menu)
 
         return super.onCreateOptionsMenu(menu)
+    }
+
+    //戻るボタンの処理
+    override fun onBackPressed() {
+        // 行いたい処理
+        //ボトムシートを上に浮き上がらせる
+        val view = findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.bottom_sheet)
+        val mBottomSheetBehavior = BottomSheetBehavior.from(view)
+        mBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 }
