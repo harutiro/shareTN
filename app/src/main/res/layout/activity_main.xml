@@ -46,6 +46,7 @@
             android:text="追加したメモはココに表示されます"
             android:textColor="@color/textLightGray"
             android:textSize="20sp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hintImage" />

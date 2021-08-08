@@ -146,16 +146,7 @@ class MainActivity : AppCompatActivity() {
 
         //Realmデータや、検索枠の取得
         val word = findViewById<EditText>(R.id.searchEditText).text.toString()
-        var mutablePerson: MutableList<MainDate> = realm.where(MainDate::class.java).findAll().toMutableList()
-
-        Log.d("debug",mutablePerson.size.toString())
-        if(mutablePerson.size > 0){
-            findViewById<ImageView>(R.id.hintImage).visibility = GONE
-            findViewById<TextView>(R.id.hintText).visibility = GONE
-        }else{
-            findViewById<ImageView>(R.id.hintImage).visibility = VISIBLE
-            findViewById<TextView>(R.id.hintText).visibility = VISIBLE
-        }
+        var realmResalt: MutableList<MainDate> = realm.where(MainDate::class.java).findAll().toMutableList()
 
         //一時保存配列の作成
         val mutableNewPerson: MutableList<MainDate> = mutableListOf()
@@ -168,12 +159,21 @@ class MainActivity : AppCompatActivity() {
 
         //アーカイブの消去
         if(stateTagList.contains("アーカイブ")){
-            mutablePerson = mutablePerson.filter{it.archive}.toMutableList()
+            realmResalt = realmResalt.filter{it.archive}.toMutableList()
             stateTagList.remove("アーカイブ")
         }else{
-            mutablePerson = mutablePerson.filter{!it.archive}.toMutableList()
+            realmResalt = realmResalt.filter{!it.archive}.toMutableList()
         }
 
+        if(realmResalt.size > 0){
+            findViewById<ImageView>(R.id.hintImage).visibility = GONE
+            findViewById<TextView>(R.id.hintText).visibility = GONE
+        }else{
+            findViewById<ImageView>(R.id.hintImage).visibility = VISIBLE
+            findViewById<TextView>(R.id.hintText).visibility = VISIBLE
+        }
+
+        var mutablePerson: MutableList<MainDate> = realmResalt
 
 
         //検索バーでの検索
@@ -218,6 +218,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         adapter?.setList(mutableNewPerson.distinct())
+
+
+        if(mutableNewPerson.size == 0 && realmResalt.size > 0){
+            findViewById<ImageView>(R.id.hintImage).visibility = VISIBLE
+            findViewById<TextView>(R.id.hintText).visibility = VISIBLE
+
+            findViewById<ImageView>(R.id.hintImage).setImageResource(R.drawable._290859_close_delete_document_note_shut_down_icon)
+            findViewById<TextView>(R.id.hintText).text = "一致する情報は見つかりませんでした\nm(_ _)m"
+
+        }else{
+            findViewById<ImageView>(R.id.hintImage).setImageResource(R.drawable.description_black_24dp__1_)
+            findViewById<TextView>(R.id.hintText).text = "追加したメモはココに表示されます"
+        }
+
+
 
 
     }
