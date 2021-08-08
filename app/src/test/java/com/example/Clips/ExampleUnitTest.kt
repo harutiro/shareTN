@@ -1,4 +1,4 @@
-package com.example.sharetn
+package app.makino.harutiro.clips
 
 import org.junit.Test
 

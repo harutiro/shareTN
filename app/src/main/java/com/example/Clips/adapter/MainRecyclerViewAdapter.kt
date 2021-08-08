@@ -1,4 +1,4 @@
-package com.example.sharetn.adapter
+package app.makino.harutiro.clips.adapter
 
 import android.content.Context
 import android.graphics.BitmapFactory
@@ -11,15 +11,12 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginStart
-import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.date.MainDate
-import com.example.sharetn.date.OriginTagDateClass
-import com.example.sharetn.R
+import app.makino.harutiro.clips.date.MainDate
+import app.makino.harutiro.clips.date.OriginTagDateClass
+import app.makino.harutiro.clips.R
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 
 class MainRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):

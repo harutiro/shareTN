@@ -1,4 +1,4 @@
-package com.example.sharetn
+package app.makino.harutiro.clips
 
 import android.app.Activity
 import android.content.Intent
@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.adapter.OriginTagSelectRecyclerViewAdapter
-import com.example.sharetn.date.OriginTagDateClass
+import app.makino.harutiro.clips.adapter.OriginTagSelectRecyclerViewAdapter
+import app.makino.harutiro.clips.date.OriginTagDateClass
 import io.realm.Realm
 import io.realm.RealmResults
 import java.util.*

@@ -1,4 +1,4 @@
-package com.example.sharetn
+package app.makino.harutiro.clips
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -27,11 +27,9 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.sharetn.date.MainDate
-import com.example.sharetn.date.OriginTagDateClass
-import com.example.sharetn.date.TagDateClass
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import app.makino.harutiro.clips.date.MainDate
+import app.makino.harutiro.clips.date.OriginTagDateClass
+import app.makino.harutiro.clips.date.TagDateClass
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton

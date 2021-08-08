@@ -1,4 +1,4 @@
-package com.example.sharetn.date
+package app.makino.harutiro.clips.date
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey

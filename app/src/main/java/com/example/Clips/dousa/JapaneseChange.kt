@@ -1,4 +1,4 @@
-package com.example.sharetn.dousa
+package app.makino.harutiro.clips.dousa
 
 class JapaneseChange {
 

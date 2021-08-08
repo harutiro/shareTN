@@ -1,4 +1,4 @@
-package com.example.sharetn
+package app.makino.harutiro.clips
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.adapter.OriginTagRecyclerViewAdapter
-import com.example.sharetn.date.OriginTagDateClass
+import app.makino.harutiro.clips.adapter.OriginTagRecyclerViewAdapter
+import app.makino.harutiro.clips.date.OriginTagDateClass
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmResults

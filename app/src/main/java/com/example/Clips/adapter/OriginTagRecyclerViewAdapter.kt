@@ -1,15 +1,14 @@
-package com.example.sharetn.adapter
+package app.makino.harutiro.clips.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.R
-import com.example.sharetn.date.OriginTagDateClass
+import app.makino.harutiro.clips.R
+import app.makino.harutiro.clips.date.OriginTagDateClass
 import io.realm.Realm
 
 class OriginTagRecyclerViewAdapter(private val context: Context,private val listener: OnItemClickListner):

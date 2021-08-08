@@ -1,4 +1,4 @@
-package com.example.sharetn
+package app.makino.harutiro.clips
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,10 +13,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.adapter.MainRecyclerViewAdapter
-import com.example.sharetn.date.MainDate
-import com.example.sharetn.date.OriginTagDateClass
-import com.example.sharetn.dousa.JapaneseChange
+import app.makino.harutiro.clips.adapter.MainRecyclerViewAdapter
+import app.makino.harutiro.clips.date.MainDate
+import app.makino.harutiro.clips.date.OriginTagDateClass
+import app.makino.harutiro.clips.dousa.JapaneseChange
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
@@ -195,12 +195,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val tempItemTagList = mutableListOf<String>()
+        var tempItemTagList = mutableListOf<String>()
         val realmStateResult = mutableListOf<String>()
 
         //tagにおける検索
         for(data in mutablePerson){
 
+            tempItemTagList = mutableListOf()
             for(tag in data.tagList!!){
                 tempItemTagList.add(tag.copyId.toString())
             }

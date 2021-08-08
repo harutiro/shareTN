@@ -1,4 +1,4 @@
-package com.example.sharetn.adapter
+package app.makino.harutiro.clips.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.sharetn.R
-import com.example.sharetn.date.OriginTagDateClass
+import app.makino.harutiro.clips.R
+import app.makino.harutiro.clips.date.OriginTagDateClass
 
 class OriginTagSelectRecyclerViewAdapter(private val context: Context, private val listener: OnItemClickListner):
     RecyclerView.Adapter<OriginTagSelectRecyclerViewAdapter.ViewHolder>(){
