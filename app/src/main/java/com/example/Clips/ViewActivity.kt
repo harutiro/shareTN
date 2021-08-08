@@ -186,6 +186,19 @@ class ViewActivity : AppCompatActivity() {
 
             stateTagList = intent?.getStringArrayListExtra("stateTagList")
             setChip()
+
+            realm.executeTransaction{
+                val new = it.where(MainDate::class.java).equalTo("id",id).findFirst()
+
+                //＝＝＝＝＝＝＝＝＝＝＝＝タグの保存===================
+                new?.tagList?.clear()
+                for( i in stateTagList!!){
+                    val tagObject = realm.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+                        this.copyId = i
+                    }
+                    new?.tagList?.add(tagObject)
+                }
+            }
         }
     }
 
@@ -248,23 +261,12 @@ class ViewActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    //戻るボタンの処理
-    override fun onBackPressed() {
-        realm.executeTransaction{
-            val new = it.where(MainDate::class.java).equalTo("id",id).findFirst()
-
-            //＝＝＝＝＝＝＝＝＝＝＝＝タグの保存===================
-            new?.tagList?.clear()
-            for( i in stateTagList!!){
-                val tagObject = realm.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-                    this.copyId = i
-                }
-                new?.tagList?.add(tagObject)
-            }
-        }
-
-        finish()
-    }
+//    //戻るボタンの処理
+//    override fun onBackPressed() {
+//
+//
+//        finish()
+//    }
 
 
 }
