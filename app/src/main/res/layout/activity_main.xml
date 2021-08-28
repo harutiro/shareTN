@@ -106,6 +106,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="ここに入力して検索"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:scrollbars="vertical"
