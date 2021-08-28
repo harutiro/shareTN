@@ -145,22 +145,6 @@ class EditActivity : AppCompatActivity() {
             subIcon?.visibility = GONE
         }
 
-
-
-
-
-//＝＝＝＝＝＝＝＝＝＝＝＝＝＝Realm保存部分
-        findViewById<FloatingActionButton>(R.id.saveFAB).setOnClickListener {
-            if (mainEdit?.text.toString().isBlank()) {
-                val snackbar = Snackbar.make(findViewById(android.R.id.content),"タイトルが入力されていません。", Snackbar.LENGTH_SHORT)
-                snackbar.view.setBackgroundResource(R.color.error)
-                snackbar.show()
-            }else{
-//                Snackbar.make(findViewById(android.R.id.content),"保存しました。", Snackbar.LENGTH_SHORT).show()
-                save()
-            }
-        }
-
 //    ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝消去部分
         findViewById<ImageButton>(R.id.removeButton2).setOnClickListener{
             val person = realm.where(MainDate::class.java).equalTo("id",id).findFirst()
@@ -284,47 +268,47 @@ class EditActivity : AppCompatActivity() {
     }
 
     fun save(){
-        realm.executeTransaction{
+        if(mainEdit?.text.toString().isNotEmpty()){
+            realm.executeTransaction{
 
-            val new = if(id == null){
-                it.createObject(MainDate::class.java,UUID.randomUUID().toString())
-            }else{
-                it.where(MainDate::class.java).equalTo("id",id).findFirst()
-            }
-
-            //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-            //データ受け取り
-            val bmp = (mainIcon?.drawable as BitmapDrawable).bitmap
-            //エンコード
-            val baos = ByteArrayOutputStream()
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, baos)
-            val b: ByteArray = baos.toByteArray()
-            val output = Base64.encodeToString(b, Base64.NO_WRAP)
-
-            //====================その他データの保存=========================
-            new?.icon = output
-            new?.mainText = mainEdit?.text.toString()
-            new?.subText = subEdit?.text.toString()
-            new?.memoText = memoEdit?.text.toString()
-            new?.image = ""
-            new?.archive = archive
-
-            //=====================日付==========================
-            val date = Date(System.currentTimeMillis())
-            val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
-            val formatted = df.format(date)
-            new?.dayText = formatted
-
-            //＝＝＝＝＝＝＝＝＝＝＝＝タグの保存===================
-            new?.tagList?.clear()
-            for( i in stateTagList!!){
-                val tagObject = realm.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
-                    this.copyId = i
+                val new = if(id == null){
+                    it.createObject(MainDate::class.java,UUID.randomUUID().toString())
+                }else{
+                    it.where(MainDate::class.java).equalTo("id",id).findFirst()
                 }
-                new?.tagList?.add(tagObject)
-            }
 
-            finish()
+                //＝＝＝＝＝＝＝＝＝＝＝＝＝＝BASE６４＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+                //データ受け取り
+                val bmp = (mainIcon?.drawable as BitmapDrawable).bitmap
+                //エンコード
+                val baos = ByteArrayOutputStream()
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, baos)
+                val b: ByteArray = baos.toByteArray()
+                val output = Base64.encodeToString(b, Base64.NO_WRAP)
+
+                //====================その他データの保存=========================
+                new?.icon = output
+                new?.mainText = mainEdit?.text.toString()
+                new?.subText = subEdit?.text.toString()
+                new?.memoText = memoEdit?.text.toString()
+                new?.image = ""
+                new?.archive = archive
+
+                //=====================日付==========================
+                val date = Date(System.currentTimeMillis())
+                val df = SimpleDateFormat("yyyy年 MM月 dd日", Locale.JAPANESE)
+                val formatted = df.format(date)
+                new?.dayText = formatted
+
+                //＝＝＝＝＝＝＝＝＝＝＝＝タグの保存===================
+                new?.tagList?.clear()
+                for( i in stateTagList!!){
+                    val tagObject = realm.createObject(TagDateClass::class.java ,UUID.randomUUID().toString()).apply {
+                        this.copyId = i
+                    }
+                    new?.tagList?.add(tagObject)
+                }
+            }
         }
     }
 
@@ -350,24 +334,24 @@ class EditActivity : AppCompatActivity() {
 
     //戻るボタンの処理
     override fun onBackPressed() {
-        // 行いたい処理
-        AlertDialog.Builder(this) // FragmentではActivityを取得して生成
-            .setTitle("ホームへ戻る")
-            .setMessage("入力したデータを保存しないでホームに戻りますか？")
-            .setPositiveButton("OK") { _, _ ->
-                //Yesが押された時の挙動
-                finish()
-            }
-            .setNegativeButton("Cancel") { _, _ ->
-            // Noが押された時の挙動
-            }
-            .show()
+        if (mainEdit?.text.toString().isBlank()) {
+            val snackbar = Snackbar.make(findViewById(android.R.id.content),"タイトルが入力されていません。", Snackbar.LENGTH_SHORT)
+            snackbar.view.setBackgroundResource(R.color.error)
+            snackbar.show()
+        }else{
+            finish()
+        }
     }
 
     override fun onDestroy() {
         realm.close()
         super.onDestroy()
 
+    }
+    override fun onPause() {
+        super.onPause()
+
+        save()
     }
 
     //    タグインテントにおける戻りデータの受け取り部分
