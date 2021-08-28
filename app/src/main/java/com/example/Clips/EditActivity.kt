@@ -2,6 +2,8 @@ package app.makino.harutiro.clips
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -91,6 +93,16 @@ class EditActivity : AppCompatActivity() {
         mainEdit?.movementMethod = ScrollingMovementMethod()
         subEdit?.movementMethod = ScrollingMovementMethod()
         memoEdit?.movementMethod = ScrollingMovementMethod()
+
+        subIcon?.setOnClickListener{
+            copyToClipboard(subEdit?.text.toString())
+        }
+        mainIcon?.setOnClickListener{
+            copyToClipboard(mainEdit?.text.toString())
+        }
+        memoIcon?.setOnClickListener{
+            copyToClipboard(memoEdit?.text.toString())
+        }
 
         // MainActivityのRecyclerViewの要素をタップした場合はidが，fabをタップした場合は"空白"が入っているはず
         id = intent.getStringExtra("id")
@@ -257,6 +269,17 @@ class EditActivity : AppCompatActivity() {
 
 
 
+
+    }
+
+    private fun copyToClipboard(text: kotlin.String) {
+        //クリップボードの保存
+        val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("", text)
+        clipboard.setPrimaryClip(clip)
+
+        //スナックバーの表示
+        Snackbar.make(findViewById(android.R.id.content),"コピーしました", Snackbar.LENGTH_SHORT).show()
 
     }
 
