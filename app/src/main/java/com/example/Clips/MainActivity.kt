@@ -1,6 +1,7 @@
 package app.makino.harutiro.clips
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -10,6 +11,8 @@ import android.view.View.VISIBLE
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.app.AppLaunchChecker
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +43,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //      初回起動チェック
+        if(!AppLaunchChecker.hasStartedFromLauncher(this)){
+            val tabsIntent = CustomTabsIntent.Builder()
+                .setShowTitle(true)
+                .setToolbarColor(ContextCompat.getColor(this, R.color.themeColor_Light))
+                .setStartAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .build()
+
+            // Chromeの起動
+            tabsIntent.launchUrl(this, Uri.parse("https://sites.google.com/view/pochimane/%E6%9B%B4%E6%96%B0%E5%B1%A5%E6%AD%B4"))
+        }
+        AppLaunchChecker.onActivityCreate(this)
 
         findViewById<EditText>(R.id.searchEditText).doOnTextChanged{ _, _, _, _ ->
             recyclerViewGo()
