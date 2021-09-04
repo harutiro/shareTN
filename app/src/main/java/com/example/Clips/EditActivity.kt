@@ -198,7 +198,7 @@ class EditActivity : AppCompatActivity() {
                 //faviconの取得
                 Picasso.get()
                     //画像URL
-                    .load("https://www.google.com/s2/favicons?domain=$domein")
+                    .load("https://api.faviconkit.com/$domein/144")
                     .resize(300, 300) //表示サイズ指定
                     .centerCrop() //resizeで指定した範囲になるよう中央から切り出し
                     .into(findViewById<ImageView>(R.id.mainIcon)) //imageViewに流し込み
