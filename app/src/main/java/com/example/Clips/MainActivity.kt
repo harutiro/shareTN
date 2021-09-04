@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
             // Chromeの起動
-            tabsIntent.launchUrl(this, Uri.parse("https://sites.google.com/view/pochimane/%E6%9B%B4%E6%96%B0%E5%B1%A5%E6%AD%B4"))
+            tabsIntent.launchUrl(this, Uri.parse("https://sites.google.com/view/clips-is-good/%E4%BD%BF%E3%81%84%E6%96%B9"))
         }
         AppLaunchChecker.onActivityCreate(this)
 
