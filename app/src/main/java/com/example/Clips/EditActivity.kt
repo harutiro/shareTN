@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.PixelFormat
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.text.method.ScrollingMovementMethod
@@ -71,6 +72,8 @@ class EditActivity : AppCompatActivity() {
 
     var archive :Boolean = false
 
+    var url = ""
+
     @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,6 +133,7 @@ class EditActivity : AppCompatActivity() {
             memoEdit?.setText(item?.memoText)
             mainEdit?.setText(item?.mainText)
             subEdit?.setText(item?.subText)
+            url = item?.subText.toString()
             archive = item?.archive!!
 
             //＝＝＝＝＝＝＝＝＝＝＝＝タグのはめ込み部分＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -367,10 +371,9 @@ class EditActivity : AppCompatActivity() {
     //　アプリバーの部分
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
-            //ボトムシートを上に浮き上がらせる
-//            val view = findViewById<ConstraintLayout>(R.id.edit_bottom_sheet)
-//            val mBottomSheetBehavior = BottomSheetBehavior.from(view)
-//            mBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            val uri = Uri.parse(url)
+            val i = Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
 
             true
         }
