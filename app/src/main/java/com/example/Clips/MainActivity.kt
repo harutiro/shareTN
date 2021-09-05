@@ -1,6 +1,8 @@
 package app.makino.harutiro.clips
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.app.AppLaunchChecker
 import androidx.core.content.ContextCompat
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -57,6 +60,20 @@ class MainActivity : AppCompatActivity() {
             tabsIntent.launchUrl(this, Uri.parse("https://sites.google.com/view/clips-is-good/%E4%BD%BF%E3%81%84%E6%96%B9"))
         }
         AppLaunchChecker.onActivityCreate(this)
+
+//        バージョンアップチェック
+        val versionNow = PackageInfoCompat.getLongVersionCode(this.packageManager.getPackageInfo(this.packageName, 0))
+
+        val sp: SharedPreferences = getSharedPreferences("DateStore", Context.MODE_PRIVATE)
+        val vCode: Int = sp.getInt("VersionCode", 1)
+
+        if(versionNow > vCode) {
+            val editor = sp.edit()
+            editor.putInt("VersionCode", versionNow.toInt())
+            editor.apply()
+
+            updateWebView()
+        }
 
         findViewById<EditText>(R.id.searchEditText).doOnTextChanged{ _, _, _, _ ->
             recyclerViewGo()
@@ -254,10 +271,22 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun updateWebView(){
+        val tabsIntent = CustomTabsIntent.Builder()
+            .setShowTitle(true)
+            .setToolbarColor(ContextCompat.getColor(this, R.color.themeColor_Light))
+            .setStartAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            .setExitAnimations(this, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            .build()
+
+        // Chromeの起動
+        tabsIntent.launchUrl(this, Uri.parse("https://sites.google.com/view/clips-is-good/%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97%E6%83%85%E5%A0%B1"))
+    }
+
     //　アプリバーの部分
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_settings -> {
-            Snackbar.make(findViewById(android.R.id.content),"現在設定できるものはありません", Snackbar.LENGTH_SHORT).show()
+            updateWebView()
 
             true
         }
