@@ -41,10 +41,10 @@ class EditTagActivity : AppCompatActivity(){
         inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         container = findViewById(R.id.constraintEditTag)
 
+//        findViewByIdの部分
         val editTextTextMultiLine = findViewById<EditText>(R.id.editTextTextMultiLine)
 
-        val id = intent.getStringExtra("id")
-
+//        チェックボタンを押されたとき
         findViewById<ImageButton>(R.id.EditTagSaveButton).setOnClickListener{
             if(realm.where(OriginTagDateClass::class.java).findAll().any { it.name == editTextTextMultiLine.text.toString()}){
                 val snackbar = Snackbar.make(findViewById(android.R.id.content),"重複した名前があります。", Snackbar.LENGTH_SHORT)
@@ -67,10 +67,7 @@ class EditTagActivity : AppCompatActivity(){
 
         }
 
-
-
-
-
+//        リサイクラービューの部分
         val rView = findViewById<RecyclerView>(R.id.rVTagEdit)
         adapter = OriginTagRecyclerViewAdapter(this , object: OriginTagRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: OriginTagDateClass) {
@@ -87,6 +84,7 @@ class EditTagActivity : AppCompatActivity(){
         recyclerViewGo()
     }
 
+//    リサイクラービューの再表示
     fun recyclerViewGo(){
 
         val mainPersons: RealmResults<OriginTagDateClass> = realm.where(OriginTagDateClass::class.java).findAll()

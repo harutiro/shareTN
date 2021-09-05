@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //      初回起動チェック
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝初回起動チェック
         if(!AppLaunchChecker.hasStartedFromLauncher(this)){
             val tabsIntent = CustomTabsIntent.Builder()
                 .setShowTitle(true)
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
         AppLaunchChecker.onActivityCreate(this)
 
-//        バージョンアップチェック
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝バージョンアップチェック
         val versionNow = PackageInfoCompat.getLongVersionCode(this.packageManager.getPackageInfo(this.packageName, 0))
 
         val sp: SharedPreferences = getSharedPreferences("DateStore", Context.MODE_PRIVATE)
@@ -75,22 +75,27 @@ class MainActivity : AppCompatActivity() {
             updateWebView()
         }
 
+// ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝検索バーを動的に動かす部分
         findViewById<EditText>(R.id.searchEditText).doOnTextChanged{ _, _, _, _ ->
             recyclerViewGo()
         }
 
         serchTagChipGroup = findViewById(R.id.serchTagChipGroup)
 
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝新規追加の部分
         findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.puraFAB).setOnClickListener{
             val intent = Intent(this, EditActivity::class.java)
             intent.putExtra("editMode", true)
             startActivity(intent)
         }
+
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ボトムシートの消去の部分
         findViewById<ImageButton>(R.id.dellButton).setOnClickListener{
             findViewById<EditText>(R.id.searchEditText).setText("")
             recyclerViewGo()
         }
 
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ーリサイクラービュー
         val rView = findViewById<RecyclerView>(R.id.RView)
         adapter = MainRecyclerViewAdapter(this , object: MainRecyclerViewAdapter.OnItemClickListner{
             override fun onItemClick(item: MainDate) {
@@ -102,11 +107,13 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
+            //再表示
             override fun onReView(moji:String) {
                 Snackbar.make(findViewById(android.R.id.content),moji, Snackbar.LENGTH_SHORT).show()
                 recyclerViewGo()
             }
 
+            //URLのインテント
             override fun onWebIntent(url: String) {
                 val uri = Uri.parse(url)
                 val i = Intent(Intent.ACTION_VIEW,uri)
@@ -118,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         recyclerViewGo()
     }
 
-
+//===============タグの変更があったときのみリサイクラービューの再表示を行う部分
     override fun onResume(){
         super.onResume()
 
@@ -137,6 +144,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ボトムシートのチップを置く部分
     fun setChip(){
         serchTagChipGroup?.removeAllViews()
         val new = realm.where(OriginTagDateClass::class.java).findAll()
@@ -181,6 +189,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝リサイクラービューの表示関係　検索部分
     @Suppress("DEPRECATION")
     fun recyclerViewGo(){
 
@@ -277,6 +286,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+//    アップデートのウェブ表示部分
     fun updateWebView(){
         val tabsIntent = CustomTabsIntent.Builder()
             .setShowTitle(true)

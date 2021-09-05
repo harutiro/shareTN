@@ -53,6 +53,7 @@ class EditActivity : AppCompatActivity() {
         Realm.getDefaultInstance()
     }
 
+//    findViewVyIdの部分
     var subEdit:EditText? =  null
     var subIcon:ImageView? =  null
     var mainEdit:EditText? = null
@@ -64,6 +65,7 @@ class EditActivity : AppCompatActivity() {
     var image:ImageView? =    null
     var editTagChipGroup:ChipGroup? = null
 
+//    デーた受け渡しの部分
     var id: String1? = ""
 
     var stateTagList: ArrayList<String1>? = ArrayList<String1>()
@@ -81,6 +83,7 @@ class EditActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
         title = "編集"
 
+//        findViewByIdの部分
         subEdit = findViewById(R.id.subEdit)
         subIcon = findViewById(R.id.subIcon)
         mainEdit = findViewById(R.id.mainEdit)
@@ -97,6 +100,7 @@ class EditActivity : AppCompatActivity() {
         subEdit?.movementMethod = ScrollingMovementMethod()
         memoEdit?.movementMethod = ScrollingMovementMethod()
 
+//        コピペができる部分
         subIcon?.setOnClickListener{
             copyToClipboard(subEdit?.text.toString())
         }
@@ -161,6 +165,7 @@ class EditActivity : AppCompatActivity() {
 
         }
 
+//        共有の部分
         findViewById<ImageButton>(R.id.shareButton).setOnClickListener{
             var putText = "【タイトル】\n"
             putText += mainEdit?.text.toString() + "\n"
@@ -370,6 +375,7 @@ class EditActivity : AppCompatActivity() {
 
     //　アプリバーの部分
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+//        URL飛ばすよう
         R.id.action_settings -> {
             val uri = Uri.parse(url)
             val i = Intent(Intent.ACTION_VIEW,uri);
@@ -378,6 +384,8 @@ class EditActivity : AppCompatActivity() {
             true
         }
 
+
+//      アーカイブ関係
         R.id.archive_settings -> {
 
             archive = !archive
@@ -393,6 +401,7 @@ class EditActivity : AppCompatActivity() {
             true
         }
 
+//        タグへのインテント
         R.id.tag_settings ->{
             //タグへのインテント
             val intent = Intent(this , SelectTagActivity::class.java)
@@ -409,6 +418,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
+//    menuの表示
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.edit_activity_menu, menu)
