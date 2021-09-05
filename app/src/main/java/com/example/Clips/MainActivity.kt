@@ -106,6 +106,12 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(findViewById(android.R.id.content),moji, Snackbar.LENGTH_SHORT).show()
                 recyclerViewGo()
             }
+
+            override fun onWebIntent(url: String) {
+                val uri = Uri.parse(url)
+                val i = Intent(Intent.ACTION_VIEW,uri)
+                startActivity(i)
+            }
         })
         rView.layoutManager = LinearLayoutManager(this)
         rView.adapter = adapter

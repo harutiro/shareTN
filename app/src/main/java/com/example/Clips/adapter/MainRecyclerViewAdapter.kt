@@ -59,6 +59,9 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
         // MainActivity側でタップしたときの動作を記述するため，n番目の要素を渡す
         holder.container.setOnClickListener { listener.onItemClick(item) }
 
+//        iconを触られたときの動作
+        holder.iconImageView.setOnClickListener { listener.onWebIntent(item.subText)}
+
 //        itemとレイアウトの直接の結びつけ
         val decodedByte: ByteArray = Base64.decode(item.icon, 0)
         holder.iconImageView.setImageBitmap(BitmapFactory.decodeByteArray(decodedByte,0,decodedByte.size))
@@ -143,6 +146,7 @@ class MainRecyclerViewAdapter(private val context: Context,private val listener:
     interface OnItemClickListner{
         fun onItemClick(item: MainDate)
         fun onReView(moji: String)
+        fun onWebIntent(url:String)
     }
 
     fun reView(){
